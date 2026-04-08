@@ -5,8 +5,16 @@ import { motion } from "framer-motion"
 
 export const BackgroundBeams = ({ className }: { className?: string }) => {
   return (
-    <div className={cn("absolute inset-0 z-0 flex items-center justify-center opacity-40", className)}>
-      <div className="absolute inset-0 bg-[url('https://res.cloudinary.com/dzl9yxixg/image/upload/v1713531189/grid-paper_v0x7m0.svg')] bg-center [mask-image:linear-gradient(to_bottom,white_10%,transparent_90%)]" />
+    <div className={cn("absolute inset-0 z-0 flex items-center justify-center", className)}>
+      {/* Dot Grid Pattern */}
+      <div 
+        className="absolute inset-0 opacity-[0.2]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='12' cy='12' r='1' fill='white'/%3E%3C/svg%3E")`,
+          backgroundSize: "24px 24px",
+          maskImage: "linear-gradient(to bottom, white 10%, transparent 90%)"
+        }} 
+      />
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
