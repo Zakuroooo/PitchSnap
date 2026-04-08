@@ -3,6 +3,8 @@ import React from "react"
 import { motion } from "framer-motion"
 import { Spotlight } from "../aceternity/spotlight"
 import { BackgroundBeams } from "../aceternity/background-beams"
+import { HeroParticles } from "../ui/hero-particles"
+import { AnimatedHeading } from "../ui/animated-heading"
 import { TextGenerateEffect } from "../aceternity/text-generate-effect"
 import { HoverBorderGradient } from "../aceternity/hover-border-gradient"
 import { CardContainer, CardBody, CardItem } from "../aceternity/3d-card"
@@ -15,6 +17,7 @@ export default function Hero() {
       {/* Background Mesh & Spotlight */}
       <Spotlight />
       <BackgroundBeams />
+      <HeroParticles />
       
       {/* The main container centered vertically */}
       <Container className="relative z-10 w-full flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 mt-16 md:mt-0">
@@ -40,17 +43,10 @@ export default function Hero() {
           </motion.div>
           
           {/* Headline */}
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-white leading-[1.1]"
-          >
-            Win more clients with <br className="hidden xl:block" />
-            <span className="gradient-text bg-clip-text text-transparent bg-gradient-to-r from-[var(--violet)] to-[var(--cyan)]">
-              AI proposals
-            </span>
-          </motion.h1>
+          <div className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-[1.1] text-left w-full flex flex-col items-start gap-1">
+            <AnimatedHeading text="Win more clients with" className="text-white m-0 p-0 text-left justify-start" />
+            <AnimatedHeading text="AI proposals" gradient className="m-0 p-0 text-left justify-start" />
+          </div>
 
           {/* Subtitle via TextGenerateEffect */}
           <div className="min-h-[5rem] mb-10 w-full max-w-xl text-[var(--text-secondary)]">
@@ -65,18 +61,21 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
+            className="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto mt-4"
           >
             {/* Upgraded Gradient CTA */}
             <HoverBorderGradient
-              containerClassName="rounded-full w-full sm:w-auto shadow-[0_0_30px_rgba(145,94,255,0.3)] hover:shadow-[0_0_40px_rgba(0,222,255,0.4)] transition-shadow duration-500"
+              containerClassName="rounded-full w-full sm:w-auto shadow-[0_0_30px_rgba(145,94,255,0.3)] hover:shadow-[0_0_50px_rgba(0,222,255,0.6)] transition-all duration-500 hover:scale-[1.02] active:scale-95 group relative overflow-hidden"
               as="button"
               className="bg-gradient-to-r from-[var(--violet)] to-[var(--cyan)] text-white w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5 text-sm font-bold rounded-[inherit] min-w-[200px]"
             >
-              Get Started Free <ArrowRight className="w-4 h-4 ml-1" />
+              <span className="relative z-10 flex items-center group-hover:font-black transition-all">
+                Get Started Free <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1.5 transition-transform duration-300" />
+              </span>
+              <span className="absolute inset-0 bg-white/20 scale-0 rounded-full group-active:animate-[ping_0.5s_cubic-bezier(0,0,0.2,1)_1]" />
             </HoverBorderGradient>
             
-            <button className="w-full sm:w-auto px-8 py-3.5 rounded-full text-sm font-semibold border border-white/10 hover:bg-white/5 hover:border-white/20 hover:text-white transition-all text-white flex items-center justify-center min-w-[160px]">
+            <button className="w-full sm:w-auto px-8 py-3.5 rounded-full text-sm font-semibold border border-white/10 hover:bg-white/10 hover:border-white/20 hover:text-white transition-all duration-300 text-[var(--text-secondary)] flex items-center justify-center min-w-[160px] hover:scale-[1.02] active:scale-[0.98]">
               See Features
             </button>
           </motion.div>

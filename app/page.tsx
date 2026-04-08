@@ -4,6 +4,7 @@ import Hero from "@/components/sections/Hero"
 import Problem from "@/components/sections/Problem"
 import Solution from "@/components/sections/Solution"
 import Features from "@/components/sections/Features"
+import { FloatingBlobs } from "@/components/ui/floating-blobs"
 
 /**
  * Temporary placeholder — will be replaced with the full
@@ -14,7 +15,8 @@ export default function Page() {
     <>
       <Navbar />
 
-      <main className="flex flex-col min-h-dvh">
+      <main className="flex flex-col min-h-dvh relative z-10 bg-transparent">
+        <FloatingBlobs />
         <Hero />
         <Problem />
         <Solution />

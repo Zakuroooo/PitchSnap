@@ -4,6 +4,10 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
+import { SmoothScrollProvider } from "@/components/layout/SmoothScrollProvider"
+import { NoiseOverlay } from "@/components/layout/NoiseOverlay"
+import { CustomCursor } from "@/components/ui/custom-cursor"
+import { ScrollProgressIndicator } from "@/components/layout/ScrollProgressIndicator"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -63,8 +67,15 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn("antialiased", inter.variable)}
     >
-      <body className="bg-background text-foreground min-h-dvh overflow-x-hidden">
-        <ThemeProvider forcedTheme="dark">{children}</ThemeProvider>
+      <body className="bg-background text-foreground min-h-dvh overflow-x-hidden w-full selection:bg-[var(--violet)] selection:text-white">
+        <SmoothScrollProvider>
+          <ThemeProvider forcedTheme="dark">
+            <NoiseOverlay />
+            <ScrollProgressIndicator />
+            <CustomCursor />
+            {children}
+          </ThemeProvider>
+        </SmoothScrollProvider>
       </body>
     </html>
   )
