@@ -55,6 +55,7 @@ export default function Solution() {
             <AnimatedHeading text="From blank page to winning proposal in" className="text-white m-0 p-0 text-center justify-center" />
             <AnimatedHeading text="under 10 seconds." gradient className="m-0 p-0 text-center justify-center font-serif italic" />
           </div>
+        </div>
 
         {/* 3 Step Flow */}
         <div 
