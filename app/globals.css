@@ -457,4 +457,34 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  /* Infinite Marquee Animations */
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - var(--gap, 1.5rem)/2)); }
+  }
+  
+  @keyframes marquee-reverse {
+    0% { transform: translateX(calc(-50% - var(--gap, 1.5rem)/2)); }
+    100% { transform: translateX(0); }
+  }
+
+  .animate-marquee {
+    animation: marquee 45s linear infinite;
+    /* dynamically calculate gap accounting for gap-6 (1.5rem) or gap-8 (2rem) */
+    --gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .animate-marquee { --gap: 2rem; }
+  }
+
+  .animate-marquee-reverse {
+    animation: marquee-reverse 45s linear infinite;
+    --gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .animate-marquee-reverse { --gap: 2rem; }
+  }
 }
