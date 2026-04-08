@@ -3,6 +3,7 @@ import Footer from "@/components/layout/Footer"
 import Hero from "@/components/sections/Hero"
 import Problem from "@/components/sections/Problem"
 import Solution from "@/components/sections/Solution"
+import Features from "@/components/sections/Features"
 
 /**
  * Temporary placeholder — will be replaced with the full
@@ -17,6 +18,7 @@ export default function Page() {
         <Hero />
         <Problem />
         <Solution />
+        <Features />
       </main>
 
       <Footer />
