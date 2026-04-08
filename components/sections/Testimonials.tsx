@@ -71,20 +71,20 @@ const TESTIMONIALS_ROW_2_EXTENDED = [...TESTIMONIALS_ROW_2, ...TESTIMONIALS_ROW_
 
 function TestimonialCard({ item }: { item: typeof TESTIMONIALS_ROW_1[0] }) {
   return (
-    <div className="min-w-[350px] mx-3 flex-shrink-0 flex">
-      <GlowCard enableTilt={false} className="w-full flex-1 p-6 flex flex-col justify-between">
-        <div className="flex items-center gap-1 mb-4 text-[var(--violet)]">
+    <div className="w-[350px] min-w-[350px] mx-3 flex-shrink-0 flex h-[180px]">
+      <GlowCard enableTilt={false} className="w-full flex-1 p-5 flex flex-col justify-between overflow-hidden">
+        <div className="flex items-center gap-1 mb-2 text-[#915EFF]">
           {[...Array(item.rating)].map((_, i) => (
-            <Star key={i} className="w-4 h-4 fill-current" />
+            <Star key={i} className="w-4 h-4 fill-current text-[#915EFF]" />
           ))}
         </div>
         
-        <p className="text-[var(--text-secondary)] text-[15px] sm:text-base leading-relaxed mb-6 font-medium">
+        <p className="text-[var(--text-secondary)] text-[14px] leading-relaxed mb-4 font-medium line-clamp-3">
           "{item.text}"
         </p>
         
-        <div className="flex items-center gap-3 mt-auto pt-4 border-t border-white/[0.05]">
-          <div className="w-10 h-10 rounded-full overflow-hidden bg-white/10 ring-2 ring-white/5">
+        <div className="flex items-center gap-3 mt-auto pt-3 border-t border-white/[0.05]">
+          <div className="w-8 h-8 rounded-full overflow-hidden bg-white/10 ring-2 ring-white/5">
             <img 
               src={item.avatar} 
               alt={item.name} 
@@ -93,8 +93,8 @@ function TestimonialCard({ item }: { item: typeof TESTIMONIALS_ROW_1[0] }) {
             />
           </div>
           <div>
-            <h4 className="text-sm font-semibold text-white">{item.name}</h4>
-            <p className="text-xs text-[var(--text-tertiary)]">{item.handle}</p>
+            <h4 className="text-[13px] font-semibold text-white">{item.name}</h4>
+            <p className="text-[11px] text-[var(--text-tertiary)]">{item.handle}</p>
           </div>
         </div>
       </GlowCard>
@@ -104,7 +104,7 @@ function TestimonialCard({ item }: { item: typeof TESTIMONIALS_ROW_1[0] }) {
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="relative py-24 sm:py-32 w-full bg-[#0A0A0A] overflow-hidden flex flex-col items-center">
+    <section id="testimonials" className="relative pt-32 pb-24 sm:pt-40 sm:pb-32 w-full bg-[#0A0A0A] overflow-hidden flex flex-col items-center">
       <Container className="mb-16 md:mb-20 text-center">
         <AnimatedHeading text="Freelancers are closing" className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-2 text-white justify-center" />
         <AnimatedHeading text="more deals than ever." gradient className="text-3xl sm:text-4xl md:text-5xl font-serif italic justify-center drop-shadow-lg" />
