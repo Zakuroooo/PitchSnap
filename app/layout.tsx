@@ -5,8 +5,6 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 import { SmoothScrollProvider } from "@/components/layout/SmoothScrollProvider"
-import { NoiseOverlay } from "@/components/layout/NoiseOverlay"
-import { CustomCursor } from "@/components/ui/custom-cursor"
 import { ScrollProgressIndicator } from "@/components/layout/ScrollProgressIndicator"
 
 const inter = Inter({
@@ -70,9 +68,7 @@ export default function RootLayout({
       <body className="bg-background text-foreground min-h-dvh overflow-x-hidden w-full selection:bg-[var(--violet)] selection:text-white">
         <SmoothScrollProvider>
           <ThemeProvider forcedTheme="dark">
-            <NoiseOverlay />
             <ScrollProgressIndicator />
-            <CustomCursor />
             {children}
           </ThemeProvider>
         </SmoothScrollProvider>

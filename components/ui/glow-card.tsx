@@ -7,9 +7,10 @@ import { cn } from "@/lib/utils"
 interface GlowCardProps extends HTMLMotionProps<"div"> {
   children: React.ReactNode
   glowColor?: string
+  enableTilt?: boolean
 }
 
-export function GlowCard({ children, className, glowColor = "rgba(145, 94, 255, 0.15)", ...props }: GlowCardProps) {
+export function GlowCard({ children, className, glowColor = "rgba(145, 94, 255, 0.15)", enableTilt = false, ...props }: GlowCardProps) {
   const divRef = useRef<HTMLDivElement>(null)
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [opacity, setOpacity] = useState(0)
@@ -23,8 +24,8 @@ export function GlowCard({ children, className, glowColor = "rgba(145, 94, 255, 
   const mouseYSpring = useSpring(y, { stiffness: 150, damping: 15 })
 
   // Map to degrees
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["5deg", "-5deg"])
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-5deg", "5deg"])
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], enableTilt ? ["4deg", "-4deg"] : ["0deg", "0deg"])
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], enableTilt ? ["-4deg", "4deg"] : ["0deg", "0deg"])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!divRef.current) return

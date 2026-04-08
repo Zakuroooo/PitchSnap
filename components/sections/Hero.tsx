@@ -3,7 +3,6 @@ import React from "react"
 import { motion } from "framer-motion"
 import { Spotlight } from "../aceternity/spotlight"
 import { BackgroundBeams } from "../aceternity/background-beams"
-import { HeroParticles } from "../ui/hero-particles"
 import { AnimatedHeading } from "../ui/animated-heading"
 import { TextGenerateEffect } from "../aceternity/text-generate-effect"
 import { HoverBorderGradient } from "../aceternity/hover-border-gradient"
@@ -17,8 +16,15 @@ export default function Hero() {
       {/* Background Mesh & Spotlight */}
       <Spotlight />
       <BackgroundBeams />
-      <HeroParticles />
       
+      {/* CSS Animated Dots Replacement */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[20%] left-[15%] w-1.5 h-1.5 bg-[var(--cyan)] rounded-full animate-[ping_4s_linear_infinite] opacity-30" />
+        <div className="absolute top-[60%] left-[80%] w-2 h-2 bg-[var(--violet)] rounded-full animate-[ping_5s_ease-in-out_infinite] opacity-20" />
+        <div className="absolute top-[80%] left-[20%] w-1.5 h-1.5 bg-white/20 rounded-full animate-[pulse_3s_ease-in-out_infinite]" />
+        <div className="absolute top-[30%] right-[25%] w-1 h-1 bg-[var(--cyan)] rounded-full animate-[pulse_4s_ease-in-out_infinite]" />
+      </div>
+
       {/* The main container centered vertically */}
       <Container className="relative z-10 w-full flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8 mt-16 md:mt-0">
         
