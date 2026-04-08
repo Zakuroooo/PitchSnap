@@ -7,7 +7,7 @@ import { GlowCard } from "../ui/glow-card"
 
 export default function Features() {
   return (
-    <section id="features" className="relative py-24 sm:py-32 w-full bg-[#0A0A0A] overflow-hidden">
+    <section id="features" className="relative py-24 sm:py-32 w-full bg-[#0A0A0A] overflow-x-clip">
       {/* Subtle Cyan Radial Glow */}
       <div className="absolute -bottom-[20%] -right-[10%] w-[70vw] h-[70vw] rounded-full bg-[radial-gradient(circle,rgba(0,222,255,0.12)_0%,transparent_60%)] blur-[100px] z-0 pointer-events-none" />
       

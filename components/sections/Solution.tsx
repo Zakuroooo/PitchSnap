@@ -30,7 +30,7 @@ export default function Solution() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
   return (
-    <section id="solution" className="relative py-24 sm:py-32 w-full bg-[#111111] overflow-hidden">
+    <section id="solution" className="relative py-24 sm:py-32 w-full bg-[#111111] overflow-x-clip">
       {/* Subtle Violet Radial Glow centered behind Step 2 */}
       <div className="absolute top-[40%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[80vw] md:w-[50vw] h-[50vw] rounded-full bg-[radial-gradient(circle,rgba(145,94,255,0.12)_0%,transparent_60%)] blur-[100px] z-0 pointer-events-none" />
       <Container>

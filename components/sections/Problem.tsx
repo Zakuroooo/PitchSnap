@@ -42,7 +42,7 @@ export default function Problem() {
   ]
 
   return (
-    <section id="problem" className="relative py-24 sm:py-32 w-full bg-[#0A0A0A] border-t border-white/[0.05] overflow-hidden">
+    <section id="problem" className="relative py-24 sm:py-32 w-full bg-[#0A0A0A] border-t border-white/[0.05] overflow-x-clip">
       {/* Subtle Red/Orange Radial Glow */}
       <div className="absolute top-0 -left-[10%] w-[70vw] h-[70vw] rounded-full bg-[radial-gradient(circle,rgba(255,80,50,0.4)_0%,transparent_70%)] opacity-10 blur-[80px] z-0 pointer-events-none" />
       <Container>

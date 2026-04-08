@@ -104,7 +104,7 @@ function TestimonialCard({ item }: { item: typeof TESTIMONIALS_ROW_1[0] }) {
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="relative pt-32 pb-24 sm:pt-40 sm:pb-32 w-full bg-[#0A0A0A] overflow-hidden flex flex-col items-center">
+    <section id="testimonials" className="relative pt-32 pb-24 sm:pt-40 sm:pb-32 w-full bg-[#0A0A0A] overflow-x-clip flex flex-col items-center">
       <Container className="mb-16 md:mb-20 text-center">
         <AnimatedHeading text="Freelancers are closing" className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-2 text-white justify-center" />
         <AnimatedHeading text="more deals than ever." gradient className="text-3xl sm:text-4xl md:text-5xl font-serif italic justify-center drop-shadow-lg" />

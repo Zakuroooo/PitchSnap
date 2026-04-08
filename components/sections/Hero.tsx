@@ -12,7 +12,7 @@ import { ArrowRight, CheckCircle2, Star } from "lucide-react"
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[100vh] w-full flex flex-col items-center justify-center overflow-hidden">
+    <section className="relative min-h-[100vh] w-full flex flex-col items-center justify-center overflow-x-clip pt-20">
       {/* Background Mesh & Spotlight */}
       <Spotlight />
       <BackgroundBeams />

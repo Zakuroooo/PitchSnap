@@ -47,10 +47,10 @@ export default function Pricing() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto items-center">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto items-center pt-16 overflow-visible">
           
           {/* Starter Plan */}
-          <div className="flex flex-col p-8 rounded-2xl bg-[rgba(255,255,255,0.03)] backdrop-blur-[12px] border border-[rgba(255,255,255,0.08)] border-t-[rgba(255,255,255,0.12)]">
+          <div className="flex flex-col p-8 rounded-2xl bg-[rgba(255,255,255,0.03)] backdrop-blur-[12px] border border-[rgba(255,255,255,0.08)] border-t-[rgba(255,255,255,0.12)] h-full">
             <div className="mb-8">
               <h3 className="text-xl font-bold text-white mb-2">Starter</h3>
               <p className="text-[var(--text-tertiary)] text-sm h-10">Perfect for freelancers just starting out.</p>
@@ -85,44 +85,46 @@ export default function Pricing() {
           </div>
 
           {/* Pro Plan (Most Popular) */}
-          <div className="relative rounded-2xl p-[1px] scale-100 md:scale-[1.04] z-10 shadow-[0_0_60px_rgba(145,94,255,0.2)] overflow-hidden flex flex-col group">
-            {/* Animated Conic Gradient Border */}
-            <div className="absolute inset-[-100%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#915EFF_50%,transparent_100%)] opacity-80" />
-            
-            {/* Inner Card Content */}
-            <div className="relative w-full h-full flex flex-col p-8 rounded-2xl bg-[rgba(145,94,255,0.08)] backdrop-blur-[12px] border-t border-[rgba(255,255,255,0.12)]">
-              
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 py-1.5 bg-gradient-to-r from-[#915EFF] to-[#00DEFF] text-white text-[11px] font-bold uppercase tracking-wider rounded-full shadow-[0_0_15px_rgba(145,94,255,0.4)] whitespace-nowrap">
-                Most Popular
-              </div>
-              
-              <div className="mb-8 mt-2">
-                <h3 className="text-xl font-bold text-white mb-2">Pro</h3>
-                <p className="text-[var(--text-tertiary)] text-sm h-10">Everything you need to scale your freelance business.</p>
-                <div className="mt-6 flex items-baseline gap-2">
-                  <span className="text-6xl sm:text-7xl font-bold gradient-text pb-1">${isAnnual ? '29' : '39'}</span>
-                  <span className="text-[var(--text-tertiary)]">/ month</span>
-                </div>
-              </div>
-              
-              <button className="w-full py-3 px-4 rounded-lg btn-gradient font-semibold mb-8 text-white">
-                Upgrade to Pro
-              </button>
+          <div className="relative z-10 md:scale-[1.04] flex flex-col group h-full">
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 py-1.5 bg-gradient-to-r from-[#915EFF] to-[#00DEFF] text-white text-[11px] font-bold uppercase tracking-wider rounded-full shadow-[0_0_15px_rgba(145,94,255,0.4)] whitespace-nowrap z-20 mt-4 md:mt-0">
+              Most Popular
+            </div>
 
-              <div className="flex flex-col divide-y divide-white/5 mt-auto">
-                <p className="text-xs font-semibold text-white uppercase tracking-wider mb-2 pb-2">Everything in Starter, plus</p>
-                {[
-                  "Unlimited AI proposals",
-                  "Advanced custom branding",
-                  "CRM Integrations (Hubspot)",
-                  "Priority email support",
-                  "E-signatures & payment links",
-                ].map((feature, i) => (
-                  <div key={i} className="flex items-start gap-4 py-4">
-                    <Check className="w-5 h-5 text-[#915EFF] shrink-0" />
-                    <span className="text-sm text-white font-medium mt-0.5">{feature}</span>
+            <div className="relative rounded-2xl p-[1px] shadow-[0_0_60px_rgba(145,94,255,0.2)] overflow-hidden flex flex-col h-full">
+              {/* Animated Conic Gradient Border */}
+              <div className="absolute inset-[-100%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#915EFF_50%,transparent_100%)] opacity-80" />
+              
+              {/* Inner Card Content */}
+              <div className="relative w-full h-full flex flex-col p-8 rounded-2xl bg-[rgba(145,94,255,0.08)] backdrop-blur-[12px] border-t border-[rgba(255,255,255,0.12)]">
+                
+                <div className="mb-8 mt-2">
+                  <h3 className="text-xl font-bold text-white mb-2">Pro</h3>
+                  <p className="text-[var(--text-tertiary)] text-sm h-10">Everything you need to scale your freelance business.</p>
+                  <div className="mt-6 flex items-baseline gap-2">
+                    <span className="text-6xl sm:text-7xl font-bold gradient-text pb-1">${isAnnual ? '29' : '39'}</span>
+                    <span className="text-[var(--text-tertiary)]">/ month</span>
                   </div>
-                ))}
+                </div>
+                
+                <button className="w-full py-3 px-4 rounded-lg btn-gradient font-semibold mb-8 text-white">
+                  Upgrade to Pro
+                </button>
+
+                <div className="flex flex-col divide-y divide-white/5 mt-auto">
+                  <p className="text-xs font-semibold text-white uppercase tracking-wider mb-2 pb-2">Everything in Starter, plus</p>
+                  {[
+                    "Unlimited AI proposals",
+                    "Advanced custom branding",
+                    "CRM Integrations (Hubspot)",
+                    "Priority email support",
+                    "E-signatures & payment links",
+                  ].map((feature, i) => (
+                    <div key={i} className="flex items-start gap-4 py-4">
+                      <Check className="w-5 h-5 text-[#915EFF] shrink-0" />
+                      <span className="text-sm text-white font-medium mt-0.5">{feature}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
