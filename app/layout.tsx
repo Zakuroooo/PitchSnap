@@ -16,11 +16,11 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "PitchSnap — AI Proposal Generator for Freelancers",
+    default: "PitchSnap — Win Clients in 10 Seconds",
     template: "%s | PitchSnap",
   },
   description:
-    "Generate winning freelance proposals and cold outreach messages in under 10 seconds using AI. Crafted for freelancers, agency owners, and indie developers.",
+    "AI-powered proposal generator for freelancers. Generate cold emails, LinkedIn outreach, and full proposals instantly.",
   keywords: [
     "freelance proposal generator",
     "AI proposal tool",
@@ -36,15 +36,15 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://pitchsnap.app",
     siteName: "PitchSnap",
-    title: "PitchSnap — AI Proposal Generator for Freelancers",
+    title: "PitchSnap — Win Clients in 10 Seconds",
     description:
-      "Generate winning freelance proposals and cold outreach messages in under 10 seconds using AI.",
+      "AI-powered proposal generator for freelancers. Generate cold emails, LinkedIn outreach, and full proposals instantly.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "PitchSnap — AI Proposal Generator for Freelancers",
+    title: "PitchSnap — Win Clients in 10 Seconds",
     description:
-      "Generate winning freelance proposals in seconds. Built for freelancers who want to win more clients.",
+      "AI-powered proposal generator for freelancers. Generate cold emails, LinkedIn outreach, and full proposals instantly.",
     creator: "@pitchsnap",
   },
   robots: {

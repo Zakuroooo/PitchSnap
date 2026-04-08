@@ -8,6 +8,10 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* ── Dark-only variant ─────────────────────────────────────── */
 @custom-variant dark (&:is(.dark *));
 

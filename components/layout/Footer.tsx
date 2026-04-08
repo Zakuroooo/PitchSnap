@@ -122,7 +122,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 rounded-lg border flex items-center justify-center transition-all duration-200 cursor-pointer"
+                  className="w-9 h-9 rounded-lg border flex items-center justify-center transition-all duration-300 cursor-pointer hover:shadow-[0_0_15px_rgba(145,94,255,0.5)]"
                   style={{
                     color:       "var(--text-secondary)",
                     borderColor: "rgba(255,255,255,0.08)",
@@ -130,7 +130,7 @@ export default function Footer() {
                   onMouseEnter={e => {
                     e.currentTarget.style.color           = "#ffffff"
                     e.currentTarget.style.borderColor     = "var(--violet)"
-                    e.currentTarget.style.backgroundColor = "var(--violet-dim)"
+                    e.currentTarget.style.backgroundColor = "rgba(145,94,255,0.1)"
                   }}
                   onMouseLeave={e => {
                     e.currentTarget.style.color           = "var(--text-secondary)"
@@ -152,28 +152,29 @@ export default function Footer() {
             ][]
           ).map(([section, links]) => (
             <div key={section} className="flex flex-col gap-4">
-              <h3
-                className="text-xs font-semibold uppercase tracking-widest"
-                style={{ color: "var(--text-secondary)" }}
-              >
-                {section}
-              </h3>
-              <ul className="flex flex-col gap-2.5" role="list">
-                {links.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm transition-colors duration-200 cursor-pointer"
-                      style={{ color: "var(--text-tertiary)" }}
-                      onMouseEnter={e => (e.currentTarget.style.color = "#ffffff")}
-                      onMouseLeave={e => (e.currentTarget.style.color = "var(--text-tertiary)")}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+               <h3
+                 className="text-xs font-semibold uppercase tracking-widest"
+                 style={{ color: "var(--text-secondary)" }}
+               >
+                 {section}
+               </h3>
+               <ul className="flex flex-col gap-2.5" role="list">
+                 {links.map((link) => (
+                   <li key={link.href}>
+                     <Link
+                       href={link.href}
+                       className="group relative inline-flex text-sm transition-colors duration-200 cursor-pointer"
+                       style={{ color: "var(--text-tertiary)" }}
+                       onMouseEnter={e => (e.currentTarget.style.color = "#ffffff")}
+                       onMouseLeave={e => (e.currentTarget.style.color = "var(--text-tertiary)")}
+                     >
+                       {link.label}
+                       <span className="absolute -bottom-0.5 left-0 w-0 h-[1px] bg-[var(--violet)] transition-all duration-300 group-hover:w-full" />
+                     </Link>
+                   </li>
+                 ))}
+               </ul>
+             </div>
           ))}
         </div>
 
@@ -183,7 +184,7 @@ export default function Footer() {
           style={{ borderColor: "rgba(255,255,255,0.05)" }}
         >
           <p className="text-xs" style={{ color: "var(--text-tertiary)" }}>
-            © {currentYear} PitchSnap. All rights reserved.
+            © 2026 PitchSnap. All rights reserved.
           </p>
           <p className="text-xs" style={{ color: "var(--text-tertiary)" }}>
             Built for freelancers who refuse to lose.
