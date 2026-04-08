@@ -1,6 +1,6 @@
 "use client"
 import React, { useRef } from "react"
-import { motion, useInView, useScroll } from "framer-motion"
+import { motion, useInView } from "framer-motion"
 import { AnimatedHeading } from "../ui/animated-heading"
 import Container from "../layout/Container"
 import { User, Sparkles, Send } from "lucide-react"
@@ -29,11 +29,6 @@ const STEPS = [
 export default function Solution() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 60%", "center 40%"]
-  })
-
   return (
     <section id="solution" className="relative py-24 sm:py-32 w-full bg-[#111111] overflow-hidden">
       {/* Subtle Violet Radial Glow centered behind Step 2 */}
@@ -67,14 +62,16 @@ export default function Solution() {
             {/* Background Track */}
             <div className="absolute inset-0 bg-white/[0.05] rounded-full mx-6" />
             
-            {/* Animated SVG Path using scrollYProgress */}
+            {/* Animated SVG Path using whileInView */}
             <svg className="absolute inset-0 w-full h-full preserveAspectRatio-none px-6" viewBox="0 0 100 2" preserveAspectRatio="none">
               <motion.path
                 d="M 0,1 L 100,1"
                 fill="none"
                 stroke="url(#gradient)"
                 strokeWidth="2"
-                style={{ pathLength: scrollYProgress }}
+                initial={{ pathLength: 0 }}
+                animate={isInView ? { pathLength: 1 } : { pathLength: 0 }}
+                transition={{ duration: 1.5, ease: "easeInOut", delay: 0.5 }}
               />
               <defs>
                 <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -86,7 +83,9 @@ export default function Solution() {
             
             {/* Floating Particles overlay */}
             <motion.div
-              style={{ opacity: scrollYProgress }}
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
               className="absolute inset-0"
             >
               <motion.div animate={{ opacity:[0,1,0], y:[-5, -15] }} transition={{ duration: 2, repeat: Infinity, delay: 1 }} className="absolute -top-1 left-[20%] w-1.5 h-1.5 bg-[var(--cyan)] rounded-full blur-[1px]" />

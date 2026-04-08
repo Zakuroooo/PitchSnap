@@ -4,7 +4,6 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
-import { SmoothScrollProvider } from "@/components/layout/SmoothScrollProvider"
 import { ScrollProgressIndicator } from "@/components/layout/ScrollProgressIndicator"
 
 const inter = Inter({
@@ -66,12 +65,10 @@ export default function RootLayout({
       className={cn("antialiased", inter.variable)}
     >
       <body className="bg-background text-foreground min-h-dvh overflow-x-hidden w-full selection:bg-[var(--violet)] selection:text-white">
-        <SmoothScrollProvider>
-          <ThemeProvider forcedTheme="dark">
-            <ScrollProgressIndicator />
-            {children}
-          </ThemeProvider>
-        </SmoothScrollProvider>
+        <ThemeProvider forcedTheme="dark">
+          <ScrollProgressIndicator />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   )
