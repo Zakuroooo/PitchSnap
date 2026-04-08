@@ -2,6 +2,7 @@ import Navbar from "@/components/layout/Navbar"
 import Footer from "@/components/layout/Footer"
 import Hero from "@/components/sections/Hero"
 import Problem from "@/components/sections/Problem"
+import Solution from "@/components/sections/Solution"
 
 /**
  * Temporary placeholder — will be replaced with the full
@@ -15,6 +16,7 @@ export default function Page() {
       <main className="flex flex-col min-h-dvh">
         <Hero />
         <Problem />
+        <Solution />
       </main>
 
       <Footer />

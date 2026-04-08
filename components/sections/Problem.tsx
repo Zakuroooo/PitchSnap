@@ -35,7 +35,7 @@ export default function Problem() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.5 }}
-            className="inline-block px-3 py-1 mb-6 rounded-full border border-red-500/20 bg-red-500/10 text-red-400 text-xs font-semibold tracking-wide uppercase"
+            className="inline-block px-3 py-1 mb-6 rounded-full border border-[var(--violet)]/20 bg-[var(--violet)]/10 text-[var(--violet)] text-xs font-semibold tracking-wide uppercase"
           >
             The Problem
           </motion.div>
@@ -47,7 +47,7 @@ export default function Problem() {
             className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-6"
           >
             You are losing clients to freelancers who are{" "}
-            <span className="text-red-400 font-serif italic pr-1">pitching faster</span>
+            <span className="text-[var(--violet)] font-serif italic pr-1">pitching faster</span>
             than you.
           </motion.h2>
           
@@ -68,10 +68,10 @@ export default function Problem() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.5, delay: 0.3 + (i * 0.1) }}
-              className="group relative flex flex-col items-start p-8 rounded-2xl bg-[#111111] border border-white/[0.05] hover:border-red-500/20 transition-colors duration-300"
+              className="group relative flex flex-col items-start p-8 rounded-2xl bg-[#111111] border border-white/[0.05] hover:border-[var(--violet)]/30 transition-colors duration-300"
             >
-              <div className="w-12 h-12 rounded-lg bg-red-500/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-red-500/20 transition-all duration-300">
-                <point.icon className="w-6 h-6 text-red-400" />
+              <div className="w-12 h-12 rounded-lg bg-[rgba(145,94,255,0.15)] flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-[rgba(145,94,255,0.25)] transition-all duration-300">
+                <point.icon className="w-6 h-6 text-[#915EFF]" />
               </div>
               <h3 className="text-xl font-semibold text-white mb-3">{point.title}</h3>
               <p className="text-[var(--text-secondary)] leading-relaxed text-sm">
