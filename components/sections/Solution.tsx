@@ -1,6 +1,7 @@
 "use client"
 import React, { useRef } from "react"
-import { motion, useInView } from "framer-motion"
+import { motion, useInView, useScroll } from "framer-motion"
+import { AnimatedHeading } from "../ui/animated-heading"
 import Container from "../layout/Container"
 import { User, Sparkles, Send } from "lucide-react"
 
@@ -28,6 +29,10 @@ const STEPS = [
 export default function Solution() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 60%", "center 40%"]
+  })
 
   return (
     <section id="solution" className="relative py-24 sm:py-32 w-full bg-[#111111] overflow-hidden">
@@ -46,19 +51,10 @@ export default function Solution() {
             How it works
           </motion.div>
           
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white mb-6"
-          >
-            From blank page to winning proposal in{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--violet)] to-[var(--cyan)]">
-              under 10 seconds.
-            </span>
-          </motion.h2>
-        </div>
+          <div className="flex flex-col gap-2 items-center text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-[1.1] text-center w-full">
+            <AnimatedHeading text="From blank page to winning proposal in" className="text-white m-0 p-0 text-center justify-center" />
+            <AnimatedHeading text="under 10 seconds." gradient className="m-0 p-0 text-center justify-center font-serif italic" />
+          </div>
 
         {/* 3 Step Flow */}
         <div 
@@ -66,14 +62,32 @@ export default function Solution() {
           className="relative grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8"
         >
           {/* Connector Line & Particles (Desktop) */}
-          <div className="hidden md:block absolute top-[48px] left-[15%] right-[15%] h-[2px] bg-white/[0.05] z-0">
+          <div className="hidden md:block absolute top-[48px] left-[15%] right-[15%] h-[4px] z-0">
+            {/* Background Track */}
+            <div className="absolute inset-0 bg-white/[0.05] rounded-full mx-6" />
+            
+            {/* Animated SVG Path using scrollYProgress */}
+            <svg className="absolute inset-0 w-full h-full preserveAspectRatio-none px-6" viewBox="0 0 100 2" preserveAspectRatio="none">
+              <motion.path
+                d="M 0,1 L 100,1"
+                fill="none"
+                stroke="url(#gradient)"
+                strokeWidth="2"
+                style={{ pathLength: scrollYProgress }}
+              />
+              <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="var(--violet)" />
+                  <stop offset="100%" stopColor="var(--cyan)" />
+                </linearGradient>
+              </defs>
+            </svg>
+            
+            {/* Floating Particles overlay */}
             <motion.div
-              initial={{ width: "0%" }}
-              animate={isInView ? { width: "100%" } : { width: "0%" }}
-              transition={{ duration: 1.5, delay: 0.5, ease: "easeInOut" }}
-              className="absolute inset-0 bg-gradient-to-r from-[var(--violet)] via-[var(--cyan)] to-transparent relative"
+              style={{ opacity: scrollYProgress }}
+              className="absolute inset-0"
             >
-              {/* Floating Particles */}
               <motion.div animate={{ opacity:[0,1,0], y:[-5, -15] }} transition={{ duration: 2, repeat: Infinity, delay: 1 }} className="absolute -top-1 left-[20%] w-1.5 h-1.5 bg-[var(--cyan)] rounded-full blur-[1px]" />
               <motion.div animate={{ opacity:[0,1,0], y:[5, 15] }} transition={{ duration: 2.5, repeat: Infinity, delay: 1.5 }} className="absolute flex -bottom-1 left-[40%] w-1 h-1 bg-[var(--violet)] rounded-full blur-[1px]" />
               <motion.div animate={{ opacity:[0,1,0], y:[-10, -20] }} transition={{ duration: 3, repeat: Infinity, delay: 2 }} className="absolute -top-2 left-[70%] w-2 h-2 bg-white rounded-full blur-[2px]" />
@@ -90,6 +104,20 @@ export default function Solution() {
             >
               {/* Icon / Number Container */}
               <div className={`relative w-24 h-24 mb-8 flex items-center justify-center ${step.number === "02" ? "scale-110" : ""}`}>
+                {/* Radar Ping rings */}
+                <div className="absolute inset-0 z-[-1] flex items-center justify-center pointer-events-none">
+                  <motion.div
+                    animate={{ scale: [1, 2.5], opacity: [0.5, 0] }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut", delay: i * 0.4 }}
+                    className={`absolute w-full h-full rounded-full border ${step.number === "02" ? "border-[var(--cyan)]" : "border-[var(--violet)]"}`}
+                  />
+                  <motion.div
+                    animate={{ scale: [1, 2.5], opacity: [0.5, 0] }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeOut", delay: i * 0.4 + 1.25 }}
+                    className={`absolute w-full h-full rounded-full border ${step.number === "02" ? "border-[var(--cyan)]" : "border-[var(--violet)]"}`}
+                  />
+                </div>
+                
                 {/* Continuous pulsing ambient glow */}
                 <motion.div 
                   animate={{ opacity: [0.2, 0.6, 0.2], scale: [1, 1.2, 1] }} 

@@ -4,33 +4,47 @@ import { motion, useInView } from "framer-motion"
 import { GlowCard } from "../ui/glow-card"
 import Container from "../layout/Container"
 import { Clock, MessageSquareOff, FileWarning } from "lucide-react"
-
-const PAIN_POINTS = [
-  {
-    title: "Hours Wasted on Pitches",
-    description: "Writing custom proposals from scratch takes 45+ minutes per client, eating into your billable hours.",
-    icon: Clock,
-  },
-  {
-    title: "The Silent Treatment",
-    description: "Sending 50 cold emails and getting zero replies because your generic templates are triggering spam filters.",
-    icon: MessageSquareOff,
-  },
-  {
-    title: "Lost High-Ticket Deals",
-    description: "Losing premium $5,000+ contracts to competitors who respond faster with better-formatted, persuasive proposals.",
-    icon: FileWarning,
-  },
-]
+import { AnimatedHeading } from "../ui/animated-heading"
+import { AnimatedCounter } from "../ui/animated-counter"
 
 export default function Problem() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
+  const PAIN_POINTS = [
+    {
+      title: "Hours Wasted on Pitches",
+      description: (
+        <>
+          Writing custom proposals from scratch takes <strong className="text-white"><AnimatedCounter from={0} to={45} duration={3} delay={0.5} />+ minutes</strong> per client, eating into your billable hours.
+        </>
+      ),
+      icon: Clock,
+    },
+    {
+      title: "The Silent Treatment",
+      description: (
+        <>
+          Sending <strong className="text-white"><AnimatedCounter from={0} to={50} duration={2.5} delay={0.6} /> cold emails</strong> and getting getting a <strong className="text-white"><AnimatedCounter from={0} to={0} duration={1} delay={0.7} />%</strong> reply rate because your generic templates are triggering spam filters.
+        </>
+      ),
+      icon: MessageSquareOff,
+    },
+    {
+      title: "Lost High-Ticket Deals",
+      description: (
+        <>
+          Losing premium <strong className="text-white">$<AnimatedCounter from={0} to={5000} duration={3} delay={0.8} />+</strong> contracts to competitors who respond faster with better-formatted, persuasive proposals.
+        </>
+      ),
+      icon: FileWarning,
+    },
+  ]
+
   return (
     <section id="problem" className="relative py-24 sm:py-32 w-full bg-[#0A0A0A] border-t border-white/[0.05] overflow-hidden">
       {/* Subtle Red/Orange Radial Glow */}
-      <div className="absolute -top-[20%] -left-[10%] w-[70vw] h-[70vw] rounded-full bg-[radial-gradient(circle,rgba(255,80,50,0.4)_0%,transparent_70%)] opacity-10 blur-[80px] z-0 pointer-events-none" />
+      <div className="absolute top-0 -left-[10%] w-[70vw] h-[70vw] rounded-full bg-[radial-gradient(circle,rgba(255,80,50,0.4)_0%,transparent_70%)] opacity-10 blur-[80px] z-0 pointer-events-none" />
       <Container>
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16 sm:mb-24">
           <motion.div
@@ -43,16 +57,11 @@ export default function Problem() {
             The Problem
           </motion.div>
           
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-6"
-          >
-            You are losing clients to freelancers who are{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[var(--violet)] to-[var(--cyan)] font-serif italic pr-1">pitching faster</span>
-            than you.
-          </motion.h2>
+          <div className="flex flex-col gap-2 items-center text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-6 leading-[1.1] text-center w-full">
+            <AnimatedHeading text="You are losing clients to freelancers who are" className="text-white m-0 p-0" />
+            <AnimatedHeading text="pitching faster" gradient className="m-0 p-0 font-serif italic" />
+            <AnimatedHeading text="than you." className="text-white m-0 p-0" />
+          </div>
           
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -68,9 +77,18 @@ export default function Problem() {
           {PAIN_POINTS.map((point, i) => (
             <GlowCard
               key={point.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.5, delay: 0.3 + (i * 0.1) }}
+              initial={{ 
+                opacity: 0, 
+                x: i === 0 ? -150 : i === 2 ? 150 : 0, 
+                y: i === 1 ? 150 : 0 
+              }}
+              animate={isInView ? { opacity: 1, x: 0, y: 0 } : { opacity: 0, x: i === 0 ? -150 : i === 2 ? 150 : 0, y: i === 1 ? 150 : 0 }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 100, 
+                damping: 20, 
+                delay: 0.1 
+              }}
               glowColor="rgba(255, 80, 50, 0.15)"
               className="group relative h-full w-full p-[1px] rounded-[24px]"
             >
