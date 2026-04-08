@@ -66,9 +66,12 @@ const TESTIMONIALS_ROW_2 = [
   },
 ]
 
+const TESTIMONIALS_ROW_1_EXTENDED = [...TESTIMONIALS_ROW_1, ...TESTIMONIALS_ROW_2]
+const TESTIMONIALS_ROW_2_EXTENDED = [...TESTIMONIALS_ROW_2, ...TESTIMONIALS_ROW_1]
+
 function TestimonialCard({ item }: { item: typeof TESTIMONIALS_ROW_1[0] }) {
   return (
-    <div className="w-[350px] sm:w-[400px] flex-shrink-0 flex">
+    <div className="min-w-[350px] mx-3 flex-shrink-0 flex">
       <GlowCard enableTilt={false} className="w-full flex-1 p-6 flex flex-col justify-between">
         <div className="flex items-center gap-1 mb-4 text-[var(--violet)]">
           {[...Array(item.rating)].map((_, i) => (
@@ -112,41 +115,29 @@ export default function Testimonials() {
       </Container>
 
       {/* Marquee Container */}
-      <div className="relative w-full overflow-hidden flex flex-col gap-6 sm:gap-8 group">
+      <div className="relative w-full overflow-hidden flex flex-col gap-6 sm:gap-8">
         
         {/* Row 1 - Left to Right */}
-        <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-          <div className="flex w-max animate-marquee gap-6 sm:gap-8 hover:[animation-play-state:paused]">
-            {/* Original Set */}
-            <div className="flex gap-6 sm:gap-8">
-              {TESTIMONIALS_ROW_1.map((item, i) => (
-                <TestimonialCard key={`orig-${i}`} item={item} />
-              ))}
-            </div>
-            {/* Duplicated Set for infinite loop */}
-            <div className="flex gap-6 sm:gap-8">
-              {TESTIMONIALS_ROW_1.map((item, i) => (
-                <TestimonialCard key={`clone-${i}`} item={item} />
-              ))}
-            </div>
+        <div className="group flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+          <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
+            {TESTIMONIALS_ROW_1_EXTENDED.map((item, i) => (
+              <TestimonialCard key={`orig-${i}`} item={item} />
+            ))}
+            {TESTIMONIALS_ROW_1_EXTENDED.map((item, i) => (
+              <TestimonialCard key={`clone-${i}`} item={item} />
+            ))}
           </div>
         </div>
 
         {/* Row 2 - Right to Left */}
-        <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-          <div className="flex w-max animate-marquee-reverse gap-6 sm:gap-8 hover:[animation-play-state:paused]">
-            {/* Original Set */}
-            <div className="flex gap-6 sm:gap-8">
-              {TESTIMONIALS_ROW_2.map((item, i) => (
-                <TestimonialCard key={`orig-${i}`} item={item} />
-              ))}
-            </div>
-            {/* Duplicated Set for infinite loop */}
-            <div className="flex gap-6 sm:gap-8">
-              {TESTIMONIALS_ROW_2.map((item, i) => (
-                <TestimonialCard key={`clone-${i}`} item={item} />
-              ))}
-            </div>
+        <div className="group flex overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+          <div className="flex w-max animate-marquee-reverse group-hover:[animation-play-state:paused]">
+            {TESTIMONIALS_ROW_2_EXTENDED.map((item, i) => (
+              <TestimonialCard key={`orig-${i}`} item={item} />
+            ))}
+            {TESTIMONIALS_ROW_2_EXTENDED.map((item, i) => (
+              <TestimonialCard key={`clone-${i}`} item={item} />
+            ))}
           </div>
         </div>
       </div>
