@@ -1,0 +1,34 @@
+import { cookies } from "next/headers"
+import { redirect } from "next/navigation"
+import { Sidebar } from "@/components/dashboard/Sidebar"
+import { MobileNav } from "@/components/dashboard/MobileNav"
+
+export default async function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  const cookieStore = await cookies()
+  const accessToken = cookieStore.get("accessToken")?.value
+
+  if (!accessToken) {
+    redirect("/login")
+  }
+
+  return (
+    <div className="flex h-screen bg-[#0A0A0A] overflow-hidden">
+      {/* Desktop Sidebar */}
+      <Sidebar />
+
+      {/* Main Content */}
+      <main className="flex-1 flex flex-col overflow-y-auto md:ml-60">
+        {/* Mobile top bar */}
+        <MobileNav />
+        
+        <div className="flex-1 p-6 md:p-8">
+          {children}
+        </div>
+      </main>
+    </div>
+  )
+}
