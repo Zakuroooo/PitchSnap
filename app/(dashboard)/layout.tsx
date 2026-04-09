@@ -21,7 +21,7 @@ export default async function DashboardLayout({
       <Sidebar />
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col overflow-y-auto md:ml-60">
+      <main className="flex-1 flex flex-col overflow-y-auto md:ml-[200px]">
         {/* Mobile top bar */}
         <MobileNav />
         

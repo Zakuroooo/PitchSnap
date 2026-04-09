@@ -480,4 +480,14 @@ html {
   .animate-marquee-reverse {
     animation: marquee-reverse 30s linear infinite;
   }
+
+  /* Slow spin for gradient border effect */
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  .animate-spin-slow {
+    animation: spin-slow 8s linear infinite;
+  }
 }
