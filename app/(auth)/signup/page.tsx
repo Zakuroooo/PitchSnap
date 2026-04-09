@@ -3,13 +3,13 @@
 import { useState } from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { Eye, EyeOff, Loader2, Zap } from "lucide-react"
+import { Eye, EyeOff, Loader2, Zap, ArrowLeft } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { toast } from "sonner"
 
 export default function SignupPage() {
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState("")
   const [showPassword, setShowPassword] = useState(false)
 
   const [formData, setFormData] = useState({
@@ -18,21 +18,46 @@ export default function SignupPage() {
     password: "",
   })
 
+  const [fieldErrors, setFieldErrors] = useState({
+    name: "",
+    email: "",
+    password: "",
+  })
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
+    // Clear the specific field error when typing
+    setFieldErrors({ ...fieldErrors, [e.target.name]: "" })
+  }
+
+  const validate = () => {
+    let isValid = true
+    const errors = { name: "", email: "", password: "" }
+
+    if (formData.name.trim().length < 2) {
+      errors.name = "Name must be at least 2 characters"
+      isValid = false
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(formData.email)) {
+      errors.email = "Please enter a valid email address"
+      isValid = false
+    }
+
+    if (formData.password.length < 8) {
+      errors.password = "Password must be at least 8 characters long"
+      isValid = false
+    }
+
+    setFieldErrors(errors)
+    return isValid
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setError("")
 
-    if (!formData.name || !formData.email || !formData.password) {
-      setError("All fields are required")
-      return
-    }
-
-    if (formData.password.length < 8) {
-      setError("Password must be at least 8 characters long")
+    if (!validate()) {
       return
     }
 
@@ -51,19 +76,36 @@ export default function SignupPage() {
         throw new Error(data.error || "Failed to create account")
       }
 
+      toast.success("Account created! Welcome to PitchSnap", {
+        style: { background: "#10B981", color: "white", border: "none" }
+      })
+      
       // Redirect to dashboard on success
       window.location.href = "/dashboard"
     } catch (err: any) {
-      setError(err.message)
+      toast.error(err.message, {
+        style: { background: "#EF4444", color: "white", border: "none" }
+      })
     } finally {
-      setLoading(false)
+      if (typeof window !== "undefined") {
+        setLoading(false)
+      }
     }
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden bg-[#0A0A0A]">
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 py-8 relative overflow-hidden bg-[#0A0A0A]">
       <div className="absolute inset-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,rgba(145,94,255,0.15),transparent_50%)] pointer-events-none" />
       <div className="absolute inset-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom_left,rgba(0,222,255,0.1),transparent_50%)] pointer-events-none" />
+
+      {/* Back to home */}
+      <Link 
+        href="/" 
+        className="absolute top-6 left-6 z-20 flex items-center gap-2 text-sm text-[var(--text-secondary)] hover:text-white transition-colors group"
+      >
+        <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+        Back to PitchSnap.com
+      </Link>
 
       <Link href="/" className="flex items-center gap-2 cursor-pointer group mb-8 z-10" aria-label="PitchSnap home">
         <div
@@ -81,7 +123,7 @@ export default function SignupPage() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="w-full max-w-md p-8 rounded-2xl z-10"
+        className="w-full max-w-md p-6 sm:p-8 rounded-2xl z-10"
         style={{
           background: "rgba(255,255,255,0.03)",
           backdropFilter: "blur(12px)",
@@ -94,18 +136,21 @@ export default function SignupPage() {
           <p className="text-[var(--text-secondary)] text-sm">Start winning clients today</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-5" noValidate>
           <div className="space-y-2">
             <Label htmlFor="name" className="text-white/80">Full Name</Label>
             <Input
               id="name"
               name="name"
               placeholder="John Doe"
-              required
               value={formData.name}
               onChange={handleChange}
-              className="bg-black/20 border-white/10 text-white placeholder:text-white/30 h-12 focus-visible:ring-[var(--violet)] focus-visible:ring-offset-0 focus-visible:border-[var(--violet)] transition-colors"
+              disabled={loading}
+              className={`bg-black/20 text-white placeholder:text-white/30 h-12 transition-colors ${fieldErrors.name ? 'border-red-500 focus-visible:ring-red-500' : 'border-white/10 focus-visible:ring-[var(--violet)]'}`}
             />
+            {fieldErrors.name && (
+              <p className="text-red-400 text-xs mt-1 font-medium">{fieldErrors.name}</p>
+            )}
           </div>
 
           <div className="space-y-2">
@@ -115,11 +160,14 @@ export default function SignupPage() {
               name="email"
               type="email"
               placeholder="john@example.com"
-              required
               value={formData.email}
               onChange={handleChange}
-              className="bg-black/20 border-white/10 text-white placeholder:text-white/30 h-12 focus-visible:ring-[var(--violet)] focus-visible:ring-offset-0 focus-visible:border-[var(--violet)] transition-colors"
+              disabled={loading}
+              className={`bg-black/20 text-white placeholder:text-white/30 h-12 transition-colors ${fieldErrors.email ? 'border-red-500 focus-visible:ring-red-500' : 'border-white/10 focus-visible:ring-[var(--violet)]'}`}
             />
+            {fieldErrors.email && (
+              <p className="text-red-400 text-xs mt-1 font-medium">{fieldErrors.email}</p>
+            )}
           </div>
 
           <div className="space-y-2">
@@ -130,36 +178,29 @@ export default function SignupPage() {
                 name="password"
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
-                required
-                minLength={8}
                 value={formData.password}
                 onChange={handleChange}
-                className="bg-black/20 border-white/10 text-white placeholder:text-white/30 h-12 pr-10 focus-visible:ring-[var(--violet)] focus-visible:ring-offset-0 focus-visible:border-[var(--violet)] transition-colors"
+                disabled={loading}
+                className={`bg-black/20 text-white placeholder:text-white/30 h-12 pr-10 transition-colors ${fieldErrors.password ? 'border-red-500 focus-visible:ring-red-500' : 'border-white/10 focus-visible:ring-[var(--violet)]'}`}
               />
               <button
                 type="button"
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-white/50 hover:text-white/80 transition-colors"
                 onClick={() => setShowPassword(!showPassword)}
+                disabled={loading}
               >
                 {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
               </button>
             </div>
+            {fieldErrors.password && (
+              <p className="text-red-400 text-xs mt-1 font-medium">{fieldErrors.password}</p>
+            )}
           </div>
-
-          {error && (
-            <motion.div 
-              initial={{ opacity: 0, height: 0 }} 
-              animate={{ opacity: 1, height: "auto" }}
-              className="text-red-400 text-sm font-medium bg-red-400/10 p-3 rounded-lg border border-red-400/20"
-            >
-              {error}
-            </motion.div>
-          )}
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full h-12 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[var(--violet)] to-[var(--cyan)] text-white font-semibold shadow-[0_0_15px_rgba(145,94,255,0.4)] hover:shadow-[0_0_25px_rgba(0,222,255,0.5)] transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+            className="w-full h-12 flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[var(--violet)] to-[var(--cyan)] text-white font-semibold shadow-[0_0_15px_rgba(145,94,255,0.4)] hover:shadow-[0_0_25px_rgba(0,222,255,0.5)] transition-all disabled:opacity-70 disabled:cursor-not-allowed mt-2"
           >
             {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Sign Up"}
           </button>

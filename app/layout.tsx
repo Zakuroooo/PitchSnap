@@ -5,6 +5,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 import { ScrollProgressIndicator } from "@/components/layout/ScrollProgressIndicator"
+import { Toaster } from "@/components/ui/sonner"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -68,6 +69,7 @@ export default function RootLayout({
         <ThemeProvider forcedTheme="dark">
           <ScrollProgressIndicator />
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
