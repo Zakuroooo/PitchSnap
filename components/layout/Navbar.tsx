@@ -25,11 +25,30 @@ const mobileItemVariants: Variants = {
 export default function Navbar() {
   const [scrolled,    setScrolled]    = useState(false)
   const [mobileOpen,  setMobileOpen]  = useState(false)
+  const [activeSection, setActiveSection] = useState("")
 
-  /* ── Scroll detection ─────────────────────────────────── */
+  /* ── Scroll detection & Active Section ─────────────────────────────────── */
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
+    const onScroll = () => {
+      setScrolled(window.scrollY > 24)
+
+      // Active section detection
+      const sections = NAV_LINKS.map(link => link.href.substring(1))
+      let current = ""
+      for (const section of sections) {
+        const element = document.getElementById(section)
+        if (element) {
+          const rect = element.getBoundingClientRect()
+          if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+            current = section
+            break
+          }
+        }
+      }
+      setActiveSection(current)
+    }
     window.addEventListener("scroll", onScroll, { passive: true })
+    onScroll() // Initial check
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
@@ -95,18 +114,22 @@ export default function Navbar() {
 
             {/* Desktop nav links */}
             <nav className="hidden md:flex items-center gap-8" aria-label="Page sections">
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm transition-colors duration-200 cursor-pointer"
-                  style={{ color: "var(--text-secondary)" }}
-                  onMouseEnter={e => (e.currentTarget.style.color = "#ffffff")}
-                  onMouseLeave={e => (e.currentTarget.style.color = "var(--text-secondary)")}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {NAV_LINKS.map((link) => {
+                const sectionId = link.href.substring(1)
+                const isActive = activeSection === sectionId
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-sm transition-colors duration-200 cursor-pointer font-medium"
+                    style={{ color: isActive ? "var(--violet)" : "var(--text-secondary)" }}
+                    onMouseEnter={e => { if (!isActive) e.currentTarget.style.color = "#ffffff" }}
+                    onMouseLeave={e => { if (!isActive) e.currentTarget.style.color = "var(--text-secondary)" }}
+                  >
+                    {link.label}
+                  </Link>
+                )
+              })}
             </nav>
 
             {/* Desktop CTAs */}
