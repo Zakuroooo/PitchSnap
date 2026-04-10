@@ -5,7 +5,7 @@ import { GlowCard } from "../ui/glow-card"
 import Container from "../layout/Container"
 import { Clock, MessageSquareOff, FileWarning } from "lucide-react"
 import { AnimatedHeading } from "../ui/animated-heading"
-import { AnimatedCounter } from "../ui/animated-counter"
+import { AnimatedCounter } from "../ui/AnimatedCounter"
 
 export default function Problem() {
   const ref = useRef(null)
@@ -16,7 +16,7 @@ export default function Problem() {
       title: "Hours Wasted on Pitches",
       description: (
         <>
-          Writing custom proposals from scratch takes <strong className="text-white"><AnimatedCounter from={0} to={45} duration={3} delay={0.5} />+ minutes</strong> per client, eating into your billable hours.
+          Writing custom proposals from scratch takes <strong className="text-white"><AnimatedCounter target={45} duration={3} />+ minutes</strong> per client, eating into your billable hours.
         </>
       ),
       icon: Clock,
@@ -25,7 +25,7 @@ export default function Problem() {
       title: "The Silent Treatment",
       description: (
         <>
-          Sending <strong className="text-white"><AnimatedCounter from={0} to={50} duration={2.5} delay={0.6} /> cold emails</strong> and getting getting a <strong className="text-white"><AnimatedCounter from={0} to={0} duration={1} delay={0.7} />%</strong> reply rate because your generic templates are triggering spam filters.
+          Sending <strong className="text-white"><AnimatedCounter target={50} duration={2.5} /> cold emails</strong> and getting getting a <strong className="text-white"><AnimatedCounter target={0} duration={1} />%</strong> reply rate because your generic templates are triggering spam filters.
         </>
       ),
       icon: MessageSquareOff,
@@ -34,7 +34,7 @@ export default function Problem() {
       title: "Lost High-Ticket Deals",
       description: (
         <>
-          Losing premium <strong className="text-white">$<AnimatedCounter from={0} to={5000} duration={3} delay={0.8} />+</strong> contracts to competitors who respond faster with better-formatted, persuasive proposals.
+          Losing premium <strong className="text-white">$<AnimatedCounter target={5000} duration={3} />+</strong> contracts to competitors who respond faster with better-formatted, persuasive proposals.
         </>
       ),
       icon: FileWarning,
