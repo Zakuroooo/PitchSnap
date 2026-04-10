@@ -54,7 +54,7 @@ export default function FreelancerCharacter({
   const characterScale = useTransform(
     scrollYProgress,
     [0, 0.75, 1],
-    [1.0, 1.0, 1.05]
+    [1.3, 1.3, 1.35]
   );
 
 
