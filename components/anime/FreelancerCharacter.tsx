@@ -374,122 +374,70 @@ export default function FreelancerCharacter({
         xmlns="http://www.w3.org/2000/svg"
         aria-label="Animated freelancer character"
       >
-        {/* Group 1: Background glow circle */}
-        <motion.circle
-          cx={140}
-          cy={220}
-          r={130}
-          fill="rgba(255,255,255,0.06)"
-          style={{ opacity: glowOpacity }}
-        />
+        {/* Glow */}
+        <motion.circle cx={140} cy={220} r={130} fill="rgba(255,255,255,0.06)" style={{ opacity: glowOpacity }} />
 
-        {/* Group 7: Arms — behind body */}
+        {/* ── Arms (Behind body) ── */}
         <g>
           {currentState === 0 && (
-            /* State 0: Arms hanging limp */
             <>
-              <path
-                d="M95,200 Q75,240 80,280"
-                stroke="#444444"
-                strokeWidth={8}
-                strokeLinecap="round"
-                fill="none"
-              />
-              <path
-                d="M185,200 Q205,240 200,280"
-                stroke="#444444"
-                strokeWidth={8}
-                strokeLinecap="round"
-                fill="none"
-              />
+              {/* Drooping arms */}
+              <path d="M85,180 Q65,230 75,270" stroke="#666666" strokeWidth={16} strokeLinecap="round" fill="none" />
+              <path d="M195,180 Q215,230 205,270" stroke="#666666" strokeWidth={16} strokeLinecap="round" fill="none" />
+              <circle cx={75} cy={275} r={8} fill="#F2EBE9" />
+              <circle cx={205} cy={275} r={8} fill="#F2EBE9" />
             </>
           )}
           {currentState === 1 && (
-            /* State 1: One arm pointing forward */
             <>
-              <path
-                d="M95,200 Q75,240 80,275"
-                stroke="#666666"
-                strokeWidth={8}
-                strokeLinecap="round"
-                fill="none"
-              />
-              <path
-                d="M185,200 Q210,210 230,195"
-                stroke="#666666"
-                strokeWidth={8}
-                strokeLinecap="round"
-                fill="none"
-              />
+              {/* Pointing/Raised */}
+              <path d="M85,180 Q65,230 75,270" stroke="#666666" strokeWidth={16} strokeLinecap="round" fill="none" />
+              <path d="M195,180 Q225,200 240,180" stroke="#666666" strokeWidth={16} strokeLinecap="round" fill="none" />
+              <circle cx={75} cy={275} r={8} fill="#F2EBE9" />
+              <circle cx={242} cy={178} r={8} fill="#F2EBE9" />
             </>
           )}
           {currentState === 2 && (
-            /* State 2: Both arms on keyboard */
             <>
-              <path
-                d="M95,210 Q70,240 90,265"
-                stroke="#999999"
-                strokeWidth={8}
-                strokeLinecap="round"
-                fill="none"
-              />
-              <path
-                d="M185,210 Q210,240 190,265"
-                stroke="#999999"
-                strokeWidth={8}
-                strokeLinecap="round"
-                fill="none"
-              />
+              {/* Typing */}
+              <path d="M85,190 Q65,220 95,255" stroke="#666666" strokeWidth={16} strokeLinecap="round" fill="none" />
+              <path d="M195,190 Q215,220 185,255" stroke="#666666" strokeWidth={16} strokeLinecap="round" fill="none" />
+              <circle cx={98} cy={258} r={8} fill="#F2EBE9" />
+              <circle cx={182} cy={258} r={8} fill="#F2EBE9" />
             </>
           )}
           {currentState === 3 && (
-            /* State 3: Victory V pose — arms raised */
             <>
-              <path
-                d="M95,200 Q60,160 50,110"
-                stroke="#F5F5F5"
-                strokeWidth={8}
-                strokeLinecap="round"
-                fill="none"
-              />
-              <path
-                d="M185,200 Q220,160 230,110"
-                stroke="#F5F5F5"
-                strokeWidth={8}
-                strokeLinecap="round"
-                fill="none"
-              />
+              {/* Victory V */}
+              <path d="M85,190 Q65,150 55,110" stroke="#666666" strokeWidth={16} strokeLinecap="round" fill="none" />
+              <path d="M195,190 Q215,150 225,110" stroke="#666666" strokeWidth={16} strokeLinecap="round" fill="none" />
+              <circle cx={53} cy={105} r={8} fill="#F2EBE9" />
+              <circle cx={227} cy={105} r={8} fill="#F2EBE9" />
             </>
           )}
         </g>
 
-        {/* Group 2: Body/torso */}
-        <motion.rect
-          x={95}
-          y={180}
-          width={90}
-          height={110}
-          rx={12}
-          style={{ fill: bodyColor }}
-        />
-        {/* Collar detail */}
-        <motion.path
-          d="M115,180 L140,200 L165,180"
-          style={{ stroke: bodyColor }}
-          strokeWidth={2}
-          fill="none"
-          opacity={0.3}
-        />
-
-        {/* Legs */}
-        <motion.rect x={108} y={290} width={22} height={45} rx={6} style={{ fill: bodyColor }} />
-        <motion.rect x={150} y={290} width={22} height={45} rx={6} style={{ fill: bodyColor }} />
-
+        {/* ── Body: Hoodie ── */}
+        {/* Legs / Lower body */}
+        <path d="M110,290 L120,340 L135,340 L135,290 Z" fill="#333333" />
+        <path d="M170,290 L160,340 L145,340 L145,290 Z" fill="#333333" />
         {/* Shoes */}
-        <rect x={105} y={330} width={28} height={10} rx={5} fill="#1A1A1A" />
-        <rect x={147} y={330} width={28} height={10} rx={5} fill="#1A1A1A" />
+        <path d="M105,340 Q120,335 140,340 Q130,350 110,350 Z" fill="#0A0A0A" />
+        <path d="M175,340 Q160,335 140,340 Q150,350 170,350 Z" fill="#0A0A0A" />
 
-        {/* Group 3: Head */}
+        {/* Torso */}
+        <path d="M90,190 C90,190 80,300 100,300 L180,300 C200,300 190,190 190,190 Z" fill="#666666" />
+        {/* Hoodie shadows/folds */}
+        <path d="M140,190 L140,300" stroke="#555555" strokeWidth={1.5} />
+        {/* Hoodie Pocket */}
+        <path d="M110,250 C110,250 105,280 120,290 L160,290 C175,280 170,250 170,250 L110,250 Z" fill="#555555" />
+        {/* Back of Hood */}
+        <path d="M110,165 Q140,190 170,165 Q185,190 140,205 Q95,190 110,165 Z" fill="#555555" />
+        {/* Drawstrings */}
+        <path d="M125,185 Q120,210 125,230" stroke="#444444" strokeWidth={3} strokeLinecap="round" fill="none" />
+        <path d="M155,185 Q160,210 155,230" stroke="#444444" strokeWidth={3} strokeLinecap="round" fill="none" />
+
+        {/* ── Head / Anime Face ── */}
         <g
           style={{
             transform: `rotate(${headTilt}deg)`,
@@ -497,146 +445,112 @@ export default function FreelancerCharacter({
             transition: "transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)",
           }}
         >
-          <motion.circle cx={140} cy={130} r={55} style={{ fill: bodyColor }} />
+          {/* Neck */}
+          <rect x={132} y={150} width={16} height={20} rx={4} fill="#E5DCDA" />
+          {/* Face */}
+          <path d="M92,105 C92,155 110,168 140,168 C170,168 188,155 188,105 C188,75 168,65 140,65 C112,65 92,75 92,105 Z" fill="#F2EBE9" />
 
-          {/* Group 4: Hair — always dark */}
-          <path
-            d="M85,120 Q90,60 140,55 Q190,60 195,120 L190,110 Q185,75 140,68 Q95,75 90,110 Z"
-            fill="#1A1A1A"
-          />
-          {/* Spiky hair bits */}
-          <path d="M100,85 L95,55 L115,78" fill="#1A1A1A" />
-          <path d="M125,72 L130,42 L145,68" fill="#1A1A1A" />
-          <path d="M155,72 L165,45 L175,78" fill="#1A1A1A" />
-          <path d="M180,85 L190,58 L185,82" fill="#1A1A1A" />
+          {/* Hair (Anime Style Spikes) */}
+          <g fill="#2A2D34">
+            {/* Base hair bulk */}
+            <circle cx={140} cy={95} r={54} />
+            {/* Left spikes */}
+            <path d="M85,100 Q70,95 65,115 Q75,120 85,110 Z" />
+            <path d="M86,80 Q70,70 65,85 Q75,90 85,90 Z" />
+            {/* Right spikes */}
+            <path d="M195,100 Q210,95 215,115 Q205,120 195,110 Z" />
+            <path d="M194,80 Q210,70 215,85 Q205,90 195,90 Z" />
+            {/* Top Cowlick */}
+            <path d="M135,45 Q150,20 160,45 Q150,30 145,45 Z" />
+            {/* Front bangs crossing forehead */}
+            <path d="M95,65 Q115,70 110,105 Q125,85 130,65 Z" />
+            <path d="M130,60 Q145,50 160,95 Q165,75 165,65 Z" />
+            <path d="M165,65 Q180,75 185,105 Q190,85 185,75 Z" />
+            <path d="M135,65 Q145,85 140,105 Q155,85 155,65 Z" />
+          </g>
 
-          {/* Group 5: Eyes */}
-          {currentState === 0 && (
-            /* Droopy/sad ellipses */
-            <>
-              <ellipse cx={118} cy={127} rx={10} ry={6} fill="#1A1A1A" />
-              <ellipse cx={162} cy={127} rx={10} ry={6} fill="#1A1A1A" />
-              {/* Heavy eyelids */}
-              <rect x={106} y={118} width={24} height={6} rx={3} fill="#1A1A1A" opacity={0.5} />
-              <rect x={150} y={118} width={24} height={6} rx={3} fill="#1A1A1A" opacity={0.5} />
-            </>
-          )}
-          {currentState === 1 && (
-            /* Wide circles (surprised) with shine */
-            <>
-              <circle cx={118} cy={125} r={12} fill="#1A1A1A" />
-              <circle cx={162} cy={125} r={12} fill="#1A1A1A" />
-              {/* White of eyes */}
-              <circle cx={118} cy={125} r={10} fill="white" />
-              <circle cx={162} cy={125} r={10} fill="white" />
-              {/* Pupils */}
-              <circle cx={120} cy={124} r={5} fill="#1A1A1A" />
-              <circle cx={164} cy={124} r={5} fill="#1A1A1A" />
-              {/* Shine dots */}
-              <circle cx={122} cy={121} r={2} fill="white" />
-              <circle cx={166} cy={121} r={2} fill="white" />
-            </>
-          )}
-          {currentState === 2 && (
-            /* Determined half-squint */
-            <>
-              <rect x={108} y={120} width={20} height={10} rx={5} fill="#1A1A1A" />
-              <rect x={152} y={120} width={20} height={10} rx={5} fill="#1A1A1A" />
-              {/* Small glint lines */}
-              <line x1={105} y1={125} x2={100} y2={123} stroke="#1A1A1A" strokeWidth={1.5} />
-              <line x1={175} y1={125} x2={180} y2={123} stroke="#1A1A1A" strokeWidth={1.5} />
-            </>
-          )}
-          {currentState === 3 && (
-            /* Star eyes (victory) */
-            <>
-              <path d={starPath(118, 125, 12)} fill="#1A1A1A" />
-              <path d={starPath(162, 125, 12)} fill="#1A1A1A" />
-              {/* White star centers */}
-              <path d={starPath(118, 125, 7)} fill="white" />
-              <path d={starPath(162, 125, 7)} fill="white" />
-            </>
-          )}
+          {/* Eyes & Mouth container */}
+          <g>
+            {currentState === 0 && (
+              /* State 0: Stressed (Drooping eyes) */
+              <>
+                <ellipse cx={116} cy={125} rx={14} ry={10} fill="white" />
+                <ellipse cx={164} cy={125} rx={14} ry={10} fill="white" />
+                <ellipse cx={116} cy={125} rx={9} ry={7} fill="#111111" />
+                <ellipse cx={164} cy={125} rx={9} ry={7} fill="#111111" />
+                {/* Heavy Eyelids cutting off the top */}
+                <path d="M100,110 L132,125 L132,110 Z" fill="#F2EBE9" />
+                <path d="M180,110 L148,125 L148,110 Z" fill="#F2EBE9" />
+                {/* Sweat Drop */}
+                <path d="M175,135 Q180,145 175,150 Q170,145 175,135 Z" fill="#A8DADC" opacity={0.8} />
+                {/* Frown */}
+                <path d="M130,152 Q140,146 150,152" stroke="#2A2D34" strokeWidth={2.5} strokeLinecap="round" fill="none" />
+              </>
+            )}
 
-          {/* Group 6: Mouth */}
-          {currentState === 0 && (
-            /* Frown */
-            <path
-              d="M120,150 Q140,142 160,150"
-              stroke="#1A1A1A"
-              strokeWidth={3}
-              strokeLinecap="round"
-              fill="none"
-            />
-          )}
-          {currentState === 1 && (
-            /* Surprised O */
-            <circle cx={140} cy={150} r={8} fill="#1A1A1A" />
-          )}
-          {currentState === 2 && (
-            /* Confident smirk */
-            <path
-              d="M125,147 Q140,155 155,147"
-              stroke="#1A1A1A"
-              strokeWidth={3}
-              strokeLinecap="round"
-              fill="none"
-            />
-          )}
-          {currentState === 3 && (
-            /* Big open smile */
-            <>
-              <path
-                d="M115,145 Q140,168 165,145"
-                stroke="#1A1A1A"
-                strokeWidth={3}
-                strokeLinecap="round"
-                fill="none"
-              />
-              <path
-                d="M120,147 Q140,165 160,147"
-                fill="#1A1A1A"
-                opacity={0.3}
-              />
-            </>
-          )}
+            {currentState === 1 && (
+              /* State 1: Discovering (Wide eyes + highlights) */
+              <>
+                <ellipse cx={116} cy={125} rx={16} ry={18} fill="white" />
+                <ellipse cx={164} cy={125} rx={16} ry={18} fill="white" />
+                {/* Dark Iris */}
+                <ellipse cx={116} cy={125} rx={12} ry={14} fill="#111111" />
+                <ellipse cx={164} cy={125} rx={12} ry={14} fill="#111111" />
+                {/* Highlights */}
+                <circle cx={110} cy={118} r={5} fill="white" />
+                <circle cx={122} cy={133} r={2.5} fill="white" />
+                <circle cx={158} cy={118} r={5} fill="white" />
+                <circle cx={170} cy={133} r={2.5} fill="white" />
+                {/* Small O Mouth */}
+                <circle cx={140} cy={152} r={4} fill="#111111" />
+              </>
+            )}
+
+            {currentState === 2 && (
+              /* State 2: Energized (Determined Squint/Smirk) */
+              <>
+                {/* Squint paths */}
+                <path d="M102,123 Q116,113 130,123" stroke="#111111" strokeWidth={3} strokeLinecap="round" fill="none" />
+                <path d="M178,123 Q164,113 150,123" stroke="#111111" strokeWidth={3} strokeLinecap="round" fill="none" />
+                {/* Smirk */}
+                <path d="M132,150 Q142,155 150,145" stroke="#111111" strokeWidth={2.5} strokeLinecap="round" fill="none" />
+              </>
+            )}
+
+            {currentState === 3 && (
+              /* State 3: Winning (Star eyes & Big Smile) */
+              <>
+                {/* Star shape for eyes */}
+                <path d={starPath(116, 125, 12)} fill="#111111" />
+                <path d={starPath(164, 125, 12)} fill="#111111" />
+                <path d={starPath(116, 125, 5)} fill="white" />
+                <path d={starPath(164, 125, 5)} fill="white" />
+                {/* Big happy mouth */}
+                <path d="M125,145 Q140,145 155,145 C155,160 140,165 125,145 Z" fill="#111111" stroke="#111" strokeWidth={1.5} strokeLinejoin="round" />
+              </>
+            )}
+          </g>
         </g>
 
-        {/* Group 8: Laptop (visible in states 1, 2, 3) */}
+        {/* ── Laptop (Appears in states 1, 2, 3) ── */}
         {currentState >= 1 && (
           <g>
             {/* Laptop base */}
-            <rect x={170} y={255} width={65} height={5} rx={2} fill="#333333" />
+            <rect x={170} y={255} width={65} height={5} rx={2} fill="#222222" />
+            <path d="M165,260 L240,260 L235,265 L170,265 Z" fill="#111111" />
             {/* Screen */}
-            <rect x={175} y={215} width={55} height={40} rx={3} fill="#222222" stroke="#444444" strokeWidth={1} />
+            <rect x={175} y={215} width={55} height={40} rx={3} fill="#1A1A1A" stroke="#333333" strokeWidth={1} />
             {/* Screen content */}
-            <rect x={180} y={220} width={45} height={30} rx={1} fill="#111111" />
+            <rect x={180} y={220} width={45} height={30} rx={1} fill="#0C0C0C" />
             {/* PS text on screen for states 2 + 3 */}
             {currentState >= 2 && (
-              <text
-                x={202}
-                y={240}
-                fill="rgba(255,255,255,0.5)"
-                fontSize={12}
-                fontWeight={700}
-                textAnchor="middle"
-                fontFamily="system-ui"
-              >
+              <text x={202} y={240} fill="rgba(255,255,255,0.7)" fontSize={12} fontWeight={700} textAnchor="middle" fontFamily="system-ui">
                 PS
               </text>
             )}
             {/* Screen glow for state 2+ */}
             {currentState >= 2 && (
-              <rect
-                x={180}
-                y={220}
-                width={45}
-                height={30}
-                rx={1}
-                fill="none"
-                stroke="rgba(255,255,255,0.15)"
-                strokeWidth={1}
-              />
+              <rect x={180} y={220} width={45} height={30} rx={1} fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth={1} />
             )}
           </g>
         )}
