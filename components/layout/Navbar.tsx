@@ -77,20 +77,14 @@ export default function Navbar() {
             {/* ── Logo: 'Pitch' white + 'Snap' lime ── */}
             <Link
               href="/"
-              className="flex items-center gap-0 cursor-pointer"
+              className="flex items-center gap-0 cursor-pointer font-bold tracking-tight"
+              style={{ fontFamily: "var(--font-inter)", fontSize: "20px" }}
               aria-label="PitchSnap home"
             >
-              <span
-                className="font-bold text-xl tracking-tight"
-                style={{ color: "var(--color-white)" }}
-              >
-                Pitch
-              </span>
-              <span
-                className="font-bold text-xl tracking-tight"
-                style={{ color: "var(--color-accent)" }}
-              >
+              <span style={{ color: "var(--color-text-primary)" }}>Pitch</span>
+              <span className="relative" style={{ color: "var(--color-accent)" }}>
                 Snap
+                <span className="absolute top-[4px] -right-[6px] w-[4px] h-[4px] rounded-full bg-[var(--color-accent)]"></span>
               </span>
             </Link>
 
@@ -125,7 +119,7 @@ export default function Navbar() {
               <Link
                 href="/signup"
                 id="nav-signup-btn"
-                className="btn-lime text-sm"
+                className="btn-white text-sm"
               >
                 Get Started Free
               </Link>
@@ -232,7 +226,7 @@ export default function Navbar() {
                     href="/signup"
                     id="mobile-signup-btn"
                     onClick={() => setMobileOpen(false)}
-                    className="btn-lime text-center py-3 text-sm rounded-full cursor-pointer"
+                    className="btn-white text-center py-3 text-sm rounded-full cursor-pointer"
                   >
                     Get Started Free
                   </Link>
