@@ -1,165 +1,178 @@
 "use client"
-
 import React, { useState } from "react"
-import { Check, X } from "lucide-react"
-import Container from "../layout/Container"
-import { AnimatedHeading } from "../ui/animated-heading"
+import { Check } from "lucide-react"
 import { motion } from "framer-motion"
+import Container from "../layout/Container"
 
 export default function Pricing() {
   const [isAnnual, setIsAnnual] = useState(true)
 
   return (
-    <section id="pricing" className="relative py-24 sm:py-32 w-full bg-[#0A0A0A] overflow-hidden flex flex-col items-center">
-      
-      {/* Ambient background glow behind Pro card */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-[#915EFF] rounded-full blur-[150px] opacity-[0.06] pointer-events-none" />
-
-      <Container className="relative z-10 w-full">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <AnimatedHeading text="Simple, transparent pricing" className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4 text-white justify-center" />
-          <p className="text-[var(--text-secondary)] text-base sm:text-lg">
-            Start closing more deals today. Upgrade when you need more power.
-          </p>
-          
-          {/* Billing Toggle */}
-          <div className="mt-8 flex items-center justify-center gap-4">
-            <span className={`text-sm font-medium transition-colors ${!isAnnual ? 'text-white' : 'text-[var(--text-tertiary)]'}`}>
-              Monthly
-            </span>
-            <button 
-              onClick={() => setIsAnnual(!isAnnual)}
-              className={`relative w-14 h-7 rounded-full flex items-center px-1 transition-colors outline-none ${
-                isAnnual ? 'bg-[#915EFF]' : 'bg-white/10'
-              }`}
-              aria-label="Toggle billing cycle"
+    <section id="pricing" className="relative py-32 w-full bg-[#0c0c0c] text-white">
+      <Container>
+        <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-12">
+          <div className="flex flex-col max-w-xl">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-xs tracking-[0.3em] text-[#5e5e5e] uppercase font-bold mb-6"
             >
-              <motion.div 
-                layout
-                transition={{ type: "spring", stiffness: 700, damping: 30 }}
-                className="w-5 h-5 rounded-full bg-white shadow-sm"
-                style={{ marginLeft: isAnnual ? 'auto' : '0' }}
-              />
-            </button>
-            <span className={`text-sm font-medium flex items-center gap-2 transition-colors ${isAnnual ? 'text-white' : 'text-[var(--text-tertiary)]'}`}>
-              Annually <span className="text-[11px] font-bold text-[#00DEFF] bg-[#00DEFF]/10 px-2 py-0.5 rounded-full uppercase tracking-wide">Save ~20%</span>
-            </span>
+              Investment
+            </motion.div>
+            
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-5xl md:text-7xl font-extrabold tracking-tighter"
+            >
+              VALUE WITHOUT<br/>COMPROMISE.
+            </motion.h2>
           </div>
+          
+          <motion.div 
+             initial={{ opacity: 0, y: 20 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             transition={{ duration: 0.5, delay: 0.2 }}
+             className="flex flex-col items-start gap-4"
+          >
+             <p className="text-[#A1A1A1] text-lg max-w-sm">
+                Structured pricing for operators who understand the compounding value of high-converting proposals.
+             </p>
+             {/* Billing Toggle */}
+             <div className="flex items-center gap-6 mt-4">
+               <button 
+                  onClick={() => setIsAnnual(!isAnnual)}
+                  className={`text-sm font-bold tracking-widest uppercase transition-colors pb-1 border-b-2 ${!isAnnual ? 'text-white border-white' : 'text-[#474747] border-transparent hover:text-[#919191]'}`}
+               >
+                 Monthly
+               </button>
+               <button 
+                  onClick={() => setIsAnnual(!isAnnual)}
+                  className={`text-sm font-bold tracking-widest uppercase transition-colors pb-1 border-b-2 ${isAnnual ? 'text-white border-white' : 'text-[#474747] border-transparent hover:text-[#919191]'}`}
+               >
+                 Annually (Save 20%)
+               </button>
+             </div>
+          </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto items-center pt-16 overflow-visible">
+        <div className="flex flex-col lg:flex-row gap-6 items-stretch relative z-10 w-full lg:h-[600px]">
           
           {/* Starter Plan */}
-          <div className="flex flex-col p-8 rounded-2xl bg-[rgba(255,255,255,0.03)] backdrop-blur-[12px] border border-[rgba(255,255,255,0.08)] border-t-[rgba(255,255,255,0.12)] h-full">
-            <div className="mb-8">
-              <h3 className="text-xl font-bold text-white mb-2">Starter</h3>
-              <p className="text-[var(--text-tertiary)] text-sm h-10">Perfect for freelancers just starting out.</p>
-              <div className="mt-6 flex items-baseline gap-2">
-                <span className="text-6xl sm:text-7xl font-bold gradient-text pb-1">$0</span>
-                <span className="text-[var(--text-tertiary)]">/ forever</span>
+          <motion.div 
+             initial={{ opacity: 0, y: 20 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             transition={{ duration: 0.5, delay: 0.2 }}
+             className="flex-1 bg-[#111111] hover:bg-[#161616] transition-colors p-10 md:p-12 flex flex-col justify-between"
+          >
+            <div>
+              <h3 className="text-2xl font-bold uppercase tracking-wider mb-2">Starter</h3>
+              <p className="text-[#A1A1A1] text-sm h-12">Essential architecture for solo freelancers entering the market.</p>
+              <div className="mt-8 mb-12 flex items-baseline gap-2">
+                <span className="text-6xl font-black tracking-tighter">$0</span>
+                <span className="text-[#5e5e5e] font-bold text-sm uppercase tracking-widest">/ forever</span>
+              </div>
+              <div className="flex flex-col gap-4">
+                {[
+                  "3 AI proposals per month",
+                  "Standard Monolith templates",
+                  "Basic analytics structure",
+                  "Community access",
+                ].map((feature, i) => (
+                  <div key={i} className="flex items-start gap-4">
+                    <Check className="w-5 h-5 text-white shrink-0" />
+                    <span className="text-base text-[#c6c6c6]">{feature}</span>
+                  </div>
+                ))}
               </div>
             </div>
             
-            <button className="w-full py-3 px-4 rounded-lg border border-white text-white hover:bg-white hover:text-black font-semibold transition-all mb-8">
-              Get Started
+            <button className="w-full mt-12 py-4 px-4 bg-[#1C1B1B] hover:bg-[#2a2a2a] text-white font-bold tracking-widest uppercase text-sm transition-colors">
+              Deploy Starter
             </button>
+          </motion.div>
 
-            <div className="flex flex-col divide-y divide-white/5 mt-auto">
-              <p className="text-xs font-semibold text-white uppercase tracking-wider mb-2 pb-2">Features</p>
-              {[
-                "3 AI proposals per month",
-                "Standard templates",
-                "Basic analytics view",
-                "Community support",
-              ].map((feature, i) => (
-                <div key={i} className="flex items-start gap-4 py-4">
-                  <Check className="w-5 h-5 text-[#915EFF] shrink-0" />
-                  <span className="text-sm text-[var(--text-secondary)] mt-0.5">{feature}</span>
-                </div>
-              ))}
-              <div className="flex items-start gap-4 py-4">
-                <X className="w-5 h-5 shrink-0 text-[rgba(255,255,255,0.3)]" />
-                <span className="text-sm text-[rgba(255,255,255,0.3)] mt-0.5">Custom branding</span>
+          {/* Pro Plan */}
+          <motion.div 
+             initial={{ opacity: 0, y: 20 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             transition={{ duration: 0.5, delay: 0.3 }}
+             className="flex-[1.2] bg-white p-10 md:p-12 flex flex-col justify-between shadow-2xl relative z-20"
+          >
+            <div>
+              <div className="flex justify-between items-start mb-2">
+                 <h3 className="text-2xl font-bold text-black uppercase tracking-wider">Pro</h3>
+                 <span className="text-[10px] font-bold tracking-widest uppercase bg-black text-white px-3 py-1">Featured</span>
               </div>
-            </div>
-          </div>
-
-          {/* Pro Plan (Most Popular) */}
-          <div className="relative z-10 md:scale-[1.04] flex flex-col group h-full">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 py-1.5 bg-gradient-to-r from-[#915EFF] to-[#00DEFF] text-white text-[11px] font-bold uppercase tracking-wider rounded-full shadow-[0_0_15px_rgba(145,94,255,0.4)] whitespace-nowrap z-20 mt-4 md:mt-0">
-              Most Popular
-            </div>
-
-            <div className="relative rounded-2xl p-[1px] shadow-[0_0_60px_rgba(145,94,255,0.2)] overflow-hidden flex flex-col h-full">
-              {/* Animated Conic Gradient Border */}
-              <div className="absolute inset-[-100%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,transparent_0%,#915EFF_50%,transparent_100%)] opacity-80" />
-              
-              {/* Inner Card Content */}
-              <div className="relative w-full h-full flex flex-col p-8 rounded-2xl bg-[rgba(145,94,255,0.08)] backdrop-blur-[12px] border-t border-[rgba(255,255,255,0.12)]">
-                
-                <div className="mb-8 mt-2">
-                  <h3 className="text-xl font-bold text-white mb-2">Pro</h3>
-                  <p className="text-[var(--text-tertiary)] text-sm h-10">Everything you need to scale your freelance business.</p>
-                  <div className="mt-6 flex items-baseline gap-2">
-                    <span className="text-6xl sm:text-7xl font-bold gradient-text pb-1">${isAnnual ? '29' : '39'}</span>
-                    <span className="text-[var(--text-tertiary)]">/ month</span>
+              <p className="text-[#474747] text-sm h-12 pb-2">Unrestricted access for full-time operators scaling revenue.</p>
+              <div className="mt-8 mb-12 flex items-baseline gap-2 text-black">
+                <span className="text-7xl md:text-8xl font-black tracking-tighter leading-none">${isAnnual ? '49' : '59'}</span>
+                <span className="text-[#474747] font-bold text-sm uppercase tracking-widest">/ month</span>
+              </div>
+              <div className="flex flex-col gap-4 text-black">
+                 <p className="text-xs font-bold uppercase tracking-widest text-[#474747] mb-2 pb-2 border-b border-[#e2e2e2]">Everything in Starter, plus:</p>
+                {[
+                  "Unlimited proposal indexing",
+                  "Custom brand alignment",
+                  "CRM terminal integrations",
+                  "Priority protocol support",
+                  "E-signatures & digital contracts",
+                ].map((feature, i) => (
+                  <div key={i} className="flex items-start gap-4">
+                    <Check className="w-5 h-5 text-black shrink-0" />
+                    <span className="text-base font-medium">{feature}</span>
                   </div>
-                </div>
-                
-                <button className="w-full py-3 px-4 rounded-lg btn-gradient font-semibold mb-8 text-white">
-                  Upgrade to Pro
-                </button>
-
-                <div className="flex flex-col divide-y divide-white/5 mt-auto">
-                  <p className="text-xs font-semibold text-white uppercase tracking-wider mb-2 pb-2">Everything in Starter, plus</p>
-                  {[
-                    "Unlimited AI proposals",
-                    "Advanced custom branding",
-                    "CRM Integrations (Hubspot)",
-                    "Priority email support",
-                    "E-signatures & payment links",
-                  ].map((feature, i) => (
-                    <div key={i} className="flex items-start gap-4 py-4">
-                      <Check className="w-5 h-5 text-[#915EFF] shrink-0" />
-                      <span className="text-sm text-white font-medium mt-0.5">{feature}</span>
-                    </div>
-                  ))}
-                </div>
+                ))}
               </div>
             </div>
-          </div>
+            
+            <button className="w-full mt-12 py-4 px-4 bg-black hover:bg-[#1a1c1c] text-white font-bold tracking-widest uppercase text-sm transition-colors">
+              Access Terminal
+            </button>
+          </motion.div>
 
           {/* Agency Plan */}
-          <div className="flex flex-col p-8 rounded-2xl bg-[rgba(255,255,255,0.03)] backdrop-blur-[12px] border border-[rgba(255,255,255,0.08)] border-t-[rgba(255,255,255,0.12)]">
-            <div className="mb-8">
-              <h3 className="text-xl font-bold text-white mb-2">Agency</h3>
-              <p className="text-[var(--text-tertiary)] text-sm h-10">For teams sending high-volume pitches.</p>
-              <div className="mt-6 flex items-baseline gap-2">
-                <span className="text-6xl sm:text-7xl font-bold gradient-text pb-1">${isAnnual ? '99' : '119'}</span>
-                <span className="text-[var(--text-tertiary)]">/ month</span>
+          <motion.div 
+             initial={{ opacity: 0, y: 20 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             transition={{ duration: 0.5, delay: 0.4 }}
+             className="flex-1 bg-[#111111] hover:bg-[#161616] transition-colors p-10 md:p-12 flex flex-col justify-between"
+          >
+            <div>
+              <h3 className="text-2xl font-bold uppercase tracking-wider mb-2">Agency</h3>
+              <p className="text-[#A1A1A1] text-sm h-12">Volume-based infrastructure for teams and high-output agencies.</p>
+              <div className="mt-8 mb-12 flex items-baseline gap-2">
+                <span className="text-6xl font-black tracking-tighter">${isAnnual ? '149' : '179'}</span>
+                <span className="text-[#5e5e5e] font-bold text-sm uppercase tracking-widest">/ month</span>
+              </div>
+              <div className="flex flex-col gap-4">
+                 <p className="text-xs font-bold uppercase tracking-widest text-[#5e5e5e] mb-2 pb-2 border-b border-[#1C1B1B]">Everything in Pro, plus:</p>
+                {[
+                  "Up to 5 operator seats",
+                  "White-label domain hosting",
+                  "API endpoints for automation",
+                  "Dedicated success architect",
+                ].map((feature, i) => (
+                  <div key={i} className="flex items-start gap-4">
+                    <Check className="w-5 h-5 text-white shrink-0" />
+                    <span className="text-base text-[#c6c6c6]">{feature}</span>
+                  </div>
+                ))}
               </div>
             </div>
             
-            <button className="w-full py-3 px-4 rounded-lg border border-white text-white hover:bg-white hover:text-black font-semibold transition-all mb-8">
+            <button className="w-full mt-12 py-4 px-4 bg-[#1C1B1B] hover:bg-[#2a2a2a] text-white font-bold tracking-widest uppercase text-sm transition-colors">
               Contact Sales
             </button>
-
-            <div className="flex flex-col divide-y divide-white/5 mt-auto">
-              <p className="text-xs font-semibold text-white uppercase tracking-wider mb-2 pb-2">Everything in Pro, plus</p>
-              {[
-                "Up to 5 team members",
-                "White-label domain",
-                "API access for automation",
-                "Dedicated success manager",
-                "Custom MSA & Security forms",
-              ].map((feature, i) => (
-                <div key={i} className="flex items-start gap-4 py-4">
-                  <Check className="w-5 h-5 text-[#915EFF] shrink-0" />
-                  <span className="text-sm text-[var(--text-secondary)] mt-0.5">{feature}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+          </motion.div>
 
         </div>
       </Container>
