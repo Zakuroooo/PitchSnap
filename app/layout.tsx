@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 import { ScrollProgressIndicator } from "@/components/layout/ScrollProgressIndicator"
 import { Toaster } from "@/components/ui/sonner"
@@ -62,15 +61,16 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      className={cn("dark antialiased", inter.variable)}
       suppressHydrationWarning
-      className={cn("antialiased", inter.variable)}
     >
-      <body className="bg-background text-foreground min-h-dvh overflow-x-hidden w-full selection:bg-[var(--violet)] selection:text-white">
-        <ThemeProvider forcedTheme="dark">
-          <ScrollProgressIndicator />
-          {children}
-          <Toaster />
-        </ThemeProvider>
+      <body
+        suppressHydrationWarning
+        className="bg-[var(--color-bg)] text-[var(--color-text-primary)] min-h-dvh overflow-x-hidden w-full"
+      >
+        <ScrollProgressIndicator />
+        {children}
+        <Toaster />
       </body>
     </html>
   )
