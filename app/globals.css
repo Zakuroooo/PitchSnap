@@ -1,7 +1,7 @@
 /* ============================================================
    PitchSnap — Global Design System v2.0
    Redesign: Landio-Inspired · Anime Character · Scroll-Driven
-   Palette: Dark #0C0C0C + Lime #B8FF57 (sparingly)
+   Palette: Dark #0C0C0C + White #FFFFFF (sparingly)
    Font: Inter · Style: Clean Flat Editorial
    ============================================================ */
 
@@ -84,11 +84,11 @@
   --color-text-muted:       #555555;   /* placeholder, disabled text */
   --color-white:            #FFFFFF;   /* logo, nav text on dark */
 
-  /* ── Lime Accent — SPARINGLY (max 3-4x per page) ── */
-  --color-accent:           #B8FF57;   /* LIME GREEN — CTA + 2-3 highlights max */
-  --color-accent-dim:       rgba(184, 255, 87, 0.12);   /* accent backgrounds, badge fills */
-  --color-accent-border:    rgba(184, 255, 87, 0.25);   /* accent borders on badges/pills */
-  --color-accent-text:      #0C0C0C;  /* text ON lime green backgrounds */
+  /* ── Accent — Neutral ── */
+  --color-accent:           #FFFFFF;
+  --color-accent-dim:       rgba(255, 255, 255, 0.12);
+  --color-accent-border:    rgba(255, 255, 255, 0.25);
+  --color-accent-text:      #0C0C0C;
 
   /* ══════════════════════════════════════════════════════════
      SHADCN SEMANTIC TOKENS
@@ -107,7 +107,7 @@
   --card-foreground:        #F5F5F5;
   --popover:                #1A1A1A;
   --popover-foreground:     #F5F5F5;
-  --primary:                #B8FF57;
+  --primary:                #FFFFFF;
   --primary-foreground:     #0C0C0C;
   --secondary:              #1A1A1A;
   --secondary-foreground:   #F5F5F5;
@@ -117,7 +117,7 @@
   --accent-foreground:      #F5F5F5;
   --destructive:            #FF4444;
   --input:                  rgba(255, 255, 255, 0.06);
-  --ring:                   rgba(184, 255, 87, 0.40);
+  --ring:                   rgba(255, 255, 255, 0.40);
 
   /* Borders */
   --border:                 rgba(255, 255, 255, 0.07);
@@ -135,12 +135,12 @@
   /* ── Sidebar (dashboard — do not modify) ── */
   --sidebar:                #111111;
   --sidebar-foreground:     #F5F5F5;
-  --sidebar-primary:        #B8FF57;
+  --sidebar-primary:        #FFFFFF;
   --sidebar-primary-foreground: #0C0C0C;
   --sidebar-accent:         #1A1A1A;
   --sidebar-accent-foreground:  #F5F5F5;
   --sidebar-border:         rgba(255, 255, 255, 0.07);
-  --sidebar-ring:           rgba(184, 255, 87, 0.40);
+  --sidebar-ring:           rgba(255, 255, 255, 0.40);
 
   /* ── Shadows (minimal — Landio style) ── */
   --shadow-sm:              0 1px 2px rgba(0, 0, 0, 0.4);
@@ -171,7 +171,7 @@
   --card-foreground:        #F5F5F5;
   --popover:                #1A1A1A;
   --popover-foreground:     #F5F5F5;
-  --primary:                #B8FF57;
+  --primary:                #FFFFFF;
   --primary-foreground:     #0C0C0C;
   --secondary:              #1A1A1A;
   --secondary-foreground:   #F5F5F5;
@@ -182,15 +182,15 @@
   --destructive:            #FF4444;
   --border:                 rgba(255, 255, 255, 0.07);
   --input:                  rgba(255, 255, 255, 0.06);
-  --ring:                   rgba(184, 255, 87, 0.40);
+  --ring:                   rgba(255, 255, 255, 0.40);
   --sidebar:                #111111;
   --sidebar-foreground:     #F5F5F5;
-  --sidebar-primary:        #B8FF57;
+  --sidebar-primary:        #FFFFFF;
   --sidebar-primary-foreground: #0C0C0C;
   --sidebar-accent:         #1A1A1A;
   --sidebar-accent-foreground:  #F5F5F5;
   --sidebar-border:         rgba(255, 255, 255, 0.07);
-  --sidebar-ring:           rgba(184, 255, 87, 0.40);
+  --sidebar-ring:           rgba(255, 255, 255, 0.40);
 }
 
 /* ── Base Layer ────────────────────────────────────────────── */
@@ -468,9 +468,9 @@
     flex-shrink: 0;
   }
 
-  /* ── Lime gradient text ── */
+  /* ── Accent gradient text ── */
   .accent-text {
-    background: linear-gradient(135deg, var(--color-accent), #D4FF8A);
+    background: linear-gradient(135deg, var(--color-text-primary), #E0E0E0);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -515,31 +515,7 @@
     background-color: var(--color-surface-2);
   }
 
-  /* ── CTA Button — Lime ── */
-  /* Used in Navbar + Hero CTAs */
-  .btn-lime {
-    background-color: var(--color-accent);
-    color: var(--color-accent-text);
-    font-weight: 600;
-    border: none;
-    border-radius: 9999px;
-    padding: 0.5rem 1.25rem;
-    font-size: 14px;
-    line-height: 1;
-    cursor: pointer;
-    transition:
-      opacity var(--duration-fast) var(--ease-smooth),
-      transform var(--duration-fast) var(--ease-smooth);
-  }
 
-  .btn-lime:hover {
-    opacity: 0.90;
-    transform: scale(1.02);
-  }
-
-  .btn-lime:active {
-    transform: scale(0.98);
-  }
 
   /* ── CTA Button — White ── */
   .btn-white {

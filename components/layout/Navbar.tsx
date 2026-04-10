@@ -74,18 +74,15 @@ export default function Navbar() {
         <Container>
           <div className="flex items-center justify-between h-16">
 
-            {/* ── Logo: 'Pitch' white + 'Snap' lime ── */}
+            {/* ── Logo: 'Pitch' white + 'Snap' white ── */}
             <Link
               href="/"
-              className="flex items-center gap-0 cursor-pointer font-bold tracking-tight"
+              className="flex items-center gap-0 cursor-pointer tracking-tight"
               style={{ fontFamily: "var(--font-inter)", fontSize: "20px" }}
               aria-label="PitchSnap home"
             >
-              <span style={{ color: "var(--color-text-primary)" }}>Pitch</span>
-              <span className="relative" style={{ color: "var(--color-accent)" }}>
-                Snap
-                <span className="absolute top-[4px] -right-[6px] w-[4px] h-[4px] rounded-full bg-[var(--color-accent)]"></span>
-              </span>
+              <span style={{ color: "var(--color-text-primary)", fontWeight: 400 }}>Pitch</span>
+              <span style={{ color: "#FFFFFF", fontWeight: 700 }}>Snap</span>
             </Link>
 
             {/* ── Desktop nav links ── */}
