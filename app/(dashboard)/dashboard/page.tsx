@@ -1,6 +1,7 @@
 "use client";
 
 import { StatsGrid } from "@/components/dashboard/StatsGrid";
+import { PitchForm } from "@/components/dashboard/PitchForm";
 
 export default function DashboardOverview() {
   return (
@@ -8,6 +9,8 @@ export default function DashboardOverview() {
       <h1 className="text-[28px] font-bold tracking-tight text-white">Dashboard.</h1>
       
       <StatsGrid />
+      
+      <PitchForm />
     </div>
   );
 }
