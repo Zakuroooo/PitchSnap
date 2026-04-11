@@ -68,7 +68,7 @@ export default function LoginPage() {
         <div className="relative z-10 w-full h-[70vh] flex items-end justify-center">
           <div className="relative w-full h-full max-w-[500px]">
              <Image 
-               src="/auth/login-character.png" 
+               src="/auth/login-transparent.png" 
                alt="PitchSnap Welcome Buddy" 
                fill
                className="object-contain object-bottom"
