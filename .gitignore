@@ -38,4 +38,9 @@ pnpm-debug.log*
 next-env.d.ts
 bg_venv/
 .venv_rembg/
+# Notes & PRDs
+*.pdf
+*.txt
 .u2net/
+.venv_rembg/
+bg_venv/
