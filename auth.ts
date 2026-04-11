@@ -1,4 +1,5 @@
 import NextAuth, { DefaultSession } from "next-auth"
+import { authConfig } from "./auth.config"
 import Google from "next-auth/providers/google"
 import GitHub from "next-auth/providers/github"
 import Credentials from "next-auth/providers/credentials"
@@ -22,6 +23,7 @@ declare module "next-auth" {
 }
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  ...authConfig,
   adapter: MongoDBAdapter(clientPromise),
   providers: [
     Google({
@@ -54,25 +56,4 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
     })
   ],
-  pages: {
-    signIn: "/login",
-    newUser: "/signup",
-  },
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.plan = user.plan
-        token.id = user.id
-      }
-      return token
-    },
-    async session({ session, token }) {
-      if (session.user) {
-        session.user.plan = token.plan as string | undefined
-        session.user.id = token.id as string
-      }
-      return session
-    }
-  },
-  session: { strategy: "jwt" }
 })

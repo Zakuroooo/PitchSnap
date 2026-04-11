@@ -46,10 +46,11 @@ export default function LoginPage() {
       {/* Left Panel (60%) */}
       <div className="hidden lg:flex w-[60%] relative overflow-hidden flex-col items-center justify-end">
         {/* Floating elements backdrop */}
-        <div className="absolute inset-0 z-0">
-           <div className="absolute top-1/4 left-1/4 w-4 h-4 rounded-full bg-white/10 animate-pulse" />
-           <div className="absolute top-1/3 right-1/4 w-12 h-12 rounded-[2px] border border-white/10 animate-bounce" style={{animationDuration: '3s'}} />
-           <div className="absolute bottom-1/3 left-1/3 w-8 h-8 rounded-[2px] bg-white/5 animate-pulse" style={{animationDuration: '4s'}} />
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+           <div className="absolute top-[25%] left-[25%] w-4 h-4 rounded-full bg-white/60 animate-pulse" style={{animationDuration: '3s'}} />
+           <div className="absolute top-[35%] right-[25%] w-10 h-10 rounded-[2px] border-2 border-white/40 animate-bounce" style={{animationDuration: '4s'}} />
+           <div className="absolute bottom-[35%] left-[30%] w-6 h-6 rounded-[2px] bg-white/50 animate-pulse" style={{animationDuration: '5s'}} />
+           <div className="absolute top-[50%] right-[30%] w-2 h-2 rounded-full bg-white/80 animate-ping" style={{animationDuration: '6s'}} />
         </div>
 
         {/* Tagline */}

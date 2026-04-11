@@ -63,10 +63,11 @@ export default function RegisterPage() {
       {/* Left Panel (60%) */}
       <div className="hidden lg:flex w-[60%] relative overflow-hidden flex-col items-center justify-end">
         {/* Floating elements backdrop */}
-        <div className="absolute inset-0 z-0">
-           <div className="absolute top-1/4 right-1/4 w-4 h-4 rounded-full bg-white/10 animate-pulse" />
-           <div className="absolute top-1/3 left-1/4 w-10 h-10 rounded-full border border-white/5 animate-bounce" style={{animationDuration: '4s'}} />
-           <div className="absolute bottom-1/4 right-1/3 w-8 h-8 rounded-[2px] border border-white/10 animate-pulse" style={{animationDuration: '5s'}} />
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+           <div className="absolute top-[20%] right-[30%] w-3 h-3 rounded-full bg-white/60 animate-pulse" style={{animationDuration: '2s'}} />
+           <div className="absolute top-[35%] left-[25%] w-8 h-8 rounded-full border-2 border-white/40 animate-bounce" style={{animationDuration: '4s'}} />
+           <div className="absolute bottom-[30%] right-[35%] w-6 h-6 rounded-[2px] border-2 border-white/40 animate-pulse" style={{animationDuration: '3s'}} />
+           <div className="absolute top-[60%] left-[20%] w-2 h-2 rounded-full bg-white/80 animate-ping" style={{animationDuration: '5s'}} />
         </div>
 
         {/* Tagline */}
