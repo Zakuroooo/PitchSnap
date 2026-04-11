@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Loader2, Sparkles } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Loader2, Sparkles, RotateCcw } from "lucide-react";
 
 const INDUSTRIES = [
   "E-commerce", "SaaS", "Real Estate", "Healthcare", "Finance",
@@ -24,6 +24,8 @@ interface PitchOutput {
   pricingRange: string;
 }
 
+const STORAGE_KEY = "pitchsnap_form_draft";
+
 export function PitchForm() {
   const [clientName, setClientName] = useState("");
   const [industry, setIndustry] = useState("");
@@ -35,6 +37,40 @@ export function PitchForm() {
   const [error, setError] = useState("");
   const [activeTab, setActiveTab] = useState<keyof PitchOutput>("coldEmail");
   const [copied, setCopied] = useState(false);
+
+  // Restore form from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      try {
+        const draft = JSON.parse(saved);
+        if (draft.clientName) setClientName(draft.clientName);
+        if (draft.industry) setIndustry(draft.industry);
+        if (draft.service) setService(draft.service);
+        if (draft.challenge) setChallenge(draft.challenge);
+        if (draft.tone) setTone(draft.tone);
+      } catch {}
+    }
+  }, []);
+
+  // Save form to localStorage on every change
+  useEffect(() => {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ clientName, industry, service, challenge, tone })
+    );
+  }, [clientName, industry, service, challenge, tone]);
+
+  const handleReset = () => {
+    setClientName("");
+    setIndustry("");
+    setService("");
+    setChallenge("");
+    setTone("Professional");
+    setOutput(null);
+    setError("");
+    localStorage.removeItem(STORAGE_KEY);
+  };
 
   const handleGenerate = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -83,9 +119,19 @@ export function PitchForm() {
     <div className="space-y-6">
       {/* Form Section */}
       <div className="bg-[#141414] border border-white/5 rounded-[2px]">
-        <div className="px-6 pt-6 pb-4 border-b border-white/5">
-          <h2 className="text-[16px] font-bold tracking-tight text-white">Generate Pitch Package</h2>
-          <p className="text-[12px] text-zinc-500 mt-1">Fill in client details to generate a full proposal package in 10 seconds.</p>
+        <div className="px-6 pt-6 pb-4 border-b border-white/5 flex items-start justify-between">
+          <div>
+            <h2 className="text-[16px] font-bold tracking-tight text-white">Generate Pitch Package</h2>
+            <p className="text-[12px] text-zinc-500 mt-1">Fill in client details to generate a full proposal package in 10 seconds.</p>
+          </div>
+          <button
+            type="button"
+            onClick={handleReset}
+            title="Clear form"
+            className="text-zinc-600 hover:text-zinc-400 transition-colors p-1 mt-1"
+          >
+            <RotateCcw size={14} />
+          </button>
         </div>
 
         <form onSubmit={handleGenerate} className="p-6 space-y-4">
