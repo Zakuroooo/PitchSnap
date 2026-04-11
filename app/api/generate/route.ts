@@ -82,8 +82,8 @@ Return ONLY valid JSON with no markdown, no code blocks, no extra text. Use this
   "pricingRange": "SUGGESTED PRICING — ${service} for ${clientName} (${industry})\\n\\n🔹 STARTER PACKAGE\\nInvestment: [realistic price range]\\nBest for: [who this suits]\\nDeliverables:\\n• [deliverable 1]\\n• [deliverable 2]\\n• [deliverable 3]\\nTimeline: [realistic timeline]\\n\\n🔸 STANDARD PACKAGE\\nInvestment: [realistic price range]\\nBest for: [who this suits]\\nDeliverables:\\n• [deliverable 1]\\n• [deliverable 2]\\n• [deliverable 3]\\n• [deliverable 4]\\nTimeline: [realistic timeline]\\n\\n💎 PREMIUM PACKAGE\\nInvestment: [realistic price range]\\nBest for: [who this suits]\\nDeliverables:\\n• [deliverable 1]\\n• [deliverable 2]\\n• [deliverable 3]\\n• [deliverable 4]\\n• [deliverable 5]\\nTimeline: [realistic timeline]\\n\\n* Prices are estimates for ${service} in ${industry}. Final pricing depends on project scope."
 }`;
 
-    // 6. Call Groq Llama 3.3
-    const completion = await groq.chat.completions.create({
+    // 6. CALL 1: Generate initial draft
+    const draftResponse = await groq.chat.completions.create({
       model: "llama-3.3-70b-versatile",
       messages: [
         { role: "system", content: systemPrompt },
@@ -93,26 +93,67 @@ Return ONLY valid JSON with no markdown, no code blocks, no extra text. Use this
       max_tokens: 3000,
     });
 
-    const rawContent = completion.choices[0]?.message?.content || "";
+    const draftRawContent = draftResponse.choices[0]?.message?.content || "";
+    let draft;
+    try {
+      const cleaned = draftRawContent
+        .replace(/^```json\n?/, "")
+        .replace(/^```\n?/, "")
+        .replace(/\n?```$/, "")
+        .trim();
+      draft = JSON.parse(cleaned);
+    } catch {
+      console.error("Failed to parse Groq Draft output:", draftRawContent);
+      return NextResponse.json(
+        { error: "AI draft generation failed. Please try again." },
+        { status: 500 }
+      );
+    }
 
-    // 7. Parse JSON output
+    // 7. CALL 2: Self-review and improve
+    const reviewSystemPrompt = `You are a senior sales strategist reviewing a freelance proposal. Improve weak parts. Make the copy compelling, specific, and impactful. Return ONLY the improved JSON — same exact structure, better content. No markdown, just valid JSON.`;
+    
+    const reviewUserPrompt = `Review and rigorously improve this proposal package: ${JSON.stringify(draft)}.
+Client: ${clientName}
+Industry: ${industry}
+Service: ${service}
+Main Problem: ${challenge}
+
+Improve specifically:
+1. Make the cold email subject line more compelling.
+2. Add specific details about their industry to prove deep understanding.
+3. Make the pricing section sound highly professional.
+4. Ensure the follow-up sequence escalates properly without being desperate.
+Return the improved version strictly as JSON.`;
+
+    const refinedResponse = await groq.chat.completions.create({
+      model: "llama-3.3-70b-versatile",
+      messages: [
+        { role: "system", content: reviewSystemPrompt },
+        { role: "user", content: reviewUserPrompt },
+      ],
+      temperature: 0.5,
+      max_tokens: 3000,
+    });
+
+    const refinedRawContent = refinedResponse.choices[0]?.message?.content || "";
+    
+    // 8. Parse Refined Output
     let output;
     try {
-      const cleaned = rawContent
+      const cleaned = refinedRawContent
         .replace(/^```json\n?/, "")
         .replace(/^```\n?/, "")
         .replace(/\n?```$/, "")
         .trim();
       output = JSON.parse(cleaned);
     } catch {
-      console.error("Failed to parse Groq output:", rawContent);
-      return NextResponse.json(
-        { error: "AI returned an unexpected format. Please try again." },
-        { status: 500 }
-      );
+      // Fallback to draft if refinement fails JSON parsing
+      console.error("Failed to parse Groq Refined output. Falling back to Draft.", refinedRawContent);
+      output = draft;
     }
 
-    // 8. Save generation to MongoDB
+    // 9. Save generation to MongoDB
     await GenerationModel.create({
       userId,
       clientName,
@@ -123,8 +164,8 @@ Return ONLY valid JSON with no markdown, no code blocks, no extra text. Use this
       output,
     });
 
-    // 9. Return output
-    return NextResponse.json(output, { status: 200 });
+    // 10. Return output
+    return NextResponse.json({ success: true, data: output }, { status: 200 });
   } catch (error: unknown) {
     console.error("Generate API error:", error);
     return NextResponse.json(

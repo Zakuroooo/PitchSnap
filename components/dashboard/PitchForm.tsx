@@ -80,11 +80,21 @@ export function PitchForm() {
     localStorage.removeItem(STORAGE_KEY);
   };
 
+  const [loadingStep, setLoadingStep] = useState(0);
+
   const handleGenerate = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setLoadingStep(1); // ANALYZING CLIENT PROFILE...
     setError("");
     setOutput(null);
+
+    // Simulated Loading Step Timers (to mask the expected 15s latency of Dual Groq Calls)
+    const timers = [
+      setTimeout(() => setLoadingStep(2), 3000), // GENERATING PROPOSAL PACKAGE...
+      setTimeout(() => setLoadingStep(3), 8000), // RUNNING QUALITY REVIEW...
+      setTimeout(() => setLoadingStep(4), 13000), // OPTIMIZING FOR CONVERSION...
+    ];
 
     try {
       const res = await fetch("/api/generate", {
@@ -93,12 +103,12 @@ export function PitchForm() {
         body: JSON.stringify({ clientName, industry, service, challenge, tone }),
       });
 
-      const data = await res.json();
+      const json = await res.json();
 
       if (!res.ok) {
-        setError(data.error || "Failed to generate pitch.");
+        setError(json.error || "Failed to generate pitch.");
       } else {
-        setOutput(data);
+        setOutput(json.data);
         setActiveTab("coldEmail");
         localStorage.removeItem(STORAGE_KEY);
         setHasDraft(false);
@@ -106,7 +116,9 @@ export function PitchForm() {
     } catch {
       setError("Network error. Please try again.");
     } finally {
+      timers.forEach(clearTimeout);
       setLoading(false);
+      setLoadingStep(0);
     }
   };
 
@@ -137,6 +149,14 @@ export function PitchForm() {
     followUpSequence: "Follow-Ups",
     pricingRange: "Pricing",
   };
+
+  const loadingText = [
+    "",
+    "ANALYZING CLIENT PROFILE...",
+    "GENERATING PROPOSAL PACKAGE...",
+    "RUNNING QUALITY REVIEW...",
+    "OPTIMIZING FOR CONVERSION..."
+  ][loadingStep];
 
   const isPro = session?.user?.plan === 'pro' || session?.user?.plan === 'agency';
 
@@ -260,7 +280,7 @@ export function PitchForm() {
             className="w-full md:w-auto h-[40px] px-8 bg-white text-black rounded-[2px] text-[13px] font-bold tracking-wide hover:bg-zinc-200 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
           >
             {loading ? (
-              <><Loader2 size={14} className="animate-spin" /> Generating...</>
+              <><Loader2 size={14} className="animate-spin" /> <span className="text-[10px] uppercase tracking-widest ml-1">{loadingText}</span></>
             ) : (
               <><Sparkles size={14} /> Generate Package</>
             )}
