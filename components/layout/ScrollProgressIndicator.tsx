@@ -14,7 +14,7 @@ export const ScrollProgressIndicator = () => {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-[var(--violet)] to-[var(--cyan)] z-[10000] origin-left"
+      className="fixed top-0 left-0 right-0 h-[2px] bg-white z-[10000] origin-left"
       style={{ scaleX }}
     />
   )

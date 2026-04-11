@@ -5,7 +5,6 @@ import LogoMarquee from "@/components/sections/LogoMarquee"
 import Benefits from "@/components/sections/Benefits"
 import Journey from "@/components/sections/Journey"
 import HowItWorks from "@/components/sections/HowItWorks"
-import Solution from "@/components/sections/Solution"
 import Features from "@/components/sections/Features"
 import Success from "@/components/sections/Success"
 import Testimonials from "@/components/sections/Testimonials"
@@ -34,7 +33,6 @@ export default function Page() {
         <div className="w-full h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
         <HowItWorks />
         <div className="w-full h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
-        <Solution />
         <div className="w-full h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
         <Features />
         <div className="w-full h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />

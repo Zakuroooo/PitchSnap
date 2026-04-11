@@ -6,20 +6,17 @@ import Container from "./Container"
 const FOOTER_LINKS = {
   Infrastructure: [
     { label: "Features",     href: "#features"  },
-    { label: "Methodology",  href: "#solution"  },
+    { label: "How It Works", href: "#howitworks" },
     { label: "Pricing",      href: "#pricing"   },
-    { label: "Changelog",    href: "/changelog" },
+    { label: "GitHub",       href: "https://github.com/Zakuroooo/PitchSnap" },
   ],
   Entity: [
     { label: "About",        href: "/about"   },
-    { label: "Manifesto",    href: "/blog"    },
-    { label: "Careers",      href: "/careers" },
     { label: "Contact",      href: "/contact" },
   ],
   Legal: [
     { label: "Privacy Policy",   href: "/privacy"  },
     { label: "Terms of Service", href: "/terms"    },
-    { label: "Cookie Policy",    href: "/cookies"  },
   ],
 } as const
 

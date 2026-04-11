@@ -80,10 +80,11 @@ export default function Pricing() {
               </div>
               <div className="flex flex-col gap-4">
                 {[
-                  "3 AI proposals per month",
-                  "Standard Monolith templates",
-                  "Basic analytics structure",
-                  "Community access",
+                  "5 proposals per month",
+                  "Cold email generator",
+                  "LinkedIn outreach",
+                  "Basic proposal templates",
+                  "Copy to clipboard",
                 ].map((feature, i) => (
                   <div key={i} className="flex items-start gap-4">
                     <Check className="w-5 h-5 text-white shrink-0" />
@@ -119,11 +120,11 @@ export default function Pricing() {
               <div className="flex flex-col gap-4 text-black">
                  <p className="text-xs font-bold uppercase tracking-widest text-[#474747] mb-2 pb-2 border-b border-[#e2e2e2]">Everything in Starter, plus:</p>
                 {[
-                  "Unlimited proposal indexing",
-                  "Custom brand alignment",
-                  "CRM terminal integrations",
-                  "Priority protocol support",
-                  "E-signatures & digital contracts",
+                  "Unlimited proposals",
+                  "All output types (email, LinkedIn, proposal, follow-ups, pricing)",
+                  "Generation history",
+                  "Priority generation speed",
+                  "Export as PDF",
                 ].map((feature, i) => (
                   <div key={i} className="flex items-start gap-4">
                     <Check className="w-5 h-5 text-black shrink-0" />
@@ -156,10 +157,10 @@ export default function Pricing() {
               <div className="flex flex-col gap-4">
                  <p className="text-xs font-bold uppercase tracking-widest text-[#5e5e5e] mb-2 pb-2 border-b border-[#1C1B1B]">Everything in Pro, plus:</p>
                 {[
-                  "Up to 5 operator seats",
-                  "White-label domain hosting",
-                  "API endpoints for automation",
-                  "Dedicated success architect",
+                  "Up to 5 team members",
+                  "Custom brand voice settings",
+                  "API access",
+                  "Dedicated support",
                 ].map((feature, i) => (
                   <div key={i} className="flex items-start gap-4">
                     <Check className="w-5 h-5 text-white shrink-0" />

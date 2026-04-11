@@ -6,24 +6,24 @@ import Container from "../layout/Container"
 
 const FAQS = [
   {
-    question: "Do I need to be a designer to use PitchSnap?",
-    answer: "No. PitchSnap handles the 'Monolith' aesthetic structure automatically. You provide the raw data—features, timelines, pricing—and our engine synthesizes it into a high-fidelity, highly persuasive proposal.",
+    question: "Do I need any technical skills to use PitchSnap?",
+    answer: "No. Just enter your client details and service — PitchSnap handles everything else in under 10 seconds.",
   },
   {
-    question: "How does the AI optimize for conversion?",
-    answer: "The engine is trained on thousands of winning high-ticket B2B proposals. It sequences your value propositions, structures pricing to frame your solution as an investment, and uses stark typographical hierarchy to project absolute authority.",
+    question: "What types of proposals can PitchSnap generate?",
+    answer: "Cold emails, LinkedIn outreach messages, full project proposals, 3-email follow-up sequences, and pricing suggestions.",
   },
   {
-    question: "Can I use my own domain for sending pitches?",
-    answer: "Yes. Agency and Pro users can deploy a white-labeled terminal. Your clients receive pitches from exactly your brand ecosystem (e.g., proposals.yourdomain.com), preserving the 'Monolith' illusion.",
+    question: "How many proposals can I generate for free?",
+    answer: "The free tier includes 5 proposals per month. Pro and Agency plans offer unlimited generation.",
   },
   {
-    question: "What happens if a client wants to negotiate terms?",
-    answer: "Our pitches include modular agreement blocks. You can instantly generate and index a revised variation of the proposal with new parameters without compromising the original structural integrity.",
+    question: "Is my data secure?",
+    answer: "Yes. All proposals are encrypted and stored securely. We never share your client data with third parties.",
   },
   {
-    question: "Are e-signatures legally binding?",
-    answer: "Absolute parity with enterprise standards. Every digital signature captured via PitchSnap complies fully with the ESIGN Act and European eIDAS regulations, generating an immutable audit trail.",
+    question: "Can I customize the tone of my proposals?",
+    answer: "Absolutely. Choose from Professional, Friendly, or Bold tone — PitchSnap adapts the entire output to match your style.",
   },
 ]
 

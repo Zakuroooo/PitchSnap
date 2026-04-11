@@ -129,7 +129,7 @@ export default function Features() {
                 <div className="w-12 h-12 rounded bg-[#1C1B1B] flex items-center justify-center mb-8">
                   <FileText className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="text-3xl font-extrabold text-white mb-4">Full Proposal Writer</h3>
+                <h3 className="text-3xl font-extrabold text-[#F5F5F5] mb-4">Full Proposal Writer</h3>
                 <p className="text-[#A1A1A1] text-lg max-w-sm">
                   Generate comprehensive 5-page proposals covering scope, timelines, deliverables, and terms.
                 </p>

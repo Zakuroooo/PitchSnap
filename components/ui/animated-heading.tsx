@@ -72,7 +72,7 @@ export const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({ text, classNam
           custom={i}
           variants={{ ...childVariants, ...hoverVariants }}
           key={i}
-          className={`inline-block ${gradient ? "text-transparent bg-clip-text bg-gradient-to-r from-[var(--violet)] to-[var(--cyan)]" : ""} ${letter === " " ? "w-3" : ""}`}
+          className={`inline-block ${gradient ? "text-[#F5F5F5]" : ""} ${letter === " " ? "w-3" : ""}`}
         >
           {letter}
         </motion.span>

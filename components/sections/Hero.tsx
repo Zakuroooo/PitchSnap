@@ -100,7 +100,7 @@ export default function Hero() {
                 Win more clients
                 <br />
                 with{" "}
-                <span className="accent-text">AI proposals</span>
+                <span style={{ color: "#F5F5F5" }}>AI proposals</span>
               </motion.h1>
 
               {/* Subtitle */}
@@ -159,7 +159,7 @@ export default function Hero() {
                     className="flex items-center gap-1.5 text-sm font-semibold"
                     style={{ color: "var(--color-text-primary)" }}
                   >
-                    <span style={{ color: "#FFD700" }}>★★★★★</span> 4.9/5
+                    <span style={{ color: "#F5F5F5" }}>★★★★★</span> 4.9/5
                   </div>
                   <p
                     className="text-sm mt-0.5"
