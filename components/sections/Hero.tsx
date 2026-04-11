@@ -139,19 +139,17 @@ export default function Hero() {
                 {/* Avatar stack */}
                 <div className="flex -space-x-2.5">
                   {[...Array(5)].map((_, i) => (
-                    <div
+                    <img
                       key={i}
-                      className="w-8 h-8 rounded-full border-2 flex items-center justify-center text-[10px] font-semibold"
+                      src={`https://i.pravatar.cc/100?img=${i + 12}`}
+                      alt={`User avatar ${i+1}`}
+                      className="w-8 h-8 rounded-full border-2 object-cover"
                       style={{
                         borderColor: "var(--color-bg)",
-                        backgroundColor: `rgba(255,255,255,${0.08 + i * 0.03})`,
-                        color: "var(--color-text-secondary)",
                         zIndex: 5 - i,
                         position: "relative",
                       }}
-                    >
-                      {String.fromCharCode(65 + i)}
-                    </div>
+                    />
                   ))}
                 </div>
                 <div className="flex flex-col items-center sm:items-start">

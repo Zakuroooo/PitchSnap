@@ -22,8 +22,7 @@ export default function Pricing() {
             >
               Investment
             </motion.div>
-            
-            <motion.h2 
+            <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -33,147 +32,156 @@ export default function Pricing() {
               VALUE WITHOUT<br/>COMPROMISE.
             </motion.h2>
           </div>
-          
-          <motion.div 
-             initial={{ opacity: 0, y: 20 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             viewport={{ once: true }}
-             transition={{ duration: 0.5, delay: 0.2 }}
-             className="flex flex-col items-start gap-4"
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex flex-col items-start gap-4"
           >
-             <p className="text-[#A1A1A1] text-lg max-w-sm">
-                Structured pricing for operators who understand the compounding value of high-converting proposals.
-             </p>
-             {/* Billing Toggle */}
-             <div className="flex items-center gap-6 mt-4">
-               <button 
-                  onClick={() => setIsAnnual(!isAnnual)}
-                  className={`text-sm font-bold tracking-widest uppercase transition-colors pb-1 border-b-2 ${!isAnnual ? 'text-white border-white' : 'text-[#474747] border-transparent hover:text-[#919191]'}`}
-               >
-                 Monthly
-               </button>
-               <button 
-                  onClick={() => setIsAnnual(!isAnnual)}
-                  className={`text-sm font-bold tracking-widest uppercase transition-colors pb-1 border-b-2 ${isAnnual ? 'text-white border-white' : 'text-[#474747] border-transparent hover:text-[#919191]'}`}
-               >
-                 Annually (Save 20%)
-               </button>
-             </div>
+            <p className="text-[#A1A1A1] text-lg max-w-sm">
+              Structured pricing for operators who understand the compounding value of high-converting proposals.
+            </p>
+            <div className="flex items-center gap-6 mt-4">
+              <button
+                onClick={() => setIsAnnual(false)}
+                className={`text-sm font-bold tracking-widest uppercase transition-colors pb-1 border-b-2 ${!isAnnual ? 'text-white border-white' : 'text-[#474747] border-transparent hover:text-[#919191]'}`}
+              >
+                Monthly
+              </button>
+              <button
+                onClick={() => setIsAnnual(true)}
+                className={`text-sm font-bold tracking-widest uppercase transition-colors pb-1 border-b-2 ${isAnnual ? 'text-white border-white' : 'text-[#474747] border-transparent hover:text-[#919191]'}`}
+              >
+                Annually (Save 20%)
+              </button>
+            </div>
           </motion.div>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-6 items-stretch relative z-10 w-full lg:h-[600px]">
-          
+        {/* Pricing Cards — all 3 wrapped with CometCard. Children carry their own styles (like reference). */}
+        <div className="flex flex-col lg:flex-row gap-6 items-stretch relative z-10 w-full">
+
           {/* Starter Plan */}
-          <motion.div 
-             initial={{ opacity: 0, y: 20 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             viewport={{ once: true }}
-             transition={{ duration: 0.5, delay: 0.2 }}
-             className="flex-1 bg-[#111111] hover:bg-[#161616] transition-colors p-10 md:p-12 flex flex-col justify-between"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="flex-1"
           >
-            <div>
-              <h3 className="text-2xl font-bold uppercase tracking-wider mb-2">Starter</h3>
-              <p className="text-[#A1A1A1] text-sm h-12">Essential architecture for solo freelancers entering the market.</p>
-              <div className="mt-8 mb-12 flex items-baseline gap-2">
-                <span className="text-6xl font-black tracking-tighter">$0</span>
-                <span className="text-[#5e5e5e] font-bold text-sm uppercase tracking-widest">/ forever</span>
-              </div>
-              <div className="flex flex-col gap-4">
-                {[
-                  "5 proposals per month",
-                  "Cold email generator",
-                  "LinkedIn outreach",
-                  "Basic proposal templates",
-                  "Copy to clipboard",
-                ].map((feature, i) => (
-                  <div key={i} className="flex items-start gap-4">
-                    <Check className="w-5 h-5 text-white shrink-0" />
-                    <span className="text-base text-[#c6c6c6]">{feature}</span>
+            <CometCard className="h-full rounded-none">
+              <div className="bg-[#111111] hover:bg-[#161616] transition-colors p-10 md:p-12 flex flex-col justify-between min-h-[540px] h-full">
+                <div>
+                  <h3 className="text-2xl font-bold uppercase tracking-wider mb-2">Starter</h3>
+                  <p className="text-[#A1A1A1] text-sm h-12">Essential architecture for solo freelancers entering the market.</p>
+                  <div className="mt-8 mb-12 flex items-baseline gap-2">
+                    <span className="text-6xl font-black tracking-tighter">$0</span>
+                    <span className="text-[#5e5e5e] font-bold text-sm uppercase tracking-widest">/ forever</span>
                   </div>
-                ))}
+                  <div className="flex flex-col gap-4">
+                    {[
+                      "5 proposals per month",
+                      "Cold email generator",
+                      "LinkedIn outreach",
+                      "Basic proposal templates",
+                      "Copy to clipboard",
+                    ].map((feature, i) => (
+                      <div key={i} className="flex items-start gap-4">
+                        <Check className="w-5 h-5 text-white shrink-0" />
+                        <span className="text-base text-[#c6c6c6]">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <button className="w-full mt-12 py-4 px-4 bg-[#1C1B1B] hover:bg-[#2a2a2a] text-white font-bold tracking-widest uppercase text-sm transition-colors">
+                  Deploy Starter
+                </button>
               </div>
-            </div>
-            
-            <button className="w-full mt-12 py-4 px-4 bg-[#1C1B1B] hover:bg-[#2a2a2a] text-white font-bold tracking-widest uppercase text-sm transition-colors">
-              Deploy Starter
-            </button>
+            </CometCard>
           </motion.div>
 
-          {/* Pro Plan */}
-          <motion.div 
-             initial={{ opacity: 0, y: 20 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             viewport={{ once: true }}
-             transition={{ duration: 0.5, delay: 0.3 }}
-             className="flex-[1.2] bg-white p-10 md:p-12 flex flex-col justify-between shadow-2xl relative z-20"
+          {/* Pro Plan — white/inverted, keep exactly as is per PRD */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex-[1.2] relative z-20"
           >
-            <div>
-              <div className="flex justify-between items-start mb-2">
-                 <h3 className="text-2xl font-bold text-black uppercase tracking-wider">Pro</h3>
-                 <span className="text-[10px] font-bold tracking-widest uppercase bg-black text-white px-3 py-1">Featured</span>
-              </div>
-              <p className="text-[#474747] text-sm h-12 pb-2">Unrestricted access for full-time operators scaling revenue.</p>
-              <div className="mt-8 mb-12 flex items-baseline gap-2 text-black">
-                <span className="text-7xl md:text-8xl font-black tracking-tighter leading-none">${isAnnual ? '15' : '19'}</span>
-                <span className="text-[#474747] font-bold text-sm uppercase tracking-widest">/ month</span>
-              </div>
-              <div className="flex flex-col gap-4 text-black">
-                 <p className="text-xs font-bold uppercase tracking-widest text-[#474747] mb-2 pb-2 border-b border-[#e2e2e2]">Everything in Starter, plus:</p>
-                {[
-                  "Unlimited proposals",
-                  "All output types (email, LinkedIn, proposal, follow-ups, pricing)",
-                  "Generation history",
-                  "Priority generation speed",
-                  "Export as PDF",
-                ].map((feature, i) => (
-                  <div key={i} className="flex items-start gap-4">
-                    <Check className="w-5 h-5 text-black shrink-0" />
-                    <span className="text-base font-medium">{feature}</span>
+            <CometCard className="h-full rounded-none">
+              <div className="bg-white p-10 md:p-12 flex flex-col justify-between min-h-[580px] h-full shadow-2xl">
+                <div>
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="text-2xl font-bold text-black uppercase tracking-wider">Pro</h3>
+                    <span className="text-[10px] font-bold tracking-widest uppercase bg-black text-white px-3 py-1">Featured</span>
                   </div>
-                ))}
+                  <p className="text-[#474747] text-sm h-12 pb-2">Unrestricted access for full-time operators scaling revenue.</p>
+                  <div className="mt-8 mb-12 flex items-baseline gap-2 text-black">
+                    <span className="text-7xl md:text-8xl font-black tracking-tighter leading-none">${isAnnual ? '15' : '19'}</span>
+                    <span className="text-[#474747] font-bold text-sm uppercase tracking-widest">/ month</span>
+                  </div>
+                  <div className="flex flex-col gap-4 text-black">
+                    <p className="text-xs font-bold uppercase tracking-widest text-[#474747] mb-2 pb-2 border-b border-[#e2e2e2]">Everything in Starter, plus:</p>
+                    {[
+                      "Unlimited proposals",
+                      "All output types (email, LinkedIn, proposal, follow-ups, pricing)",
+                      "Generation history",
+                      "Priority generation speed",
+                      "Export as PDF",
+                    ].map((feature, i) => (
+                      <div key={i} className="flex items-start gap-4">
+                        <Check className="w-5 h-5 text-black shrink-0" />
+                        <span className="text-base font-medium">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <button className="w-full mt-12 py-4 px-4 bg-black hover:bg-[#1a1c1c] text-white font-bold tracking-widest uppercase text-sm transition-colors">
+                  Access Terminal
+                </button>
               </div>
-            </div>
-            
-            <button className="w-full mt-12 py-4 px-4 bg-black hover:bg-[#1a1c1c] text-white font-bold tracking-widest uppercase text-sm transition-colors">
-              Access Terminal
-            </button>
+            </CometCard>
           </motion.div>
 
           {/* Agency Plan */}
-          <motion.div 
-             initial={{ opacity: 0, y: 20 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             viewport={{ once: true }}
-             transition={{ duration: 0.5, delay: 0.4 }}
-             className="flex-1 bg-[#111111] hover:bg-[#161616] transition-colors p-10 md:p-12 flex flex-col justify-between"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex-1"
           >
-            <div>
-              <h3 className="text-2xl font-bold uppercase tracking-wider mb-2">Agency</h3>
-              <p className="text-[#A1A1A1] text-sm h-12">Volume-based infrastructure for teams and high-output agencies.</p>
-              <div className="mt-8 mb-12 flex items-baseline gap-2">
-                <span className="text-6xl font-black tracking-tighter">${isAnnual ? '39' : '49'}</span>
-                <span className="text-[#5e5e5e] font-bold text-sm uppercase tracking-widest">/ month</span>
-              </div>
-              <div className="flex flex-col gap-4">
-                 <p className="text-xs font-bold uppercase tracking-widest text-[#5e5e5e] mb-2 pb-2 border-b border-[#1C1B1B]">Everything in Pro, plus:</p>
-                {[
-                  "Up to 5 team members",
-                  "Custom brand voice settings",
-                  "API access",
-                  "Dedicated support",
-                ].map((feature, i) => (
-                  <div key={i} className="flex items-start gap-4">
-                    <Check className="w-5 h-5 text-white shrink-0" />
-                    <span className="text-base text-[#c6c6c6]">{feature}</span>
+            <CometCard className="h-full rounded-none">
+              <div className="bg-[#111111] hover:bg-[#161616] transition-colors p-10 md:p-12 flex flex-col justify-between min-h-[540px] h-full">
+                <div>
+                  <h3 className="text-2xl font-bold uppercase tracking-wider mb-2">Agency</h3>
+                  <p className="text-[#A1A1A1] text-sm h-12">Volume-based infrastructure for teams and high-output agencies.</p>
+                  <div className="mt-8 mb-12 flex items-baseline gap-2">
+                    <span className="text-6xl font-black tracking-tighter">${isAnnual ? '39' : '49'}</span>
+                    <span className="text-[#5e5e5e] font-bold text-sm uppercase tracking-widest">/ month</span>
                   </div>
-                ))}
+                  <div className="flex flex-col gap-4">
+                    <p className="text-xs font-bold uppercase tracking-widest text-[#5e5e5e] mb-2 pb-2 border-b border-[#1C1B1B]">Everything in Pro, plus:</p>
+                    {[
+                      "Up to 5 team members",
+                      "Custom brand voice settings",
+                      "API access",
+                      "Dedicated support",
+                    ].map((feature, i) => (
+                      <div key={i} className="flex items-start gap-4">
+                        <Check className="w-5 h-5 text-white shrink-0" />
+                        <span className="text-base text-[#c6c6c6]">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <button className="w-full mt-12 py-4 px-4 bg-[#1C1B1B] hover:bg-[#2a2a2a] text-white font-bold tracking-widest uppercase text-sm transition-colors">
+                  Contact Sales
+                </button>
               </div>
-            </div>
-            
-            <button className="w-full mt-12 py-4 px-4 bg-[#1C1B1B] hover:bg-[#2a2a2a] text-white font-bold tracking-widest uppercase text-sm transition-colors">
-              Contact Sales
-            </button>
+            </CometCard>
           </motion.div>
 
         </div>

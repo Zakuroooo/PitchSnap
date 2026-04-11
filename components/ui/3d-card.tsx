@@ -34,12 +34,11 @@ export const CardContainer = ({
     containerRef.current.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
   };
 
-  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseEnter = (_e: React.MouseEvent<HTMLDivElement>) => {
     setIsMouseEntered(true);
-    if (!containerRef.current) return;
   };
 
-  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseLeave = (_e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current) return;
     setIsMouseEntered(false);
     containerRef.current.style.transform = `rotateY(0deg) rotateX(0deg)`;
@@ -47,17 +46,19 @@ export const CardContainer = ({
 
   return (
     <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
+      {/* Outer: perspective wrapper — containerClassName controls sizing/layout */}
       <div
-        className={cn("items-center justify-center flex", containerClassName)}
+        className={cn("flex", containerClassName)}
         style={{ perspective: "1000px" }}
       >
+        {/* Inner: the element that actually rotates */}
         <div
           ref={containerRef}
           onMouseEnter={handleMouseEnter}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           className={cn(
-            "flex items-center justify-center transition-all duration-200 ease-linear",
+            "flex transition-all duration-200 ease-linear w-full",
             className
           )}
           style={{ transformStyle: "preserve-3d" }}
@@ -79,7 +80,7 @@ export const CardBody = ({
   return (
     <div
       className={cn(
-        "h-full w-full [transform-style:preserve-3d] [&>*]:[transform-style:preserve-3d]",
+        "w-full [transform-style:preserve-3d] [&>*]:[transform-style:preserve-3d]",
         className
       )}
     >
@@ -116,6 +117,7 @@ export const CardItem = ({
 
   useEffect(() => {
     handleAnimations();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMouseEntered]);
 
   const handleAnimations = () => {

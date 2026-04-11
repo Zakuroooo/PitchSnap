@@ -4,6 +4,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { cn } from "@/lib/utils"
 import { ScrollProgressIndicator } from "@/components/layout/ScrollProgressIndicator"
+import { SmoothCursor } from "@/components/ui/SmoothCursor"
 import { Toaster } from "@/components/ui/sonner"
 
 const inter = Inter({
@@ -68,6 +69,7 @@ export default function RootLayout({
         suppressHydrationWarning
         className="bg-[var(--color-bg)] text-[var(--color-text-primary)] min-h-dvh overflow-x-hidden w-full"
       >
+        <SmoothCursor />
         <ScrollProgressIndicator />
         {children}
         <Toaster />

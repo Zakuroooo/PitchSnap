@@ -8,33 +8,41 @@ import Container from "../layout/Container";
    Pure CSS @keyframes animation — no JS, no requestAnimationFrame
    ================================================================ */
 
-/* Platform logos as simple SVG text marks — no external images */
 const LOGOS = [
-  { name: "Upwork", width: 90 },
-  { name: "Fiverr", width: 75 },
-  { name: "Toptal", width: 80 },
-  { name: "LinkedIn", width: 95 },
-  { name: "Dribbble", width: 90 },
-  { name: "Contra", width: 75 },
-  { name: "Freelancer", width: 105 },
-  { name: "99designs", width: 95 },
+  { name: "Upwork", icon: "upwork" },
+  { name: "Fiverr", icon: "fiverr" },
+  { name: "Toptal", icon: "toptal" },
+  { name: "LinkedIn", icon: "linkedin" },
+  { name: "Dribbble", icon: "dribbble" },
+  { name: "Freelancer", icon: "freelancer" },
+  { name: "Behance", icon: "behance" },
 ] as const;
 
-function LogoItem({ name }: { name: string }) {
+function LogoItem({ name, icon }: { name: string; icon: string }) {
   return (
     <div
-      className="flex items-center justify-center flex-shrink-0 px-8 md:px-12"
+      className="flex items-center justify-center flex-shrink-0 px-8 md:px-12 group"
       style={{ willChange: "transform" }}
     >
-      <span
-        className="text-base md:text-lg font-semibold tracking-tight whitespace-nowrap select-none"
-        style={{
-          color: "rgba(255, 255, 255, 0.15)",
-          fontFamily: "var(--font-inter), system-ui, sans-serif",
-        }}
-      >
-        {name}
-      </span>
+      <div className="flex items-center gap-3">
+        <img
+          src={`https://cdn.simpleicons.org/${icon}/white`}
+          alt={`${name} logo`}
+          className="w-6 h-6 md:w-7 md:h-7 object-contain opacity-40 transition-all duration-300 group-hover:opacity-100"
+          onError={(e) => {
+            (e.target as HTMLElement).style.display = 'none';
+          }}
+        />
+        <span
+          className="text-base md:text-lg font-semibold tracking-tight whitespace-nowrap select-none transition-all duration-300 opacity-40 group-hover:opacity-100"
+          style={{
+            color: "rgba(255, 255, 255, 1)",
+            fontFamily: "var(--font-inter), system-ui, sans-serif",
+          }}
+        >
+          {name}
+        </span>
+      </div>
     </div>
   );
 }
@@ -95,7 +103,7 @@ export default function LogoMarquee() {
           style={{ willChange: "transform" }}
         >
           {tripled.map((logo, i) => (
-            <LogoItem key={`${logo.name}-${i}`} name={logo.name} />
+            <LogoItem key={`${logo.name}-${i}`} name={logo.name} icon={logo.icon} />
           ))}
         </div>
       </div>

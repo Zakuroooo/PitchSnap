@@ -79,16 +79,16 @@ export default function FreelancerCharacter({
           style={{ willChange: "transform, opacity" }}
         >
           <div
-            className="relative px-5 py-3 shadow-2xl backdrop-blur-md"
+            className="relative px-5 py-3 shadow-2xl"
             style={{
-              backgroundColor: "rgba(20, 20, 20, 0.7)",
-              border: "1.5px solid rgba(255, 255, 255, 0.15)",
+              backgroundColor: "#F5F5F5",
+              border: "1px solid #FFFFFF",
               borderRadius: "20px 20px 20px 0px",
-              color: "#FFFFFF",
+              color: "#0C0C0C",
               fontFamily: "var(--font-inter), system-ui, sans-serif",
               fontSize: "13px",
-              fontWeight: 600,
-              boxShadow: "0 10px 30px -10px rgba(0,0,0,0.5)",
+              fontWeight: 700,
+              boxShadow: "0 12px 30px -10px rgba(0,0,0,0.8)",
             }}
           >
             {SPEECH_BUBBLES[currentState]}
@@ -98,7 +98,7 @@ export default function FreelancerCharacter({
 
       {/* ── Floating elements (CSS @keyframes only) ────────────── */}
       <div
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none z-20"
         style={{ willChange: "transform" }}
       >
         {/* State 0: Papers flying chaotically */}
@@ -352,6 +352,10 @@ export default function FreelancerCharacter({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="absolute inset-0 w-full h-full object-contain pointer-events-none drop-shadow-2xl"
+            style={{
+              maskImage: "radial-gradient(ellipse closest-side, black 60%, transparent 100%)",
+              WebkitMaskImage: "radial-gradient(ellipse closest-side, black 60%, transparent 100%)"
+            }}
           />
         </AnimatePresence>
       </div>

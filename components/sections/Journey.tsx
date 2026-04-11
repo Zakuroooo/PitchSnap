@@ -36,7 +36,6 @@ export default function Journey() {
     offset: ["start center", "end center"]
   })
 
-  // The glowing line that fills up as you scroll down
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
 
   return (
@@ -95,7 +94,7 @@ export default function Journey() {
                   {step.isHighlight && <div className="w-1.5 h-1.5 bg-white rounded-full" />}
                 </div>
 
-                {/* Content Left (Empty for odd on desktop) */}
+                {/* Card Side */}
                 <div className={`w-full md:w-1/2 pl-20 md:pl-0 ${isEven ? 'md:pr-24 md:text-right' : 'md:order-2 md:pl-24'}`}>
                   <motion.div
                     initial={{ opacity: 0, x: isEven ? -20 : 20 }}
@@ -107,20 +106,30 @@ export default function Journey() {
                     <span className="text-[#353534] text-6xl md:text-8xl font-black tracking-tighter leading-none mb-4 md:-mb-6 opacity-50 pointer-events-none select-none">
                       {step.id}
                     </span>
-                    <CardContainer className="inter-var w-full">
-                      <CardBody className={`bg-[#111111] p-8 md:p-12 hover:bg-[#161616] transition-colors relative ${step.isHighlight ? 'shadow-[0_0_60px_rgba(255,255,255,0.05)]' : ''}`}>
-                        <CardItem translateZ={20} className={`text-2xl md:text-3xl font-extrabold mb-4 ${step.isHighlight ? 'text-white' : 'text-[#c6c6c6]'}`}>
+
+                    {/* 3D Card wrapping each journey card — containerClassName = outer perspective div */}
+                    <CardContainer containerClassName="w-full" className="inter-var w-full">
+                      <CardBody className={`bg-[#111111] p-8 md:p-12 hover:bg-[#161616] transition-colors relative w-full ${step.isHighlight ? 'shadow-[0_0_60px_rgba(255,255,255,0.05)]' : ''}`}>
+                        <CardItem
+                          translateZ={20}
+                          className={`text-2xl md:text-3xl font-extrabold mb-4 ${step.isHighlight ? 'text-white' : 'text-[#c6c6c6]'}`}
+                        >
                           {step.title}
                         </CardItem>
-                        <CardItem as="p" translateZ={10} className="text-[#A1A1A1] leading-relaxed text-base md:text-lg">
+                        <CardItem
+                          as="p"
+                          translateZ={10}
+                          className="text-[#A1A1A1] leading-relaxed text-base md:text-lg"
+                        >
                           {step.description}
                         </CardItem>
                       </CardBody>
                     </CardContainer>
+
                   </motion.div>
                 </div>
 
-                {/* Desktop Spacer for alternating layout */}
+                {/* Desktop Spacer */}
                 <div className={`hidden md:block w-1/2 ${isEven ? 'md:order-2' : ''}`} />
 
               </div>

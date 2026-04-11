@@ -33,7 +33,7 @@ export default function Features() {
           </motion.h2>
         </div>
 
-        {/* Bento Grid */}
+        {/* Bento Grid — All 6 cards wrapped with CardContainer + CardBody */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
           
           {/* Large Card 1: Cold Email Generator */}
@@ -42,33 +42,39 @@ export default function Features() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="group md:col-span-2 row-span-1 bg-[#131313] hover:bg-[#1a1b1c] transition-colors flex flex-col justify-between overflow-hidden"
+            className="md:col-span-2 row-span-1"
           >
-            <div className="p-8 sm:p-12 flex-1">
-              <div className="w-12 h-12 rounded bg-[#1C1B1B] flex items-center justify-center mb-8">
-                <Mail className="w-5 h-5 text-white" />
-              </div>
-              <h3 className="text-3xl font-extrabold text-white mb-4">Cold Email Generator</h3>
-              <p className="text-[#A1A1A1] text-lg max-w-md">
-                Instantly draft highly personalized cold emails that bypass spam filters and command a response.
-              </p>
-            </div>
-            
-            {/* Mock Email Preview Animation */}
-            <div className="bg-[#0e0e0e] border-t border-[#1C1B1B] p-8 mt-auto mx-4 sm:mx-12 rounded-t-xl overflow-hidden relative">
-              <motion.div animate={{ x: ["-100%", "200%"] }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }} className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent w-full h-full pointer-events-none" />
-              <div className="flex text-xs text-[#5e5e5e] mb-4 pb-2 border-b border-[#1C1B1B]">
-                <span className="w-16 uppercase tracking-widest font-bold">To:</span> <span className="text-[#c6c6c6]">founder@stellar.io</span>
-              </div>
-              <div className="flex text-xs text-[#5e5e5e] mb-6">
-                <span className="w-16 uppercase tracking-widest font-bold">Subject:</span> <span className="text-white font-bold">Re: Frontend Architecture</span>
-              </div>
-              <div className="space-y-3">
-                <div className="w-[85%] h-1 rounded bg-[#1C1B1B]" />
-                <div className="w-[90%] h-1 rounded bg-[#1C1B1B]" />
-                <div className="w-[60%] h-1 rounded bg-[#1C1B1B]" />
-              </div>
-            </div>
+            <CardContainer containerClassName="w-full" className="w-full">
+              <CardBody className="bg-[#131313] hover:bg-[#1a1b1c] transition-colors flex flex-col justify-between overflow-hidden w-full">
+                <div className="p-8 sm:p-12 flex-1">
+                  <div className="w-12 h-12 rounded bg-[#1C1B1B] flex items-center justify-center mb-8">
+                    <Mail className="w-5 h-5 text-white" />
+                  </div>
+                  <CardItem translateZ={15} as="h3" className="text-3xl font-extrabold text-white mb-4">
+                    Cold Email Generator
+                  </CardItem>
+                  <CardItem translateZ={8} as="p" className="text-[#A1A1A1] text-lg max-w-md">
+                    Instantly draft highly personalized cold emails that bypass spam filters and command a response.
+                  </CardItem>
+                </div>
+                
+                {/* Mock Email Preview */}
+                <div className="bg-[#0e0e0e] border-t border-[#1C1B1B] p-8 mt-auto mx-4 sm:mx-12 rounded-t-xl overflow-hidden relative">
+                  <motion.div animate={{ x: ["-100%", "200%"] }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }} className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent w-full h-full pointer-events-none" />
+                  <div className="flex text-xs text-[#5e5e5e] mb-4 pb-2 border-b border-[#1C1B1B]">
+                    <span className="w-16 uppercase tracking-widest font-bold">To:</span> <span className="text-[#c6c6c6]">founder@stellar.io</span>
+                  </div>
+                  <div className="flex text-xs text-[#5e5e5e] mb-6">
+                    <span className="w-16 uppercase tracking-widest font-bold">Subject:</span> <span className="text-white font-bold">Re: Frontend Architecture</span>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="w-[85%] h-1 rounded bg-[#1C1B1B]" />
+                    <div className="w-[90%] h-1 rounded bg-[#1C1B1B]" />
+                    <div className="w-[60%] h-1 rounded bg-[#1C1B1B]" />
+                  </div>
+                </div>
+              </CardBody>
+            </CardContainer>
           </motion.div>
 
           {/* Small Card 1: LinkedIn Outreach */}
@@ -77,45 +83,57 @@ export default function Features() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="group md:col-span-1 bg-[#1A1C1C] p-8 sm:p-12 flex flex-col justify-between"
+            className="md:col-span-1"
           >
-            <div>
-              <div className="w-12 h-12 rounded bg-[#2A2A2A] flex items-center justify-center mb-8">
-                <Briefcase className="w-5 h-5 text-white" />
-              </div>
-              <h3 className="text-xl font-extrabold text-white mb-4">LinkedIn Outreach</h3>
-              <p className="text-[#A1A1A1] text-base mb-8">
-                Generate connection notes perfectly formatted for algorithms.
-              </p>
-            </div>
-            <div className="w-full bg-[#131313] p-6 rounded-lg border border-[#201f1f]">
-               <div className="flex items-center gap-3 mb-4">
-                  <div className="w-8 h-8 rounded bg-[#1C1B1B] flex items-center justify-center font-bold text-[10px]">IN</div>
-                  <div className="text-[10px] text-[#5e5e5e] font-bold tracking-widest uppercase">Tech Recruiter</div>
-               </div>
-               <div className="space-y-2">
-                 <div className="w-full h-1 rounded bg-[#2A2A2A]" />
-                 <div className="w-[80%] h-1 rounded bg-[#2A2A2A]" />
-                 <div className="w-[60%] h-1 rounded bg-[#2A2A2A]" />
-               </div>
-            </div>
+            <CardContainer containerClassName="w-full h-full" className="w-full h-full">
+              <CardBody className="bg-[#1A1C1C] p-8 sm:p-12 flex flex-col justify-between w-full h-full">
+                <div>
+                  <div className="w-12 h-12 rounded bg-[#2A2A2A] flex items-center justify-center mb-8">
+                    <Briefcase className="w-5 h-5 text-white" />
+                  </div>
+                  <CardItem translateZ={15} as="h3" className="text-xl font-extrabold text-white mb-4">
+                    LinkedIn Outreach
+                  </CardItem>
+                  <CardItem translateZ={8} as="p" className="text-[#A1A1A1] text-base mb-8">
+                    Generate connection notes perfectly formatted for algorithms.
+                  </CardItem>
+                </div>
+                <div className="w-full bg-[#131313] p-6 rounded-lg border border-[#201f1f]">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="w-8 h-8 rounded bg-[#1C1B1B] flex items-center justify-center font-bold text-[10px]">IN</div>
+                    <div className="text-[10px] text-[#5e5e5e] font-bold tracking-widest uppercase">Tech Recruiter</div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="w-full h-1 rounded bg-[#2A2A2A]" />
+                    <div className="w-[80%] h-1 rounded bg-[#2A2A2A]" />
+                    <div className="w-[60%] h-1 rounded bg-[#2A2A2A]" />
+                  </div>
+                </div>
+              </CardBody>
+            </CardContainer>
           </motion.div>
 
-          {/* Small Card 2: Follow-up Sequences */}
+          {/* Small Card 2: Smart Follow-ups */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="group md:col-span-1 bg-[#161616] hover:bg-[#1c1b1b] transition-colors p-8 sm:p-12"
+            className="md:col-span-1"
           >
-            <div className="w-12 h-12 rounded bg-[#201f1f] flex items-center justify-center mb-8">
-              <Clock className="w-5 h-5 text-white" />
-            </div>
-            <h3 className="text-xl font-extrabold text-white mb-4">Smart Follow-ups</h3>
-            <p className="text-[#A1A1A1] text-base">
-              Never let a lead go cold. Auto-generate perfectly timed follow-up sequences.
-            </p>
+            <CardContainer containerClassName="w-full h-full" className="w-full h-full">
+              <CardBody className="bg-[#161616] hover:bg-[#1c1b1b] transition-colors p-8 sm:p-12 w-full h-full">
+                <div className="w-12 h-12 rounded bg-[#201f1f] flex items-center justify-center mb-8">
+                  <Clock className="w-5 h-5 text-white" />
+                </div>
+                <CardItem translateZ={15} as="h3" className="text-xl font-extrabold text-white mb-4">
+                  Smart Follow-ups
+                </CardItem>
+                <CardItem translateZ={8} as="p" className="text-[#A1A1A1] text-base">
+                  Never let a lead go cold. Auto-generate perfectly timed follow-up sequences.
+                </CardItem>
+              </CardBody>
+            </CardContainer>
           </motion.div>
 
           {/* Large Card 2: Full Proposal Writer */}
@@ -124,45 +142,56 @@ export default function Features() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="group md:col-span-2 row-span-1 bg-[#131313] hover:bg-[#1a1b1c] transition-colors overflow-hidden flex flex-col sm:flex-row"
+            className="md:col-span-2 row-span-1"
           >
-             <div className="p-8 sm:p-12 flex-1 flex flex-col justify-center relative z-10 w-full sm:w-1/2">
-                <div className="w-12 h-12 rounded bg-[#1C1B1B] flex items-center justify-center mb-8">
-                  <FileText className="w-5 h-5 text-white" />
+            <CardContainer containerClassName="w-full" className="w-full">
+              <CardBody className="bg-[#131313] hover:bg-[#1a1b1c] transition-colors overflow-hidden flex flex-col sm:flex-row w-full">
+                <div className="p-8 sm:p-12 flex-1 flex flex-col justify-center relative z-10 w-full sm:w-1/2">
+                  <div className="w-12 h-12 rounded bg-[#1C1B1B] flex items-center justify-center mb-8">
+                    <FileText className="w-5 h-5 text-white" />
+                  </div>
+                  <CardItem translateZ={15} as="h3" className="text-3xl font-extrabold text-[#F5F5F5] mb-4">
+                    Full Proposal Writer
+                  </CardItem>
+                  <CardItem translateZ={8} as="p" className="text-[#A1A1A1] text-lg max-w-sm">
+                    Generate comprehensive 5-page proposals covering scope, timelines, deliverables, and terms.
+                  </CardItem>
                 </div>
-                <h3 className="text-3xl font-extrabold text-[#F5F5F5] mb-4">Full Proposal Writer</h3>
-                <p className="text-[#A1A1A1] text-lg max-w-sm">
-                  Generate comprehensive 5-page proposals covering scope, timelines, deliverables, and terms.
-                </p>
-             </div>
-
-             <div className="bg-[#0e0e0e] w-full sm:w-1/2 border-l border-[#1C1B1B] p-12 relative overflow-hidden flex flex-col items-center justify-center group-hover:bg-[#111111] transition-colors">
-               <motion.div animate={{ x: ["-100%", "300%"] }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }} className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent w-full h-full pointer-events-none" />
-               <div className="w-48 h-64 bg-[#1C1B1B] border border-[#2A2A2A] p-6 shadow-2xl flex flex-col gap-4 transform group-hover:-translate-y-2 transition-transform duration-500">
-                  <div className="w-full h-12 bg-[#2A2A2A] rounded-sm mb-2" />
-                  <div className="w-full h-2 bg-[#2A2A2A] rounded-sm" />
-                  <div className="w-[85%] h-2 bg-[#2A2A2A] rounded-sm" />
-                  <div className="w-[90%] h-2 bg-[#2A2A2A] rounded-sm" />
-                  <div className="w-[60%] h-2 bg-[#2A2A2A] rounded-sm" />
-               </div>
-             </div>
+                <div className="bg-[#0e0e0e] w-full sm:w-1/2 border-l border-[#1C1B1B] p-12 relative overflow-hidden flex flex-col items-center justify-center hover:bg-[#111111] transition-colors">
+                  <motion.div animate={{ x: ["-100%", "300%"] }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }} className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent w-full h-full pointer-events-none" />
+                  <div className="w-48 h-64 bg-[#1C1B1B] border border-[#2A2A2A] p-6 shadow-2xl flex flex-col gap-4 transform hover:-translate-y-2 transition-transform duration-500">
+                    <div className="w-full h-12 bg-[#2A2A2A] rounded-sm mb-2" />
+                    <div className="w-full h-2 bg-[#2A2A2A] rounded-sm" />
+                    <div className="w-[85%] h-2 bg-[#2A2A2A] rounded-sm" />
+                    <div className="w-[90%] h-2 bg-[#2A2A2A] rounded-sm" />
+                    <div className="w-[60%] h-2 bg-[#2A2A2A] rounded-sm" />
+                  </div>
+                </div>
+              </CardBody>
+            </CardContainer>
           </motion.div>
 
-          {/* Small Card 3: Pricing Suggester */}
+          {/* Small Card 3: Pricing Intel */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="group md:col-span-1 bg-[#1A1C1C] p-8 sm:p-12 hover:bg-[#201F1F] transition-colors"
+            className="md:col-span-1"
           >
-            <div className="w-12 h-12 rounded bg-[#2A2A2A] flex items-center justify-center mb-8">
-              <DollarSign className="w-5 h-5 text-white" />
-            </div>
-            <h3 className="text-xl font-extrabold text-white mb-4">Pricing Intel</h3>
-            <p className="text-[#A1A1A1] text-base">
-              Get AI suggestions on how much to charge based on industry standards.
-            </p>
+            <CardContainer containerClassName="w-full h-full" className="w-full h-full">
+              <CardBody className="bg-[#1A1C1C] p-8 sm:p-12 hover:bg-[#201F1F] transition-colors w-full h-full">
+                <div className="w-12 h-12 rounded bg-[#2A2A2A] flex items-center justify-center mb-8">
+                  <DollarSign className="w-5 h-5 text-white" />
+                </div>
+                <CardItem translateZ={15} as="h3" className="text-xl font-extrabold text-white mb-4">
+                  Pricing Intel
+                </CardItem>
+                <CardItem translateZ={8} as="p" className="text-[#A1A1A1] text-base">
+                  Get AI suggestions on how much to charge based on industry standards.
+                </CardItem>
+              </CardBody>
+            </CardContainer>
           </motion.div>
 
           {/* Small Card 4: Generation History */}
@@ -171,17 +200,23 @@ export default function Features() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.5 }}
-            className="group md:col-span-2 bg-[#131313] p-8 sm:p-12 flex flex-col sm:flex-row items-center text-center sm:text-left gap-8"
+            className="md:col-span-2"
           >
-            <div className="w-16 h-16 shrink-0 rounded bg-[#1C1B1B] flex items-center justify-center">
-              <History className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <h3 className="text-xl font-extrabold text-white mb-3">Generation Cloud History</h3>
-              <p className="text-[#A1A1A1] text-base">
-                Never lose a successful pitch. Every cold email, proposal, and LinkedIn message is automatically protected.
-              </p>
-            </div>
+            <CardContainer containerClassName="w-full" className="w-full">
+              <CardBody className="bg-[#131313] p-8 sm:p-12 flex flex-col sm:flex-row items-center text-center sm:text-left gap-8 w-full">
+                <div className="w-16 h-16 shrink-0 rounded bg-[#1C1B1B] flex items-center justify-center">
+                  <History className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                  <CardItem translateZ={15} as="h3" className="text-xl font-extrabold text-white mb-3">
+                    Generation Cloud History
+                  </CardItem>
+                  <CardItem translateZ={8} as="p" className="text-[#A1A1A1] text-base">
+                    Never lose a successful pitch. Every cold email, proposal, and LinkedIn message is automatically protected.
+                  </CardItem>
+                </div>
+              </CardBody>
+            </CardContainer>
           </motion.div>
           
         </div>
