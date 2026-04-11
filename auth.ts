@@ -60,24 +60,26 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   ],
   events: {
     async createUser({ user }) {
-      await dbConnect()
-      if (!user.id) return
-      await UserModel.findByIdAndUpdate(user.id, {
-        $set: { 
-          plan: "free", 
-          generationsThisMonth: 0, 
-          lastResetDate: new Date() 
+      try {
+        await dbConnect()
+        // Use email lookup — adapter-agnostic and always reliable
+        const email = user.email
+        if (!email) return
+
+        await UserModel.findOneAndUpdate(
+          { email },
+          { $setOnInsert: { plan: "free", generationsThisMonth: 0, lastResetDate: new Date() } },
+          { upsert: false }
+        )
+
+        // Send welcome email + n8n trigger (fire-and-forget, never block auth)
+        if (user.name) {
+          sendWelcomeEmail(email, user.name)
+          triggerSignupWebhook({ name: user.name, email, plan: "free", provider: "google" })
         }
-      })
-      // Send welcome email + n8n trigger (fire-and-forget)
-      if (user.email && user.name) {
-        sendWelcomeEmail(user.email, user.name);
-        triggerSignupWebhook({
-          name: user.name,
-          email: user.email,
-          plan: "free",
-          provider: "google", // Could be github too, but we can't differentiate here easily
-        });
+      } catch (err) {
+        // Never let this block the OAuth session
+        console.error("[createUser event]", err)
       }
     }
   }
