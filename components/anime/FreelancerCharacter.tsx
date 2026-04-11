@@ -79,14 +79,13 @@ export default function FreelancerCharacter({
           style={{ willChange: "transform, opacity" }}
         >
           <div
-            className="relative px-5 py-3 shadow-2xl"
+            className="relative px-3 py-1.5 md:px-5 md:py-3 shadow-2xl text-[9px] md:text-[13px]"
             style={{
               backgroundColor: "#F5F5F5",
               border: "1px solid #FFFFFF",
               borderRadius: "20px 20px 20px 0px",
               color: "#0C0C0C",
               fontFamily: "var(--font-inter), system-ui, sans-serif",
-              fontSize: "13px",
               fontWeight: 700,
               boxShadow: "0 12px 30px -10px rgba(0,0,0,0.8)",
             }}

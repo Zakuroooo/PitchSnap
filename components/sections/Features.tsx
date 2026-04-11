@@ -46,7 +46,7 @@ export default function Features() {
           >
             <CardContainer containerClassName="w-full" className="w-full">
               <CardBody className="bg-[#131313] hover:bg-[#1a1b1c] transition-colors flex flex-col justify-between overflow-hidden w-full">
-                <div className="p-8 sm:p-12 flex-1">
+                <div className="p-5 sm:p-12 flex-1">
                   <div className="w-12 h-12 rounded bg-[#1C1B1B] flex items-center justify-center mb-8">
                     <Mail className="w-5 h-5 text-white" />
                   </div>
@@ -59,7 +59,7 @@ export default function Features() {
                 </div>
                 
                 {/* Mock Email Preview */}
-                <div className="bg-[#0e0e0e] border-t border-[#1C1B1B] p-8 mt-auto mx-4 sm:mx-12 rounded-t-xl overflow-hidden relative">
+                <div className="bg-[#0e0e0e] border-t border-[#1C1B1B] p-5 mt-auto mx-4 sm:mx-12 rounded-t-xl overflow-hidden relative">
                   <motion.div animate={{ x: ["-100%", "200%"] }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }} className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.02] to-transparent w-full h-full pointer-events-none" />
                   <div className="flex text-xs text-[#5e5e5e] mb-4 pb-2 border-b border-[#1C1B1B]">
                     <span className="w-16 uppercase tracking-widest font-bold">To:</span> <span className="text-[#c6c6c6]">founder@stellar.io</span>
@@ -86,7 +86,7 @@ export default function Features() {
             className="md:col-span-1"
           >
             <CardContainer containerClassName="w-full h-full" className="w-full h-full">
-              <CardBody className="bg-[#1A1C1C] p-8 sm:p-12 flex flex-col justify-between w-full h-full">
+              <CardBody className="bg-[#1A1C1C] p-5 sm:p-12 flex flex-col justify-between w-full h-full">
                 <div>
                   <div className="w-12 h-12 rounded bg-[#2A2A2A] flex items-center justify-center mb-8">
                     <Briefcase className="w-5 h-5 text-white" />
@@ -122,7 +122,7 @@ export default function Features() {
             className="md:col-span-1"
           >
             <CardContainer containerClassName="w-full h-full" className="w-full h-full">
-              <CardBody className="bg-[#161616] hover:bg-[#1c1b1b] transition-colors p-8 sm:p-12 w-full h-full">
+              <CardBody className="bg-[#161616] hover:bg-[#1c1b1b] transition-colors p-5 sm:p-12 w-full h-full">
                 <div className="w-12 h-12 rounded bg-[#201f1f] flex items-center justify-center mb-8">
                   <Clock className="w-5 h-5 text-white" />
                 </div>
@@ -146,7 +146,7 @@ export default function Features() {
           >
             <CardContainer containerClassName="w-full" className="w-full">
               <CardBody className="bg-[#131313] hover:bg-[#1a1b1c] transition-colors overflow-hidden flex flex-col sm:flex-row w-full">
-                <div className="p-8 sm:p-12 flex-1 flex flex-col justify-center relative z-10 w-full sm:w-1/2">
+                <div className="p-5 sm:p-12 flex-1 flex flex-col justify-center relative z-10 w-full sm:w-1/2">
                   <div className="w-12 h-12 rounded bg-[#1C1B1B] flex items-center justify-center mb-8">
                     <FileText className="w-5 h-5 text-white" />
                   </div>
@@ -180,7 +180,7 @@ export default function Features() {
             className="md:col-span-1"
           >
             <CardContainer containerClassName="w-full h-full" className="w-full h-full">
-              <CardBody className="bg-[#1A1C1C] p-8 sm:p-12 hover:bg-[#201F1F] transition-colors w-full h-full">
+              <CardBody className="bg-[#1A1C1C] p-5 sm:p-12 hover:bg-[#201F1F] transition-colors w-full h-full">
                 <div className="w-12 h-12 rounded bg-[#2A2A2A] flex items-center justify-center mb-8">
                   <DollarSign className="w-5 h-5 text-white" />
                 </div>
@@ -203,7 +203,7 @@ export default function Features() {
             className="md:col-span-2"
           >
             <CardContainer containerClassName="w-full" className="w-full">
-              <CardBody className="bg-[#131313] p-8 sm:p-12 flex flex-col sm:flex-row items-center text-center sm:text-left gap-8 w-full">
+              <CardBody className="bg-[#131313] p-5 sm:p-12 flex flex-col sm:flex-row items-center text-center sm:text-left gap-8 w-full">
                 <div className="w-16 h-16 shrink-0 rounded bg-[#1C1B1B] flex items-center justify-center">
                   <History className="w-6 h-6 text-white" />
                 </div>

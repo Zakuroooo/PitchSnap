@@ -45,7 +45,7 @@ export default function HowItWorks() {
               containerClassName="bg-[#111111] min-h-[400px] h-full"
               className=""
             >
-              <div className="p-10 md:p-16 h-full flex flex-col justify-between relative overflow-hidden group">
+              <div className="p-6 md:p-16 h-full flex flex-col justify-between relative overflow-hidden group">
                 <div className="absolute -right-8 -top-8 text-[12rem] md:text-[20rem] font-bold text-white/[0.02] leading-none select-none pointer-events-none group-hover:text-white/[0.04] transition-colors">
                   01
                 </div>
@@ -71,7 +71,7 @@ export default function HowItWorks() {
               containerClassName="bg-[#1a1c1c] min-h-[400px] h-full"
               className=""
             >
-              <div className="p-10 md:p-12 h-full flex flex-col justify-between">
+              <div className="p-6 md:p-12 h-full flex flex-col justify-between">
                 <div className="flex items-center gap-3 text-xs tracking-widest text-white uppercase font-bold mb-8">
                   <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                   10 Seconds Flat
@@ -94,7 +94,7 @@ export default function HowItWorks() {
               containerClassName="bg-[#141414] min-h-[460px] h-full"
               className=""
             >
-              <div className="p-10 md:p-16 h-full flex flex-col justify-between relative overflow-hidden group">
+              <div className="p-6 md:p-16 h-full flex flex-col justify-between relative overflow-hidden group">
                 <div className="absolute right-0 bottom-0 translate-y-1/4 translate-x-1/4 text-[12rem] font-bold text-white/[0.02] leading-none select-none pointer-events-none group-hover:text-white/[0.04] transition-colors">
                   02
                 </div>
@@ -120,7 +120,7 @@ export default function HowItWorks() {
               containerClassName="bg-[#1c1b1b] min-h-[460px] h-full"
               className=""
             >
-              <div className="p-10 md:p-16 h-full flex flex-col justify-between relative overflow-hidden">
+              <div className="p-6 md:p-16 h-full flex flex-col justify-between relative overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-white/[0.04] via-transparent to-transparent opacity-50" />
                 <div className="flex justify-between items-start relative z-10">
                   <div className="text-sm font-bold tracking-widest text-white mb-6">STEP 03</div>

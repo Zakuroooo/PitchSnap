@@ -53,7 +53,7 @@ export default function Success() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="md:col-span-7 bg-[#111111] hover:bg-[#161616] transition-colors p-10 md:p-16 flex flex-col justify-between min-h-[500px]"
+            className="md:col-span-7 bg-[#111111] hover:bg-[#161616] transition-colors p-6 md:p-16 flex flex-col justify-between min-h-[500px]"
           >
             <div className="text-sm font-bold tracking-widest text-[#5e5e5e] mb-6">WIN RATE</div>
             <div className="mt-auto">
@@ -74,7 +74,7 @@ export default function Success() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="flex-1 bg-[#161616] hover:bg-[#1a1a1a] transition-colors p-10 md:p-12 flex flex-col justify-between"
+              className="flex-1 bg-[#161616] hover:bg-[#1a1a1a] transition-colors p-6 md:p-12 flex flex-col justify-between"
             >
               <div className="text-sm font-bold tracking-widest text-[#5e5e5e] mb-6">TIME SAVED</div>
               <div className="mt-auto">
@@ -92,7 +92,7 @@ export default function Success() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex-1 bg-[#1a1c1c] hover:bg-[#1e2020] transition-colors p-10 md:p-12 flex flex-col justify-between relative overflow-hidden"
+              className="flex-1 bg-[#1a1c1c] hover:bg-[#1e2020] transition-colors p-6 md:p-12 flex flex-col justify-between relative overflow-hidden"
             >
               <div className="text-sm font-bold tracking-widest text-[#5e5e5e] mb-6 relative z-10">RETURN ON PROPOSALS</div>
               <div className="mt-auto relative z-10">

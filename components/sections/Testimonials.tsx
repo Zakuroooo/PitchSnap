@@ -63,9 +63,9 @@ const TESTIMONIALS_ROW_2_EXTENDED = [...TESTIMONIALS_ROW_2, ...TESTIMONIALS_ROW_
 
 function TestimonialCard({ item }: { item: typeof TESTIMONIALS_ROW_1[0] }) {
   return (
-    <div className="w-[350px] md:w-[420px] min-w-[350px] md:min-w-[420px] mx-3 flex-shrink-0 flex h-auto">
-      <div className="w-full flex-1 p-8 md:p-10 bg-[#111111] hover:bg-[#161616] transition-colors flex flex-col justify-between">
-        <div className="flex items-center gap-1 mb-8">
+    <div className="w-[280px] md:w-[420px] min-w-[280px] md:min-w-[420px] mx-3 flex-shrink-0 flex h-auto">
+      <div className="w-full flex-1 p-6 md:p-10 bg-[#111111] hover:bg-[#161616] transition-colors flex flex-col justify-between">
+        <div className="flex items-center gap-1 mb-6 md:mb-8">
           {[...Array(item.rating)].map((_, i) => (
             <Star key={i} className="w-4 h-4 fill-current text-white" />
           ))}

@@ -72,7 +72,7 @@ export default function Pricing() {
             className="flex-1"
           >
             <CometCard className="h-full rounded-none">
-              <div className="bg-[#111111] hover:bg-[#161616] transition-colors p-10 md:p-12 flex flex-col justify-between min-h-[540px] h-full">
+              <div className="bg-[#111111] hover:bg-[#161616] transition-colors p-6 md:p-12 flex flex-col justify-between min-h-[540px] h-full">
                 <div>
                   <h3 className="text-2xl font-bold uppercase tracking-wider mb-2">Starter</h3>
                   <p className="text-[#A1A1A1] text-sm h-12">Essential architecture for solo freelancers entering the market.</p>
@@ -111,7 +111,7 @@ export default function Pricing() {
             className="flex-[1.2] relative z-20"
           >
             <CometCard className="h-full rounded-none">
-              <div className="bg-white p-10 md:p-12 flex flex-col justify-between min-h-[580px] h-full shadow-2xl">
+              <div className="bg-white p-6 md:p-12 flex flex-col justify-between min-h-[580px] h-full shadow-2xl">
                 <div>
                   <div className="flex justify-between items-start mb-2">
                     <h3 className="text-2xl font-bold text-black uppercase tracking-wider">Pro</h3>
@@ -154,7 +154,7 @@ export default function Pricing() {
             className="flex-1"
           >
             <CometCard className="h-full rounded-none">
-              <div className="bg-[#111111] hover:bg-[#161616] transition-colors p-10 md:p-12 flex flex-col justify-between min-h-[540px] h-full">
+              <div className="bg-[#111111] hover:bg-[#161616] transition-colors p-6 md:p-12 flex flex-col justify-between min-h-[540px] h-full">
                 <div>
                   <h3 className="text-2xl font-bold uppercase tracking-wider mb-2">Agency</h3>
                   <p className="text-[#A1A1A1] text-sm h-12">Volume-based infrastructure for teams and high-output agencies.</p>

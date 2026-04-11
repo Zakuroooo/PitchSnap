@@ -65,7 +65,7 @@ export default function Benefits() {
               initial={{ opacity: 0, x: 20 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="bg-[#131313] p-10 lg:p-12 hover:bg-[#1C1B1B] transition-colors duration-500 group"
+              className="bg-[#131313] p-6 lg:p-12 hover:bg-[#1C1B1B] transition-colors duration-500 group"
             >
               <div className="text-xs tracking-[0.1em] text-[#474747] uppercase font-semibold mb-8 group-hover:text-[#A1A1A1] transition-colors">Manual Proposals</div>
               
@@ -85,7 +85,7 @@ export default function Benefits() {
               initial={{ opacity: 0, x: 20 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="bg-[#1c1b1b] p-10 lg:p-12 relative overflow-hidden"
+              className="bg-[#1c1b1b] p-6 lg:p-12 relative overflow-hidden"
             >
               {/* Active glow */}
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/[0.03] rounded-full blur-[80px]" />
