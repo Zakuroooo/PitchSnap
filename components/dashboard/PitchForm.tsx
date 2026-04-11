@@ -114,7 +114,15 @@ export function PitchForm({ isPro = false }: { isPro?: boolean }) {
       const json = await res.json();
 
       if (!res.ok) {
-        setError(json.error || "Failed to generate pitch.");
+        if (res.status === 429) {
+          setError("Rate limit reached. You've hit your monthly proposal limit. Upgrade to Pro for more.");
+        } else if (res.status === 401) {
+          setError("Session expired. Please refresh the page and sign in again.");
+        } else if (res.status === 503) {
+          setError("AI service is temporarily unavailable. Please try again in a moment.");
+        } else {
+          setError(json.error || "Failed to generate pitch. Please try again.");
+        }
       } else {
         setOutput(json.data);
         setActiveTab("coldEmail");
@@ -122,7 +130,7 @@ export function PitchForm({ isPro = false }: { isPro?: boolean }) {
         setHasDraft(false);
       }
     } catch {
-      setError("Network error. Please try again.");
+      setError("Network error. Check your connection and try again.");
     } finally {
       timers.forEach(clearTimeout);
       setLoading(false);
@@ -278,7 +286,18 @@ export function PitchForm({ isPro = false }: { isPro?: boolean }) {
             />
           </div>
 
-          {error && <p className="text-red-500 text-[12px]">{error}</p>}
+          {error && (
+            <div className="flex items-start justify-between gap-4 bg-red-950/30 border border-red-500/20 rounded-[2px] px-4 py-3">
+              <p className="text-red-400 text-[12px] leading-relaxed">{error}</p>
+              <button
+                type="button"
+                onClick={() => setError("")}
+                className="text-red-500/60 hover:text-red-400 text-[16px] leading-none flex-shrink-0 mt-0.5"
+              >
+                ×
+              </button>
+            </div>
+          )}
 
           <button
             type="submit"
