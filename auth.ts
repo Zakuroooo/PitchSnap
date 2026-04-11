@@ -56,4 +56,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
     })
   ],
+  events: {
+    async createUser({ user }) {
+      await dbConnect()
+      if (!user.id) return
+      await UserModel.findByIdAndUpdate(user.id, {
+        $set: { 
+          plan: "free", 
+          generationsThisMonth: 0, 
+          lastResetDate: new Date() 
+        }
+      })
+    }
+  }
 })
