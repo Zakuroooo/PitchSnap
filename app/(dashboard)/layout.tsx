@@ -1,7 +1,5 @@
 import { auth } from "@/auth"
 import { redirect } from "next/navigation"
-import { Sidebar } from "@/components/dashboard/Sidebar"
-import { MobileNav } from "@/components/dashboard/MobileNav"
 
 export default async function DashboardLayout({
   children,
@@ -15,18 +13,13 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="flex h-screen bg-[#0A0A0A] overflow-hidden">
-      {/* Desktop Sidebar */}
-      <Sidebar />
-
-      {/* Main Content */}
-      <main className="flex-1 flex flex-col overflow-y-auto md:ml-[200px]">
-        {/* Mobile top bar */}
-        <MobileNav />
-        
-        <div className="flex-1 p-6 md:p-8">
-          {children}
-        </div>
+    <div className="flex h-screen bg-[#0C0C0C] text-white overflow-hidden font-inter">
+      {/* 200px Sidebar reserved space */}
+      <aside className="w-[200px] flex-shrink-0 border-r border-white/5 bg-[#0C0C0C] hidden md:block">
+      </aside>
+      
+      <main className="flex-1 overflow-y-auto">
+        {children}
       </main>
     </div>
   )
