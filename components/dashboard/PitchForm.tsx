@@ -37,6 +37,7 @@ export function PitchForm() {
   const [error, setError] = useState("");
   const [activeTab, setActiveTab] = useState<keyof PitchOutput>("coldEmail");
   const [copied, setCopied] = useState(false);
+  const [hasDraft, setHasDraft] = useState(false);
 
   // Restore form from localStorage on mount
   useEffect(() => {
@@ -44,11 +45,14 @@ export function PitchForm() {
     if (saved) {
       try {
         const draft = JSON.parse(saved);
-        if (draft.clientName) setClientName(draft.clientName);
-        if (draft.industry) setIndustry(draft.industry);
-        if (draft.service) setService(draft.service);
-        if (draft.challenge) setChallenge(draft.challenge);
-        if (draft.tone) setTone(draft.tone);
+        if (draft.clientName || draft.industry || draft.service || draft.challenge) {
+          if (draft.clientName) setClientName(draft.clientName);
+          if (draft.industry) setIndustry(draft.industry);
+          if (draft.service) setService(draft.service);
+          if (draft.challenge) setChallenge(draft.challenge);
+          if (draft.tone) setTone(draft.tone);
+          setHasDraft(true);
+        }
       } catch {}
     }
   }, []);
@@ -69,6 +73,7 @@ export function PitchForm() {
     setTone("Professional");
     setOutput(null);
     setError("");
+    setHasDraft(false);
     localStorage.removeItem(STORAGE_KEY);
   };
 
@@ -92,6 +97,8 @@ export function PitchForm() {
       } else {
         setOutput(data);
         setActiveTab("coldEmail");
+        localStorage.removeItem(STORAGE_KEY);
+        setHasDraft(false);
       }
     } catch {
       setError("Network error. Please try again.");
@@ -120,8 +127,14 @@ export function PitchForm() {
       {/* Form Section */}
       <div className="bg-[#141414] border border-white/5 rounded-[2px]">
         <div className="px-6 pt-6 pb-4 border-b border-white/5 flex items-start justify-between">
-          <div className="flex items-center h-full">
+          <div className="flex items-center h-full gap-4">
             <h2 className="text-[11px] font-bold uppercase tracking-widest text-zinc-500">GENERATE</h2>
+            {hasDraft && (
+              <span className="flex items-center gap-1.5 text-[9px] font-bold uppercase tracking-widest text-zinc-600">
+                <span className="w-1.5 h-1.5 rounded-full bg-zinc-600"></span>
+                DRAFT RESTORED
+              </span>
+            )}
           </div>
           <button
             type="button"
