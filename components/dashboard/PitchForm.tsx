@@ -1,7 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Loader2, Sparkles, RotateCcw } from "lucide-react";
+import { Loader2, Sparkles, RotateCcw, Download } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { exportProposalPDF } from "@/lib/exportPDF";
 
 const INDUSTRIES = [
   "E-commerce", "SaaS", "Real Estate", "Healthcare", "Finance",
@@ -27,6 +29,7 @@ interface PitchOutput {
 const STORAGE_KEY = "pitchsnap_form_draft";
 
 export function PitchForm() {
+  const { data: session } = useSession();
   const [clientName, setClientName] = useState("");
   const [industry, setIndustry] = useState("");
   const [service, setService] = useState("");
@@ -114,6 +117,19 @@ export function PitchForm() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const handleExportPDF = () => {
+    if (!output) return;
+    exportProposalPDF({
+      clientName,
+      service,
+      coldEmail: output.coldEmail,
+      linkedinOutreach: output.linkedinMessage,
+      fullProposal: output.proposal,
+      followUpSequence: output.followUpSequence,
+      pricingRange: output.pricingRange
+    });
+  };
+
   const tabLabels: Record<keyof PitchOutput, string> = {
     coldEmail: "Cold Email",
     linkedinMessage: "LinkedIn",
@@ -121,6 +137,8 @@ export function PitchForm() {
     followUpSequence: "Follow-Ups",
     pricingRange: "Pricing",
   };
+
+  const isPro = session?.user?.plan === 'pro' || session?.user?.plan === 'agency';
 
   return (
     <div className="space-y-6">
@@ -254,27 +272,49 @@ export function PitchForm() {
       {output && (
         <div className="bg-[#141414] border border-white/5 rounded-[2px]">
           {/* Tabs */}
-          <div className="flex border-b border-white/5 overflow-x-auto">
-            {(Object.keys(tabLabels) as Array<keyof PitchOutput>).map(tab => (
+          <div className="flex items-center justify-between border-b border-white/5 pr-4">
+            <div className="flex overflow-x-auto hide-scrollbar">
+              {(Object.keys(tabLabels) as Array<keyof PitchOutput>).map(tab => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`flex-shrink-0 px-5 py-3 text-[11px] font-bold uppercase tracking-widest transition-colors border-b-2 ${
+                    activeTab === tab
+                      ? "text-white border-white"
+                      : "text-zinc-500 border-transparent hover:text-zinc-300"
+                  }`}
+                >
+                  {tabLabels[tab]}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex items-center gap-3">
               <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`flex-shrink-0 px-5 py-3 text-[11px] font-bold uppercase tracking-widest transition-colors border-b-2 ${
-                  activeTab === tab
-                    ? "text-white border-white"
-                    : "text-zinc-500 border-transparent hover:text-zinc-300"
-                }`}
+                onClick={handleCopy}
+                className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 hover:text-white transition-colors"
               >
-                {tabLabels[tab]}
+                {copied ? "Copied!" : "Copy"}
               </button>
-            ))}
-            <div className="flex-1" />
-            <button
-              onClick={handleCopy}
-              className="flex-shrink-0 px-5 py-3 text-[11px] font-bold uppercase tracking-widest text-zinc-500 hover:text-white transition-colors"
-            >
-              {copied ? "Copied!" : "Copy"}
-            </button>
+              
+              <div className="w-[1px] h-4 bg-white/10" />
+
+              {isPro ? (
+                <button
+                  onClick={handleExportPDF}
+                  className="flex items-center gap-2 px-3 py-1.5 border border-white/20 rounded-[2px] text-[10px] font-bold uppercase tracking-widest text-white hover:bg-white hover:text-black transition-colors"
+                >
+                  <Download size={12} /> ExPORT PDF
+                </button>
+              ) : (
+                <button
+                  disabled
+                  className="flex items-center gap-2 px-3 py-1.5 border border-white/5 rounded-[2px] text-[10px] font-bold uppercase tracking-widest text-zinc-600 bg-[#0C0C0C] cursor-not-allowed"
+                >
+                  <Download size={12} className="opacity-50" /> PRO FEATURE
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Content */}
