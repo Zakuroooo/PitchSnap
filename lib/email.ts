@@ -2,8 +2,26 @@
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY ?? "";
 const FROM = process.env.EMAIL_FROM ?? "PitchSnap <onboarding@resend.dev>";
+const IS_DEV = process.env.NODE_ENV !== "production";
 
-async function sendEmail(to: string, subject: string, html: string) {
+/**
+ * Core send function.
+ * In dev: If Resend rejects with a domain/recipient restriction (403),
+ * we fall back to console — the full flow still works, OTP appears in terminal.
+ * In prod: throws so the API route returns a proper error.
+ */
+async function sendEmail(
+  to: string,
+  subject: string,
+  html: string,
+  fallbackLog?: string
+): Promise<void> {
+  if (!RESEND_API_KEY) {
+    console.warn("[Email] RESEND_API_KEY not set. Skipping email send.");
+    if (fallbackLog) console.log(fallbackLog);
+    return;
+  }
+
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
@@ -12,14 +30,39 @@ async function sendEmail(to: string, subject: string, html: string) {
     },
     body: JSON.stringify({ from: FROM, to, subject, html }),
   });
+
   if (!res.ok) {
-    const err = (await res.json().catch(() => ({}))) as { message?: string };
-    throw new Error(err.message ?? "Resend API error");
+    const err = (await res.json().catch(() => ({}))) as {
+      statusCode?: number;
+      name?: string;
+      message?: string;
+    };
+
+    // Resend free-tier restriction: can only send to verified account owner.
+    // In dev, gracefully fall back to console so the flow is testable.
+    if (
+      IS_DEV &&
+      (err.statusCode === 403 || err.name === "validation_error")
+    ) {
+      console.warn(
+        `[Email] Resend domain restriction — email NOT delivered to ${to}.`
+      );
+      console.warn(
+        `[Email] To test locally, add a verified domain at resend.com/domains.`
+      );
+      if (fallbackLog) console.log(fallbackLog);
+      return; // Don't throw in dev — let the OTP flow continue
+    }
+
+    throw new Error(err.message ?? `Resend API error (${res.status})`);
   }
+
+  console.log(`[Email] ✓ Sent "${subject}" → ${to}`);
 }
 
 /** Send a 6-digit OTP email for email verification */
 export async function sendOTPEmail(email: string, name: string, code: string) {
+  const fallbackLog = `\n  ╔══════════════════════════════════╗\n  ║  [DEV] OTP FOR ${email.padEnd(18)} ║\n  ║  CODE: ${code}                     ║\n  ╚══════════════════════════════════╝\n`;
   await sendEmail(
     email,
     `${code} is your PitchSnap verification code`,
@@ -49,7 +92,8 @@ export async function sendOTPEmail(email: string, name: string, code: string) {
     </td></tr>
   </table>
 </body>
-</html>`
+</html>`,
+    fallbackLog
   );
 }
 

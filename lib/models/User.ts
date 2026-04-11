@@ -21,7 +21,7 @@ const UserSchema: Schema<IUser> = new Schema(
       lowercase: true, 
       trim: true 
     },
-    hashedPassword: { type: String, required: true },
+    hashedPassword: { type: String, required: false },
     plan: { 
       type: String, 
       enum: ["free", "pro", "agency"], 
