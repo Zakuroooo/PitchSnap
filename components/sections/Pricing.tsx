@@ -113,7 +113,7 @@ export default function Pricing() {
               </div>
               <p className="text-[#474747] text-sm h-12 pb-2">Unrestricted access for full-time operators scaling revenue.</p>
               <div className="mt-8 mb-12 flex items-baseline gap-2 text-black">
-                <span className="text-7xl md:text-8xl font-black tracking-tighter leading-none">${isAnnual ? '49' : '59'}</span>
+                <span className="text-7xl md:text-8xl font-black tracking-tighter leading-none">${isAnnual ? '15' : '19'}</span>
                 <span className="text-[#474747] font-bold text-sm uppercase tracking-widest">/ month</span>
               </div>
               <div className="flex flex-col gap-4 text-black">
@@ -150,7 +150,7 @@ export default function Pricing() {
               <h3 className="text-2xl font-bold uppercase tracking-wider mb-2">Agency</h3>
               <p className="text-[#A1A1A1] text-sm h-12">Volume-based infrastructure for teams and high-output agencies.</p>
               <div className="mt-8 mb-12 flex items-baseline gap-2">
-                <span className="text-6xl font-black tracking-tighter">${isAnnual ? '149' : '179'}</span>
+                <span className="text-6xl font-black tracking-tighter">${isAnnual ? '39' : '49'}</span>
                 <span className="text-[#5e5e5e] font-bold text-sm uppercase tracking-widest">/ month</span>
               </div>
               <div className="flex flex-col gap-4">

@@ -14,7 +14,6 @@ import FAQ from "@/components/sections/FAQ"
 import FinalCTA from "@/components/sections/FinalCTA"
 import { FloatingBlobs } from "@/components/ui/floating-blobs"
 
-import { FloatingCTA } from "@/components/layout/FloatingCTA"
 
 /**
  * Full Landing Page Component
@@ -23,7 +22,6 @@ export default function Page() {
   return (
     <>
       <Navbar />
-      <FloatingCTA />
 
       <main className="flex flex-col min-h-dvh relative z-10 bg-transparent">
         <FloatingBlobs />
