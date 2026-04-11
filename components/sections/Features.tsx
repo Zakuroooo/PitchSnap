@@ -3,6 +3,7 @@ import React, { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { Mail, Briefcase, Clock, FileText, DollarSign, History } from "lucide-react"
 import Container from "../layout/Container"
+import { CardContainer, CardBody, CardItem } from "../ui/3d-card"
 
 export default function Features() {
   const ref = useRef(null)

@@ -2,6 +2,7 @@
 import React, { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import Container from "../layout/Container"
+import { WobbleCard } from "../ui/wobble-card"
 
 export default function HowItWorks() {
   const ref = useRef(null)

@@ -2,6 +2,7 @@
 import React, { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import Container from "../layout/Container"
+import { CardContainer, CardBody, CardItem } from "../ui/3d-card"
 
 const JOURNEY_STEPS = [
   {
@@ -106,14 +107,16 @@ export default function Journey() {
                     <span className="text-[#353534] text-6xl md:text-8xl font-black tracking-tighter leading-none mb-4 md:-mb-6 opacity-50 pointer-events-none select-none">
                       {step.id}
                     </span>
-                    <div className={`bg-[#111111] p-8 md:p-12 hover:bg-[#161616] transition-colors relative ${step.isHighlight ? 'shadow-[0_0_60px_rgba(255,255,255,0.05)]' : ''}`}>
-                      <h3 className={`text-2xl md:text-3xl font-extrabold mb-4 ${step.isHighlight ? 'text-white' : 'text-[#c6c6c6]'}`}>
-                        {step.title}
-                      </h3>
-                      <p className="text-[#A1A1A1] leading-relaxed text-base md:text-lg">
-                        {step.description}
-                      </p>
-                    </div>
+                    <CardContainer className="inter-var w-full">
+                      <CardBody className={`bg-[#111111] p-8 md:p-12 hover:bg-[#161616] transition-colors relative ${step.isHighlight ? 'shadow-[0_0_60px_rgba(255,255,255,0.05)]' : ''}`}>
+                        <CardItem translateZ={20} className={`text-2xl md:text-3xl font-extrabold mb-4 ${step.isHighlight ? 'text-white' : 'text-[#c6c6c6]'}`}>
+                          {step.title}
+                        </CardItem>
+                        <CardItem as="p" translateZ={10} className="text-[#A1A1A1] leading-relaxed text-base md:text-lg">
+                          {step.description}
+                        </CardItem>
+                      </CardBody>
+                    </CardContainer>
                   </motion.div>
                 </div>
 

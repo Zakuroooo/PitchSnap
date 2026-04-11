@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import { Check } from "lucide-react"
 import { motion } from "framer-motion"
 import Container from "../layout/Container"
+import { CometCard } from "../ui/comet-card"
 
 export default function Pricing() {
   const [isAnnual, setIsAnnual] = useState(true)
