@@ -153,7 +153,39 @@ Return the improved version strictly as JSON.`;
       output = draft;
     }
 
-    // 9. Save generation to MongoDB
+    // 9. CALL 3: Quality Score (Evaluate the refined output)
+    const scoreSystemPrompt = `You are a strict conversion rate expert. Analyze this freelance proposal and return ONLY a JSON object with this exact structure: { "score": 85, "grade": "A", "strengths": ["specific strength 1", "specific strength 2"], "improvements": ["one improvement suggestion"], "verdict": "One sentence verdict" }
+Score 0-100. Grade: A(90+), B(75-89), C(60-74), D(below 60). No markdown, just JSON.`;
+    const scoreUserPrompt = `Score this proposal for ${clientName}:
+Cold email: ${output.coldEmail.substring ? output.coldEmail.substring(0, 500) : ''}...
+Service: ${service}
+Industry: ${industry}`;
+
+    let qualityScore = null;
+    try {
+      const scoreResponse = await groq.chat.completions.create({
+        model: "llama-3.3-70b-versatile",
+        messages: [
+          { role: "system", content: scoreSystemPrompt },
+          { role: "user", content: scoreUserPrompt },
+        ],
+        temperature: 0.3,
+        max_tokens: 300,
+      });
+      
+      const rawScore = scoreResponse.choices[0]?.message?.content || "";
+      const cleanedScore = rawScore
+        .replace(/^```json\n?/, "")
+        .replace(/^```\n?/, "")
+        .replace(/\n?```$/, "")
+        .trim();
+      qualityScore = JSON.parse(cleanedScore);
+      output.qualityScore = qualityScore;
+    } catch (e) {
+      console.error("Failed to generate quality score:", e);
+    }
+
+    // 10. Save generation to MongoDB
     await GenerationModel.create({
       userId,
       clientName,
@@ -164,7 +196,7 @@ Return the improved version strictly as JSON.`;
       output,
     });
 
-    // 10. Return output
+    // 11. Return output
     return NextResponse.json({ success: true, data: output }, { status: 200 });
   } catch (error: unknown) {
     console.error("Generate API error:", error);

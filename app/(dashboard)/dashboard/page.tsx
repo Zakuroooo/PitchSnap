@@ -47,7 +47,7 @@ export default async function DashboardOverview() {
         daysUntilReset={daysUntilReset}
       />
       
-      <PitchForm />
+      <PitchForm isPro={session?.user?.plan === "pro" || session?.user?.plan === "agency"} />
     </div>
   );
 }

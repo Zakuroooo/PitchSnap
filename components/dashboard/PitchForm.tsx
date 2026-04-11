@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import { Loader2, Sparkles, RotateCcw, Download } from "lucide-react";
-import { useSession } from "next-auth/react";
 import { exportProposalPDF } from "@/lib/exportPDF";
 
 const INDUSTRIES = [
@@ -26,17 +25,26 @@ interface PitchOutput {
   pricingRange: string;
 }
 
+interface PitchPackage extends PitchOutput {
+  qualityScore?: {
+    score: number;
+    grade: string;
+    strengths: string[];
+    improvements: string[];
+    verdict: string;
+  };
+}
+
 const STORAGE_KEY = "pitchsnap_form_draft";
 
-export function PitchForm() {
-  const { data: session } = useSession();
+export function PitchForm({ isPro = false }: { isPro?: boolean }) {
   const [clientName, setClientName] = useState("");
   const [industry, setIndustry] = useState("");
   const [service, setService] = useState("");
   const [challenge, setChallenge] = useState("");
   const [tone, setTone] = useState("Professional");
   const [loading, setLoading] = useState(false);
-  const [output, setOutput] = useState<PitchOutput | null>(null);
+  const [output, setOutput] = useState<PitchPackage | null>(null);
   const [error, setError] = useState("");
   const [activeTab, setActiveTab] = useState<keyof PitchOutput>("coldEmail");
   const [copied, setCopied] = useState(false);
@@ -157,8 +165,6 @@ export function PitchForm() {
     "RUNNING QUALITY REVIEW...",
     "OPTIMIZING FOR CONVERSION..."
   ][loadingStep];
-
-  const isPro = session?.user?.plan === 'pro' || session?.user?.plan === 'agency';
 
   return (
     <div className="space-y-6">
@@ -290,6 +296,51 @@ export function PitchForm() {
 
       {/* Output Section */}
       {output && (
+        <div className="space-y-6">
+          {output.qualityScore && (
+            <div className="bg-[#141414] border border-white/5 rounded-[2px] p-6 lg:p-8 flex flex-col md:flex-row gap-8 items-start md:items-center">
+              <div className="flex-shrink-0 text-center md:border-r border-white/5 md:pr-8">
+                <div className="text-[10px] font-bold uppercase tracking-[0.12em] text-zinc-500 mb-2">
+                  Conversion Probability
+                </div>
+                <div 
+                  className="text-[56px] font-bold leading-none tracking-tighter"
+                  style={{
+                    color: output.qualityScore.score >= 90 ? "#FFFFFF" :
+                           output.qualityScore.score >= 75 ? "rgba(255,255,255,0.8)" :
+                           output.qualityScore.score >= 60 ? "rgba(255,255,255,0.5)" :
+                           "rgba(255,100,100,0.8)"
+                  }}
+                >
+                  {output.qualityScore.score}%
+                </div>
+                <div className="text-[13px] font-bold mt-2 text-zinc-400">
+                  GRADE: {output.qualityScore.grade}
+                </div>
+              </div>
+
+              <div className="flex-1 space-y-4">
+                <div className="text-[13px] text-white">
+                  {output.qualityScore.verdict}
+                </div>
+                <div className="space-y-2">
+                  {output.qualityScore.strengths?.slice(0, 2).map((s: string, i: number) => (
+                    <div key={i} className="flex items-start gap-2 text-[12px] text-zinc-400">
+                      <span className="text-[#B8FF57] mt-0.5">✓</span>
+                      {s}
+                    </div>
+                  ))}
+                  {output.qualityScore.improvements?.slice(0, 1).map((imp: string, i: number) => (
+                    <div key={i} className="flex items-start gap-2 text-[12px] text-red-400/80 mt-1">
+                      <span className="mt-0.5 text-[10px]">↳</span>
+                      {imp}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
         <div className="bg-[#141414] border border-white/5 rounded-[2px]">
           {/* Tabs */}
           <div className="flex items-center justify-between border-b border-white/5 pr-4">
@@ -343,6 +394,7 @@ export function PitchForm() {
               {output[activeTab]}
             </pre>
           </div>
+        </div>
         </div>
       )}
     </div>
