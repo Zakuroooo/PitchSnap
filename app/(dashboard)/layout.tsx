@@ -1,4 +1,4 @@
-import { cookies } from "next/headers"
+import { auth } from "@/auth"
 import { redirect } from "next/navigation"
 import { Sidebar } from "@/components/dashboard/Sidebar"
 import { MobileNav } from "@/components/dashboard/MobileNav"
@@ -8,10 +8,9 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode
 }) {
-  const cookieStore = await cookies()
-  const accessToken = cookieStore.get("accessToken")?.value
+  const session = await auth()
 
-  if (!accessToken) {
+  if (!session) {
     redirect("/login")
   }
 
