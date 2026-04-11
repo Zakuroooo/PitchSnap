@@ -57,8 +57,10 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // 5. Build Groq prompt
-    const prompt = `You are an elite freelance proposal writer. Generate a complete pitch package for the following:
+    // 5. Build prompts
+    const systemPrompt = `You are an elite freelance business development expert and copywriter with 10+ years of experience closing high-ticket freelance deals. You write hyper-personalized, conversion-focused outreach that gets replies. Every piece of copy you write feels authentic, specific, and tailored — never generic or templated. You ALWAYS return valid JSON only.`;
+
+    const userPrompt = `Generate a complete, professional pitch package. Every section must be FULLY written — no placeholders, no "[insert here]", no skipping content.
 
 CLIENT BUSINESS: ${clientName}
 INDUSTRY: ${industry}
@@ -66,22 +68,29 @@ SERVICE BEING PITCHED: ${service}
 CLIENT'S MAIN PROBLEM: ${challenge}
 TONE: ${tone}
 
-Generate EXACTLY this JSON structure (no markdown, no extra text, only valid JSON):
+Return ONLY valid JSON with no markdown, no code blocks, no extra text. Use this exact structure:
 
 {
-  "coldEmail": "Subject: [subject line]\\n\\n[Full cold email body - 150-200 words, ${tone} tone, personalized to ${clientName} in ${industry}]",
-  "linkedinMessage": "[LinkedIn DM - 80-100 words, conversational, no hard sell, ${tone} tone]",
-  "proposal": "[Full professional project proposal - 400-500 words covering: Executive Summary, Understanding of Problem, Proposed Solution, Deliverables, Timeline, Why Choose Me. ${tone} tone]",
-  "followUpSequence": "Follow-Up 1 (Day 3):\\n[50-60 word follow-up email]\\n\\nFollow-Up 2 (Day 7):\\n[50-60 word follow-up email]\\n\\nFollow-Up 3 (Day 14):\\n[50-60 word final follow-up email]",
-  "pricingRange": "[Suggested pricing breakdown for ${service} for a ${industry} client with this scope. Include: Starter package, Standard package, Premium package with price ranges and what's included in each]"
+  "coldEmail": "Subject: [compelling subject line specific to ${clientName}]\\n\\n[Complete 180-220 word cold email. Open with a specific observation about ${clientName} in ${industry}. Address their problem: ${challenge}. Present your ${service} with 2-3 concrete benefits. End with a clear low-friction CTA. Sign off professionally. ${tone} tone.]",
+
+  "linkedinMessage": "[Complete 80-100 word LinkedIn DM. Start with a genuine observation about ${clientName}. Connect it to how ${challenge} affects them. Mention your ${service} expertise briefly. Ask one easy question to open a dialogue. No hard sell. ${tone} tone. Do NOT start with 'I hope this message finds you well'.]",
+
+  "proposal": "[Complete 450-500 word proposal with these exact headings:\\n\\nEXECUTIVE SUMMARY\\n[60-80 words: what you're proposing and core value for ${clientName}]\\n\\nUNDERSTANDING YOUR CHALLENGE\\n[80-100 words: deep knowledge of ${challenge} and its business impact for ${clientName} in ${industry}]\\n\\nPROPOSED SOLUTION\\n[100-120 words: how your ${service} solves it, with 3-4 specific deliverables]\\n\\nTIMELINE\\n[60-80 words: realistic phases and milestones]\\n\\nWHY WORK WITH ME\\n[80-100 words: specific reasons your ${service} expertise is the right fit]\\n\\nNEXT STEPS\\n[30-40 words: clear call to action]]",
+
+  "followUpSequence": "FOLLOW-UP EMAIL 1 — Day 3\\nSubject: [specific follow-up subject]\\n\\n[Complete 50-60 word follow-up. Reference your original pitch. Add one new value insight about ${industry}. Warm, non-pushy. ${tone} tone.]\\n\\nFOLLOW-UP EMAIL 2 — Day 7\\nSubject: [specific follow-up subject]\\n\\n[Complete 50-60 word follow-up. Share a relevant result or case example. Offer something useful specific to ${clientName}'s situation. ${tone} tone.]\\n\\nFOLLOW-UP EMAIL 3 — Day 14\\nSubject: [specific final follow-up subject]\\n\\n[Complete 50-60 word final follow-up. Graceful closing. Leave the door open. Mention you won't follow up after this. Give a clear reason to reply now. ${tone} tone.]",
+
+  "pricingRange": "SUGGESTED PRICING — ${service} for ${clientName} (${industry})\\n\\n🔹 STARTER PACKAGE\\nInvestment: [realistic price range]\\nBest for: [who this suits]\\nDeliverables:\\n• [deliverable 1]\\n• [deliverable 2]\\n• [deliverable 3]\\nTimeline: [realistic timeline]\\n\\n🔸 STANDARD PACKAGE\\nInvestment: [realistic price range]\\nBest for: [who this suits]\\nDeliverables:\\n• [deliverable 1]\\n• [deliverable 2]\\n• [deliverable 3]\\n• [deliverable 4]\\nTimeline: [realistic timeline]\\n\\n💎 PREMIUM PACKAGE\\nInvestment: [realistic price range]\\nBest for: [who this suits]\\nDeliverables:\\n• [deliverable 1]\\n• [deliverable 2]\\n• [deliverable 3]\\n• [deliverable 4]\\n• [deliverable 5]\\nTimeline: [realistic timeline]\\n\\n* Prices are estimates for ${service} in ${industry}. Final pricing depends on project scope."
 }`;
 
-    // 6. Call Groq Llama 3.1
+    // 6. Call Groq Llama 3.3
     const completion = await groq.chat.completions.create({
       model: "llama-3.3-70b-versatile",
-      messages: [{ role: "user", content: prompt }],
+      messages: [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: userPrompt },
+      ],
       temperature: 0.7,
-      max_tokens: 2048,
+      max_tokens: 3000,
     });
 
     const rawContent = completion.choices[0]?.message?.content || "";
@@ -89,7 +98,6 @@ Generate EXACTLY this JSON structure (no markdown, no extra text, only valid JSO
     // 7. Parse JSON output
     let output;
     try {
-      // Strip markdown code blocks if Groq wraps in them
       const cleaned = rawContent
         .replace(/^```json\n?/, "")
         .replace(/^```\n?/, "")
