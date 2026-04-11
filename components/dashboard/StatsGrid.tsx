@@ -1,42 +1,45 @@
-import { TrendingUp } from "lucide-react";
+interface StatsGridProps {
+  proposalsThisMonth: number;
+  totalProposals: number;
+  daysUntilReset: number;
+}
 
-export function StatsGrid() {
+export function StatsGrid({ proposalsThisMonth, totalProposals, daysUntilReset }: StatsGridProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      {/* Stat 1: Total Pitches */}
-      <div className="bg-[#141414] border border-white/5 rounded-[2px] p-6 flex flex-col justify-between h-[140px]">
-        <h3 className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
-          Total Generated
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-8 mb-4 border-y border-white/5">
+      {/* Stat 1: Proposals This Month */}
+      <div className="flex flex-col">
+        <h3 className="text-[11px] font-bold uppercase tracking-widest text-zinc-500 mb-2">
+          Proposals This Month
         </h3>
-        <p className="text-[32px] font-bold text-white tracking-tight">
-          128
+        <p className="text-[56px] font-bold text-white tracking-tighter leading-none">
+          {proposalsThisMonth}
         </p>
       </div>
 
-      {/* Stat 2: Active Clients */}
-      <div className="bg-[#141414] border border-white/5 rounded-[2px] p-6 flex flex-col justify-between h-[140px]">
-        <h3 className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
-          Active Conversations
+      {/* Stat 2: Total Proposals */}
+      <div className="flex flex-col">
+        <h3 className="text-[11px] font-bold uppercase tracking-widest text-zinc-500 mb-2">
+          Total Proposals
         </h3>
-        <p className="text-[32px] font-bold text-white tracking-tight">
-          14
+        <p className="text-[56px] font-bold text-white tracking-tighter leading-none">
+          {totalProposals}
         </p>
       </div>
 
-      {/* Stat 3: Win Rate */}
-      <div className="bg-[#141414] border border-white/5 rounded-[2px] p-6 flex flex-col justify-between h-[140px]">
-        <div className="flex items-start justify-between">
-          <h3 className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">
-            Average Response Rate
-          </h3>
-          <div className="flex items-center gap-1 text-zinc-400 bg-white/5 px-2 py-1 rounded-[2px]">
-            <TrendingUp size={12} strokeWidth={2.5} />
-            <span className="text-[10px] font-bold">+12%</span>
-          </div>
+      {/* Stat 3: Days Until Reset */}
+      <div className="flex flex-col">
+        <h3 className="text-[11px] font-bold uppercase tracking-widest text-zinc-500 mb-2">
+          Days Until Reset
+        </h3>
+        <div className="flex items-end gap-3">
+          <p className="text-[56px] font-bold text-white tracking-tighter leading-none">
+            {daysUntilReset}
+          </p>
+          <span className="text-[10px] uppercase tracking-widest text-zinc-500 pb-2">
+            Until Monthly Reset
+          </span>
         </div>
-        <p className="text-[32px] font-bold text-white tracking-tight">
-          32%
-        </p>
       </div>
     </div>
   );

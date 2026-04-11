@@ -120,9 +120,8 @@ export function PitchForm() {
       {/* Form Section */}
       <div className="bg-[#141414] border border-white/5 rounded-[2px]">
         <div className="px-6 pt-6 pb-4 border-b border-white/5 flex items-start justify-between">
-          <div>
-            <h2 className="text-[16px] font-bold tracking-tight text-white">Generate Pitch Package</h2>
-            <p className="text-[12px] text-zinc-500 mt-1">Fill in client details to generate a full proposal package in 10 seconds.</p>
+          <div className="flex items-center h-full">
+            <h2 className="text-[11px] font-bold uppercase tracking-widest text-zinc-500">GENERATE</h2>
           </div>
           <button
             type="button"

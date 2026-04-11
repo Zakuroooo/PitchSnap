@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, FileText, Send, Settings, LogOut } from "lucide-react";
+import { LogOut } from "lucide-react";
 import { signOut } from "next-auth/react";
 import type { Session } from "next-auth";
 
@@ -18,10 +18,9 @@ export function Sidebar({ session }: SidebarProps) {
     : "Free Plan";
 
   const navLinks = [
-    { name: "Overview", href: "/dashboard", icon: LayoutDashboard },
-    { name: "Proposals", href: "/dashboard/proposals", icon: FileText },
-    { name: "Campaigns", href: "/dashboard/campaigns", icon: Send },
-    { name: "Settings", href: "/dashboard/settings", icon: Settings },
+    { name: "Overview", href: "/dashboard" },
+    { name: "Proposals", href: "/dashboard/proposals" },
+    { name: "Settings", href: "/dashboard/settings" },
   ];
 
   return (
@@ -37,18 +36,16 @@ export function Sidebar({ session }: SidebarProps) {
       <nav className="flex-1 px-4 mt-8 space-y-1">
         {navLinks.map((link) => {
           const isActive = pathname === link.href;
-          const Icon = link.icon;
           return (
             <Link
               key={link.name}
               href={link.href}
-              className={`flex items-center gap-3 px-3 py-2 rounded-[2px] text-[13px] font-medium transition-colors ${
+              className={`flex items-center px-4 py-3 rounded-[2px] text-[11px] font-bold uppercase tracking-widest transition-colors ${
                 isActive 
                   ? "text-white bg-white/[0.04]" 
                   : "text-zinc-500 hover:text-white hover:bg-white/[0.02]"
               }`}
             >
-              <Icon size={16} strokeWidth={isActive ? 2.5 : 2} />
               {link.name}
             </Link>
           );
