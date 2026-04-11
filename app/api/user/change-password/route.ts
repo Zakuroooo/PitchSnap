@@ -11,9 +11,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { currentPassword, newPassword } = await req.json();
+    const { userEmail, currentPassword, newPassword } = await req.json();
 
-    if (!currentPassword || !newPassword) {
+    if (!userEmail || !currentPassword || !newPassword) {
       return NextResponse.json({ error: "All fields are required." }, { status: 400 });
     }
 
@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     }
 
     await dbConnect();
-    const user = await UserModel.findById(session.user.id);
+    const user = await UserModel.findOne({ email: userEmail });
 
     if (!user || !user.hashedPassword) {
       return NextResponse.json({ error: "Cannot change password for OAuth accounts." }, { status: 400 });

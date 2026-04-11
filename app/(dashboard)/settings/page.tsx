@@ -12,8 +12,10 @@ export default async function SettingsPage() {
 
   await dbConnect();
 
-  const user = await UserModel.findById(session.user.id).lean();
-  const isOAuthUser = !user?.hashedPassword;
+  // Use email lookup to be adapter-agnostic (works for both OAuth and credentials)
+  const user = await UserModel.findOne({ email: session.user.email }).lean().catch(() => null);
+
+  const isOAuthUser = !user || !("hashedPassword" in user) || !user.hashedPassword;
 
   const planLabels: Record<string, string> = {
     free: "Free",
@@ -92,7 +94,7 @@ export default async function SettingsPage() {
           <h2 className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 border-b border-white/5 pb-3">
             Change Password
           </h2>
-          <SettingsForm userId={session.user.id} />
+          <SettingsForm userEmail={session.user.email ?? ""} />
         </section>
       )}
 

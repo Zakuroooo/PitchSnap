@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export function SettingsForm({ userId }: { userId: string }) {
+export function SettingsForm({ userEmail }: { userEmail: string }) {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -29,7 +29,7 @@ export function SettingsForm({ userId }: { userId: string }) {
       const res = await fetch("/api/user/change-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ userId, currentPassword, newPassword }),
+        body: JSON.stringify({ userEmail, currentPassword, newPassword }),
       });
       const data = await res.json();
       if (!res.ok) {
