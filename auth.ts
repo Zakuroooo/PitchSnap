@@ -8,6 +8,8 @@ import clientPromise from "@/lib/mongodb-client"
 import bcrypt from "bcryptjs"
 import { UserModel } from "@/lib/models/User"
 import dbConnect from "@/lib/db"
+import { sendWelcomeEmail } from "@/lib/email"
+import { triggerSignupWebhook } from "@/lib/n8n"
 
 declare module "next-auth" {
   interface Session {
@@ -67,6 +69,16 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           lastResetDate: new Date() 
         }
       })
+      // Send welcome email + n8n trigger (fire-and-forget)
+      if (user.email && user.name) {
+        sendWelcomeEmail(user.email, user.name);
+        triggerSignupWebhook({
+          name: user.name,
+          email: user.email,
+          plan: "free",
+          provider: "google", // Could be github too, but we can't differentiate here easily
+        });
+      }
     }
   }
 })
