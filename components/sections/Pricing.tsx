@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import { Check } from "lucide-react"
 import { motion } from "framer-motion"
 import { toast } from "sonner"
+import Link from "next/link"
 import Container from "../layout/Container"
 import { CometCard } from "../ui/comet-card"
 
@@ -96,9 +97,12 @@ export default function Pricing() {
                     ))}
                   </div>
                 </div>
-                <button className="w-full mt-12 py-4 px-4 bg-[#1C1B1B] hover:bg-[#2a2a2a] text-white font-bold tracking-widest uppercase text-sm transition-colors">
+                <Link
+                  href="/signup"
+                  className="w-full mt-12 py-4 px-4 bg-[#1C1B1B] hover:bg-[#2a2a2a] text-white font-bold tracking-widest uppercase text-sm transition-colors block text-center"
+                >
                   Deploy Starter
-                </button>
+                </Link>
               </div>
             </CometCard>
           </motion.div>

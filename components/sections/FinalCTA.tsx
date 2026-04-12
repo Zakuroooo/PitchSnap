@@ -1,6 +1,7 @@
 "use client"
 import React, { useRef } from "react"
 import { motion, useInView } from "framer-motion"
+import Link from "next/link"
 import Container from "../layout/Container"
 
 export default function FinalCTA() {
@@ -51,10 +52,16 @@ export default function FinalCTA() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto"
           >
-            <button className="px-10 py-5 bg-white text-black font-extrabold tracking-widest uppercase text-sm hover:scale-[1.02] transition-transform">
+            <Link
+              href="/signup"
+              className="px-10 py-5 bg-white text-black font-extrabold tracking-widest uppercase text-sm hover:scale-[1.02] transition-transform text-center"
+            >
               CLAIM YOUR VAULT
-            </button>
-            <button className="px-10 py-5 bg-[#1C1B1B] text-white font-extrabold tracking-widest uppercase text-sm hover:bg-[#2a2a2a] transition-colors shadow-2xl">
+            </Link>
+            <button
+              onClick={() => document.getElementById("features")?.scrollIntoView({ behavior: "smooth" })}
+              className="px-10 py-5 bg-[#1C1B1B] text-white font-extrabold tracking-widest uppercase text-sm hover:bg-[#2a2a2a] transition-colors shadow-2xl"
+            >
               VIEW THE MANIFESTO
             </button>
           </motion.div>

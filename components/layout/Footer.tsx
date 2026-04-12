@@ -23,26 +23,26 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="w-full bg-[#0c0c0c] text-white pt-24 pb-12 overflow-hidden border-t-2 border-[#111111]">
+    <footer className="w-full bg-[#0c0c0c] text-white pt-12 pb-6 overflow-hidden border-t-2 border-[#111111]">
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-8 mb-32">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-10">
           
           {/* Brand Column */}
           <div className="md:col-span-5 flex flex-col justify-between">
             <div>
               <Link
                 href="/"
-                className="inline-block text-3xl font-black tracking-tighter uppercase mb-6"
+                className="inline-block text-2xl font-black tracking-tighter uppercase mb-3"
                 aria-label="PitchSnap home"
               >
                 PITCHSNAP.
               </Link>
-              <p className="text-[#A1A1A1] text-lg max-w-sm leading-relaxed">
+              <p className="text-[#A1A1A1] text-sm max-w-sm leading-relaxed">
                 The authoritative engine for creating uncompromising freelance proposals.
               </p>
             </div>
             
-            <div className="flex gap-8 mt-12 md:mt-0">
+            <div className="flex gap-8 mt-6 md:mt-0">
                {SOCIAL_LINKS.map(({ label, href }) => (
                  <a 
                    key={label}
@@ -58,7 +58,7 @@ export default function Footer() {
           </div>
 
           {/* Links Columns */}
-          <div className="md:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-8">
+          <div className="md:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-6">
             {(
               Object.entries(FOOTER_LINKS) as [
                 string,
@@ -66,10 +66,10 @@ export default function Footer() {
               ][]
             ).map(([section, links]) => (
               <div key={section} className="flex flex-col">
-                 <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-[#474747] mb-8 pb-4 border-b-2 border-[#161616]">
+                 <h3 className="text-[10px] font-black uppercase tracking-[0.2em] text-[#474747] mb-4 pb-3 border-b-2 border-[#161616]">
                    {section}
                  </h3>
-                 <ul className="flex flex-col gap-4">
+                 <ul className="flex flex-col gap-3">
                    {links.map((link) => (
                      <li key={link.href}>
                        <Link
@@ -88,8 +88,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t-2 border-[#111111]">
-          <p className="text-[#474747] text-xs font-bold tracking-widest uppercase mb-4 md:mb-0">
+        <div className="flex flex-col md:flex-row justify-between items-center pt-6 border-t-2 border-[#111111]">
+          <p className="text-[#474747] text-xs font-bold tracking-widest uppercase mb-3 md:mb-0">
             © {currentYear} PITCHSNAP. ALL RIGHTS RESERVED.
           </p>
           <div className="flex gap-4 items-center">
