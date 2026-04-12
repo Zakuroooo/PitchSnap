@@ -62,6 +62,7 @@ export function SettingsForm({ userEmail }: { userEmail: string }) {
           value={currentPassword}
           onChange={(e) => setCurrentPassword(e.target.value)}
           required
+          autoComplete="current-password"
           placeholder="••••••••"
           className={inputClass}
         />
@@ -75,6 +76,7 @@ export function SettingsForm({ userEmail }: { userEmail: string }) {
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
           required
+          autoComplete="new-password"
           placeholder="Min. 8 characters"
           className={inputClass}
         />
@@ -88,6 +90,7 @@ export function SettingsForm({ userEmail }: { userEmail: string }) {
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
+          autoComplete="new-password"
           placeholder="••••••••"
           className={inputClass}
         />

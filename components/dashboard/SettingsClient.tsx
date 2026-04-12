@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { SettingsForm } from "./SettingsForm";
 import { User, CreditCard, Shield, Activity } from "lucide-react";
+import { toast } from "sonner";
 
 interface SettingsClientProps {
   user: {
@@ -138,12 +139,12 @@ export function SettingsClient({
                      </span>
                   </div>
                   {plan === "free" && (
-                    <a
-                      href="#pricing"
+                    <button
+                      onClick={() => toast("Upgrade — Coming Soon", { description: "We're setting up payments. Join the waitlist at hello@pitchsnap.me", duration: 4000 })}
                       className="px-4 py-2 bg-white text-black text-[11px] font-bold uppercase tracking-widest rounded-[2px] hover:bg-[#B8FF57] transition-colors"
                     >
                       Upgrade Plan
-                    </a>
+                    </button>
                   )}
                 </div>
               </section>

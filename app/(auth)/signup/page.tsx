@@ -217,7 +217,7 @@ export default function RegisterPage() {
                 <div className="space-y-2 relative">
                   <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">Password</label>
                   <div className="relative">
-                    <input type={showPassword ? "text" : "password"} value={password} onChange={e => setPassword(e.target.value)} required placeholder="Min. 8 characters"
+                    <input type={showPassword ? "text" : "password"} value={password} onChange={e => setPassword(e.target.value)} required placeholder="Min. 8 characters" autoComplete="new-password"
                       className="w-full h-[44px] bg-[#141414] border border-white/5 rounded-[2px] px-4 text-sm focus:outline-none focus:border-white/30 transition-colors pr-10 placeholder:text-zinc-700" />
                     <button type="button" onClick={() => setShowPassword(!showPassword)}
                       className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-white transition-colors">

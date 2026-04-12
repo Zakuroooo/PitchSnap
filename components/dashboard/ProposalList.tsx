@@ -311,9 +311,12 @@ export function ProposalList({ generations, isPro }: ProposalListProps) {
                         {copiedLink ? "Copied Link" : "Share Link"}
                       </button>
                     ) : (
-                      <div className="flex items-center gap-2 px-3 py-1.5 border border-[#B8FF57]/20 bg-[#B8FF57]/5 rounded-[2px]">
+                      <button
+                         onClick={() => toast("Telemetry — Coming Soon", { description: "Upgrade to Pro when available.", duration: 3000 })}
+                         className="flex items-center gap-2 px-3 py-1.5 border border-[#B8FF57]/20 bg-[#B8FF57]/5 hover:bg-[#B8FF57]/10 rounded-[2px] transition-colors"
+                       >
                          <span className="text-[9px] font-bold uppercase tracking-widest text-[#B8FF57]">Upgrade to track client intent</span>
-                      </div>
+                      </button>
                     )}
                   </div>
                 </div>
