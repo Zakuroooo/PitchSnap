@@ -62,7 +62,7 @@ export default async function DashboardOverview() {
 
   let totalViews = 0;
   let totalTime = 0;
-  const recentActivity = [];
+  const recentActivity: any[] = [];
 
   allGenerations.forEach((gen: any, index: number) => {
     if (gen.analytics) {
