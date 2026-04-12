@@ -53,19 +53,61 @@ export default async function DashboardOverview() {
     }),
   ]);
 
+  const isPro = currentPlan === "pro" || currentPlan === "agency";
+
+  const allGenerations = await GenerationModel.find({ userId })
+    .select("clientName service analytics createdAt")
+    .sort({ createdAt: -1 })
+    .lean();
+
+  let totalViews = 0;
+  let totalTime = 0;
+  const recentActivity = [];
+
+  allGenerations.forEach((gen: any, index: number) => {
+    if (gen.analytics) {
+      totalViews += gen.analytics.views || 0;
+      totalTime += gen.analytics.totalTimeSeconds || 0;
+    }
+    if (index < 3) {
+      recentActivity.push({
+        _id: gen._id.toString(),
+        clientName: gen.clientName,
+        service: gen.service,
+        createdAt: gen.createdAt.toISOString(),
+      });
+    }
+  });
+
   return (
-    <div className="p-4 md:p-8 space-y-6">
-      <h1 className="text-[32px] md:text-[40px] font-bold tracking-tighter text-white uppercase">
-        Welcome back, {userName}.
-      </h1>
-      
-      <StatsGrid 
-        proposalsThisMonth={proposalsThisMonth}
-        totalProposals={totalProposals}
-        daysUntilReset={daysUntilReset}
-      />
-      
-      <PitchForm isPro={currentPlan === "pro" || currentPlan === "agency"} />
+    <div className="p-4 md:p-8 space-y-8 max-w-[1400px] mx-auto">
+      <div className="flex flex-col space-y-2">
+        <h1 className="text-[32px] md:text-[40px] font-bold tracking-tighter text-white uppercase leading-none">
+          Welcome back, {userName}.
+        </h1>
+        <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-500">
+          Command Center Active
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* Primary Column (Pitch Form) */}
+        <div className="lg:col-span-8 flex flex-col gap-8">
+          <PitchForm isPro={isPro} />
+        </div>
+
+        {/* Secondary Column (Telemetry & Ledger) */}
+        <div className="lg:col-span-4 flex flex-col gap-8 sticky top-8">
+          <StatsGrid 
+            proposalsThisMonth={proposalsThisMonth}
+            totalProposals={totalProposals}
+            daysUntilReset={daysUntilReset}
+            totalViews={totalViews}
+            totalTime={totalTime}
+            recentActivity={recentActivity}
+          />
+        </div>
+      </div>
     </div>
   );
 }

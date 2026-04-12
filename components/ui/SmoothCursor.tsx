@@ -62,7 +62,7 @@ export const SmoothCursor = () => {
       
       {/* Small dot (instant) */}
       <motion.div
-        className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full pointer-events-none z-[9999] opacity-90 -ml-1 -mt-1 mix-blend-difference"
+        className="fixed top-0 left-0 w-2 h-2 bg-white rounded-full pointer-events-none z-[99999] opacity-90 -ml-1 -mt-1 mix-blend-difference"
         style={{
           x: mouseX,
           y: mouseY,
@@ -71,7 +71,7 @@ export const SmoothCursor = () => {
       
       {/* Ring (smooth spring) */}
       <motion.div
-        className="fixed top-0 left-0 w-6 h-6 border rounded-full pointer-events-none z-[9999] -ml-3 -mt-3 mix-blend-difference transition-colors duration-200"
+        className="fixed top-0 left-0 w-6 h-6 border rounded-full pointer-events-none z-[99999] -ml-3 -mt-3 mix-blend-difference transition-colors duration-200"
         style={{
           x: smoothX,
           y: smoothY,

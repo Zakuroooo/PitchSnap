@@ -8,6 +8,8 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
 
+import { toast } from "sonner";
+
 export default function RegisterPage() {
   const router = useRouter();
 
@@ -32,11 +34,19 @@ export default function RegisterPage() {
     return () => clearTimeout(t);
   }, [resendCooldown]);
 
+  const handleSocialSignIn = (provider: 'google' | 'github') => {
+    toast.loading(`Connecting to ${provider === 'google' ? 'Google' : 'GitHub'}...`, {
+      description: "Securing your connection layer."
+    });
+    signIn(provider, { callbackUrl: '/dashboard' });
+  };
+
   /** Step 1: send OTP */
   const handleSendOTP = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError("");
+    const loadToast = toast.loading("Generating Secure OTP...");
 
     try {
       const res = await fetch("/api/auth/send-otp", {
@@ -47,12 +57,15 @@ export default function RegisterPage() {
       const data = await res.json();
       if (!res.ok) {
         setError(data.error || "Failed to send verification email.");
+        toast.error("Transmission failed", { id: loadToast, description: data.error || "Please verify your email format." });
       } else {
         setStep(2);
         setResendCooldown(60);
+        toast.success("Identity Challenge Sent", { id: loadToast, description: "Please check your inbox for the 6-digit code." });
       }
     } catch {
       setError("Network error. Please try again.");
+      toast.error("Network exception", { id: loadToast, description: "Check your internet connection." });
     } finally {
       setLoading(false);
     }
@@ -63,6 +76,7 @@ export default function RegisterPage() {
     e.preventDefault();
     setLoading(true);
     setError("");
+    const loadToast = toast.loading("Verifying Identity Signature...");
 
     try {
       const res = await fetch("/api/auth/verify-otp", {
@@ -73,6 +87,7 @@ export default function RegisterPage() {
       const data = await res.json();
       if (!res.ok) {
         setError(data.error || "Invalid verification code.");
+        toast.error("Verification Refused", { id: loadToast, description: "The code entered is invalid or expired." });
       } else {
         // Auto sign-in with credentials
         const loginRes = await signIn("credentials", {
@@ -83,12 +98,15 @@ export default function RegisterPage() {
         });
         if (loginRes?.error) {
           setError("Account created! Please sign in manually.");
+          toast.success("Account Created", { id: loadToast, description: "Please log in with your new credentials." });
         } else {
+          toast.success("Access Granted", { id: loadToast, description: "Protocol initialization complete. Heading to dashboard." });
           router.push("/dashboard");
         }
       }
     } catch {
       setError("Network error. Please try again.");
+      toast.error("Network exception", { id: loadToast });
     } finally {
       setLoading(false);
     }
@@ -156,7 +174,7 @@ export default function RegisterPage() {
 
               <div className="space-y-4">
                 <button
-                  onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
+                  onClick={() => handleSocialSignIn('google')}
                   className="w-full h-[44px] flex items-center justify-center gap-3 bg-[#141414] border border-white/15 rounded-[2px] text-sm font-medium hover:bg-white/5 transition-colors"
                 >
                   <svg viewBox="0 0 24 24" className="w-5 h-5">
@@ -169,7 +187,7 @@ export default function RegisterPage() {
                 </button>
 
                 <button
-                  onClick={() => signIn('github', { callbackUrl: '/dashboard' })}
+                  onClick={() => handleSocialSignIn('github')}
                   className="w-full h-[44px] flex items-center justify-center gap-3 bg-[#141414] border border-white/15 rounded-[2px] text-sm font-medium hover:bg-white/5 transition-colors"
                 >
                   <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current">

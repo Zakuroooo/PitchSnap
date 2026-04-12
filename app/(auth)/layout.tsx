@@ -1,4 +1,4 @@
-import { cookies } from "next/headers"
+import { auth } from "@/auth"
 import { redirect } from "next/navigation"
 
 export default async function AuthLayout({
@@ -6,11 +6,10 @@ export default async function AuthLayout({
 }: {
   children: React.ReactNode
 }) {
-  const cookieStore = await cookies()
-  const accessToken = cookieStore.get("accessToken")?.value
+  const session = await auth()
 
-  if (accessToken) {
-    // Basic presence check. Active token forces redirect.
+  if (session?.user?.id) {
+    // Force active sessions to dashboard instantly
     redirect("/dashboard")
   }
 

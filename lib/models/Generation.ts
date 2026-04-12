@@ -14,6 +14,12 @@ export interface IGeneration extends Document {
     followUpSequence: string;
     pricingRange: string;
   };
+  viewId: string;
+  analytics: {
+    views: number;
+    totalTimeSeconds: number;
+  };
+  isHidden: boolean;
   createdAt: Date;
 }
 
@@ -32,6 +38,17 @@ const GenerationSchema = new Schema<IGeneration>(
       followUpSequence: { type: String, required: true },
       pricingRange: { type: String, required: true },
     },
+    viewId: { 
+      type: String, 
+      required: true, 
+      index: true,
+      default: () => require('crypto').randomUUID() 
+    },
+    analytics: {
+      views: { type: Number, default: 0 },
+      totalTimeSeconds: { type: Number, default: 0 },
+    },
+    isHidden: { type: Boolean, default: false }
   },
   { timestamps: true }
 );

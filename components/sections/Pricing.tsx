@@ -130,6 +130,7 @@ export default function Pricing() {
                       "Generation history",
                       "Priority generation speed",
                       "Export as PDF",
+                      "Intent Telemetry (Analytics)",
                     ].map((feature, i) => (
                       <div key={i} className="flex items-start gap-4">
                         <Check className="w-5 h-5 text-black shrink-0" />

@@ -196,7 +196,26 @@ Industry: ${industry}`;
       output,
     });
 
-    // 11. Return output
+    // 11. Increment user's Generation count so Settings updates properly
+    const { UserModel } = await import("@/lib/models/User");
+    const updatedUser = await UserModel.findOneAndUpdate(
+      { _id: userId },
+      { $inc: { generationsThisMonth: 1 } },
+      { new: true }
+    );
+
+    // 12. Trigger n8n Automation (fire-and-forget)
+    import("@/lib/n8n").then(({ triggerProposalWebhook }) => {
+      triggerProposalWebhook({
+        email: session.user.email || "unknown@pitchsnap.me",
+        clientName,
+        service,
+        generationsThisMonth: updatedUser?.generationsThisMonth || 1,
+        planLimit: userPlan === "free" ? FREE_TIER_LIMIT : 9999,
+      });
+    }).catch(err => console.error("Failed to load n8n module", err));
+
+    // 13. Return output
     return NextResponse.json({ success: true, data: output }, { status: 200 });
   } catch (error: unknown) {
     console.error("Generate API error:", error);

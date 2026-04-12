@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { Loader2, Sparkles, RotateCcw, Download } from "lucide-react";
 import { exportProposalPDF } from "@/lib/exportPDF";
+import { useRouter } from "next/navigation";
 
 const INDUSTRIES = [
   "E-commerce", "SaaS", "Real Estate", "Healthcare", "Finance",
@@ -49,6 +50,7 @@ export function PitchForm({ isPro = false }: { isPro?: boolean }) {
   const [activeTab, setActiveTab] = useState<keyof PitchOutput>("coldEmail");
   const [copied, setCopied] = useState(false);
   const [hasDraft, setHasDraft] = useState(false);
+  const router = useRouter();
 
   // Restore form from localStorage on mount
   useEffect(() => {
@@ -128,6 +130,7 @@ export function PitchForm({ isPro = false }: { isPro?: boolean }) {
         setActiveTab("coldEmail");
         localStorage.removeItem(STORAGE_KEY);
         setHasDraft(false);
+        router.refresh();
       }
     } catch {
       setError("Network error. Check your connection and try again.");

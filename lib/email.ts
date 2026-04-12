@@ -1,7 +1,7 @@
 // Uses Resend REST API directly — no SDK needed
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY ?? "";
-const FROM = process.env.EMAIL_FROM ?? "PitchSnap <onboarding@resend.dev>";
+const FROM = process.env.EMAIL_FROM ?? "PitchSnap <hello@pitchsnap.me>";
 const IS_DEV = process.env.NODE_ENV !== "production";
 
 /**

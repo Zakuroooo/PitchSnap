@@ -8,6 +8,8 @@ import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
 
+import { toast } from "sonner";
+
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -21,6 +23,8 @@ export default function LoginPage() {
     setLoading(true);
     setError("");
 
+    const loginToast = toast.loading("Verifying credentials...");
+
     try {
       const res = await signIn("credentials", {
         redirect: false,
@@ -31,14 +35,24 @@ export default function LoginPage() {
 
       if (res?.error) {
         setError("Invalid email or password");
+        toast.error("Invalid credentials", { id: loginToast, description: "Please check your email and password and try again." });
       } else {
+        toast.success("Authentication successful", { id: loginToast, description: "Redirecting to your command center..." });
         router.push("/dashboard");
       }
     } catch (err) {
       setError("An unexpected error occurred");
+      toast.error("Network error", { id: loginToast, description: "Connection failed. Please try again." });
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleSocialSignIn = (provider: 'google' | 'github') => {
+    toast.loading(`Connecting to ${provider === 'google' ? 'Google' : 'GitHub'}...`, {
+      description: "Securing your connection layer."
+    });
+    signIn(provider, { callbackUrl: '/dashboard' });
   };
 
   return (
@@ -100,7 +114,7 @@ export default function LoginPage() {
 
           <div className="space-y-4">
             <button
-              onClick={() => signIn('google', { callbackUrl: '/dashboard' })}
+              onClick={() => handleSocialSignIn('google')}
               className="w-full h-[44px] flex items-center justify-center gap-3 bg-[#141414] border border-white/15 rounded-[2px] text-sm font-medium hover:bg-white/5 transition-colors"
             >
               <svg viewBox="0 0 24 24" className="w-5 h-5">
@@ -113,7 +127,7 @@ export default function LoginPage() {
             </button>
 
             <button
-              onClick={() => signIn('github', { callbackUrl: '/dashboard' })}
+              onClick={() => handleSocialSignIn('github')}
               className="w-full h-[44px] flex items-center justify-center gap-3 bg-[#141414] border border-white/15 rounded-[2px] text-sm font-medium hover:bg-white/5 transition-colors"
             >
               <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current">
