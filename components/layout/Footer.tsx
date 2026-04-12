@@ -11,19 +11,12 @@ const FOOTER_LINKS = {
     { label: "GitHub",       href: "https://github.com/Zakuroooo/PitchSnap" },
   ],
   Entity: [
-    { label: "About",        href: "/about"   },
-    { label: "Contact",      href: "/contact" },
-  ],
-  Legal: [
-    { label: "Privacy Policy",   href: "/privacy"  },
-    { label: "Terms of Service", href: "/terms"    },
+    { label: "Contact",      href: "mailto:hello@pitchsnap.me" },
   ],
 } as const
 
 const SOCIAL_LINKS = [
-  { label: "X.COM", href: "https://twitter.com/pitchsnap" },
-  { label: "GITHUB", href: "https://github.com/pitchsnap" },
-  { label: "LINKEDIN", href: "https://linkedin.com/company/pitchsnap" },
+  { label: "GITHUB", href: "https://github.com/Zakuroooo/PitchSnap" },
 ] as const
 
 export default function Footer() {

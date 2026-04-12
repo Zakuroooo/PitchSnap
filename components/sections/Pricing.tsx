@@ -2,6 +2,7 @@
 import React, { useState } from "react"
 import { Check } from "lucide-react"
 import { motion } from "framer-motion"
+import { toast } from "sonner"
 import Container from "../layout/Container"
 import { CometCard } from "../ui/comet-card"
 
@@ -139,7 +140,9 @@ export default function Pricing() {
                     ))}
                   </div>
                 </div>
-                <button className="w-full mt-12 py-4 px-4 bg-black hover:bg-[#1a1c1c] text-white font-bold tracking-widest uppercase text-sm transition-colors">
+                <button 
+                  onClick={() => toast("Pro Plan — Coming Soon", { description: "We're setting up payments. Join the waitlist at hello@pitchsnap.me", duration: 4000 })}
+                  className="w-full mt-12 py-4 px-4 bg-black hover:bg-[#1a1c1c] text-white font-bold tracking-widest uppercase text-sm transition-colors">
                   Access Terminal
                 </button>
               </div>
@@ -173,12 +176,19 @@ export default function Pricing() {
                     ].map((feature, i) => (
                       <div key={i} className="flex items-start gap-4">
                         <Check className="w-5 h-5 text-white shrink-0" />
-                        <span className="text-base text-[#c6c6c6]">{feature}</span>
+                        <span className="text-base text-[#c6c6c6] flex items-center gap-2">
+                          {feature}
+                          {(feature === "Up to 5 team members" || feature === "API access") && (
+                            <span className="text-[9px] font-bold tracking-widest uppercase bg-white/10 text-zinc-400 px-1.5 py-0.5 rounded-[2px] pointer-events-none">Coming Soon</span>
+                          )}
+                        </span>
                       </div>
                     ))}
                   </div>
                 </div>
-                <button className="w-full mt-12 py-4 px-4 bg-[#1C1B1B] hover:bg-[#2a2a2a] text-white font-bold tracking-widest uppercase text-sm transition-colors">
+                <button 
+                  onClick={() => window.location.href = 'mailto:hello@pitchsnap.me'}
+                  className="w-full mt-12 py-4 px-4 bg-[#1C1B1B] hover:bg-[#2a2a2a] text-white font-bold tracking-widest uppercase text-sm transition-colors">
                   Contact Sales
                 </button>
               </div>

@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Loader2, Sparkles, RotateCcw, Download } from "lucide-react";
 import { exportProposalPDF } from "@/lib/exportPDF";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const INDUSTRIES = [
   "E-commerce", "SaaS", "Real Estate", "Healthcare", "Finance",
@@ -363,56 +364,65 @@ export function PitchForm({ isPro = false }: { isPro?: boolean }) {
             </div>
           )}
 
-        <div className="bg-[#141414] border border-white/5 rounded-[2px]">
+        <div className="relative group bg-[#0C0C0C] border border-white/10 rounded-[4px] overflow-hidden shadow-2xl shadow-black/50 animate-in fade-in slide-in-from-bottom-4 duration-700">
+          {/* Subtle top glow */}
+          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+          
           {/* Tabs */}
-          <div className="flex items-center justify-between border-b border-white/5 pr-4">
+          <div className="flex items-center justify-between border-b border-white/5 bg-[#141414] pr-4">
             <div className="flex overflow-x-auto hide-scrollbar">
               {(Object.keys(tabLabels) as Array<keyof PitchOutput>).map(tab => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
-                  className={`flex-shrink-0 px-5 py-3 text-[11px] font-bold uppercase tracking-widest transition-colors border-b-2 ${
+                  className={`relative flex-shrink-0 px-6 py-4 text-[11px] font-bold uppercase tracking-widest transition-all ${
                     activeTab === tab
-                      ? "text-white border-white"
-                      : "text-zinc-500 border-transparent hover:text-zinc-300"
+                      ? "text-white bg-white/5"
+                      : "text-zinc-500 hover:text-zinc-300 hover:bg-white/[0.02]"
                   }`}
                 >
                   {tabLabels[tab]}
+                  {activeTab === tab && (
+                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-white shadow-[0_0_8px_rgba(255,255,255,0.5)]"></span>
+                  )}
                 </button>
               ))}
             </div>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4 pl-4 border-l border-white/5">
               <button
                 onClick={handleCopy}
-                className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 hover:text-white transition-colors"
+                className={`flex items-center gap-2 px-4 py-2 border rounded-[2px] text-[10px] font-bold uppercase tracking-widest transition-all ${
+                  copied 
+                    ? "bg-[#B8FF57]/10 text-[#B8FF57] border-[#B8FF57]/30 shadow-[0_0_10px_rgba(184,255,87,0.2)]" 
+                    : "bg-[#0C0C0C] text-zinc-400 border-white/10 hover:border-white/30 hover:text-white"
+                }`}
               >
-                {copied ? "Copied!" : "Copy"}
+                {copied ? <span className="text-[12px]">✓</span> : null}
+                {copied ? "COPIED" : "COPY CONTENT"}
               </button>
               
-              <div className="w-[1px] h-4 bg-white/10" />
-
               {isPro ? (
                 <button
                   onClick={handleExportPDF}
-                  className="flex items-center gap-2 px-3 py-1.5 border border-white/20 rounded-[2px] text-[10px] font-bold uppercase tracking-widest text-white hover:bg-white hover:text-black transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 border border-white/20 rounded-[2px] text-[10px] font-bold uppercase tracking-widest text-white bg-white/5 hover:bg-white hover:text-black hover:shadow-[0_0_15px_rgba(255,255,255,0.3)] transition-all"
                 >
-                  <Download size={12} /> ExPORT PDF
+                  <Download size={12} /> EXPORT PDF
                 </button>
               ) : (
                 <button
-                  disabled
-                  className="flex items-center gap-2 px-3 py-1.5 border border-white/5 rounded-[2px] text-[10px] font-bold uppercase tracking-widest text-zinc-600 bg-[#0C0C0C] cursor-not-allowed"
+                  onClick={() => toast("Export PDF — Coming Soon", { description: "Upgrade to Pro when available.", duration: 3000 })}
+                  className="flex items-center gap-2 px-4 py-2 border border-white/5 rounded-[2px] text-[10px] font-bold uppercase tracking-widest text-zinc-600 bg-[#0C0C0C] hover:text-zinc-400 hover:border-white/10 transition-colors"
                 >
-                  <Download size={12} className="opacity-50" /> PRO FEATURE
+                  <Download size={12} className="opacity-50" /> PRO ONLY
                 </button>
               )}
             </div>
           </div>
 
           {/* Content */}
-          <div className="p-6">
-            <pre className="text-[13px] text-zinc-300 whitespace-pre-wrap leading-relaxed font-sans">
+          <div className="p-8 lg:p-10 bg-gradient-to-b from-[#0C0C0C] to-[#0A0A0A]">
+            <pre className="text-[14px] text-zinc-300 whitespace-pre-wrap leading-[1.8] font-sans selection:bg-white/20">
               {output[activeTab]}
             </pre>
           </div>

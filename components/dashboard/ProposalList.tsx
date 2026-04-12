@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Briefcase, Calendar, X, Copy, Check, Download, ChevronRight, Trash2, AlertTriangle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { exportProposalPDF } from "@/lib/exportPDF";
+import { toast } from "sonner";
 
 interface Generation {
   _id: string;
@@ -346,12 +347,19 @@ export function ProposalList({ generations, isPro }: ProposalListProps) {
                     {copied ? "Copied" : "Copy"}
                   </button>
                   
-                  {isPro && (
+                  {isPro ? (
                     <button
                       onClick={handleExportPDF}
                       className="flex items-center gap-2 px-3 py-1.5 border border-white/20 rounded-[2px] text-[10px] font-bold uppercase tracking-widest text-white hover:bg-white hover:text-black transition-colors"
                     >
                       <Download size={12} /> PDF
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => toast("Export PDF — Coming Soon", { description: "Upgrade to Pro when available.", duration: 3000 })}
+                      className="flex items-center gap-2 px-3 py-1.5 border border-white/5 rounded-[2px] text-[10px] font-bold uppercase tracking-widest text-zinc-600 hover:text-zinc-400 hover:border-white/10 transition-colors"
+                    >
+                      <Download size={12} className="opacity-50" /> PRO ONLY
                     </button>
                   )}
                 </div>

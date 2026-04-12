@@ -75,15 +75,20 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16">
 
             {/* ── Logo: 'Pitch' white + 'Snap' white ── */}
-            <Link
-              href="/"
-              className="flex items-center gap-0 cursor-pointer tracking-tight"
-              style={{ fontFamily: "var(--font-inter)", fontSize: "20px" }}
-              aria-label="PitchSnap home"
-            >
-              <span style={{ color: "var(--color-text-primary)", fontWeight: 400 }}>Pitch</span>
-              <span style={{ color: "#FFFFFF", fontWeight: 700 }}>Snap</span>
-            </Link>
+            <div className="flex items-center gap-2">
+              <Link
+                href="/"
+                className="flex items-center gap-0 cursor-pointer tracking-tight"
+                style={{ fontFamily: "var(--font-inter)", fontSize: "20px" }}
+                aria-label="PitchSnap home"
+              >
+                <span style={{ color: "var(--color-text-primary)", fontWeight: 400 }}>Pitch</span>
+                <span style={{ color: "#FFFFFF", fontWeight: 700 }}>Snap</span>
+              </Link>
+              <span className="text-[9px] font-bold tracking-widest uppercase border border-white/10 text-zinc-500 px-1.5 py-0.5 rounded-[2px] pointer-events-none mt-1">
+                BETA
+              </span>
+            </div>
 
             {/* ── Desktop nav links ── */}
             <nav className="hidden md:flex items-center gap-8" aria-label="Page sections">
