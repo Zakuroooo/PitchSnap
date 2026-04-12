@@ -1,10 +1,10 @@
 /** n8n automation webhook triggers — all fire-and-forget, never block the main flow */
 
-const SIGNUP_WEBHOOK = process.env.N8N_SIGNUP_WEBHOOK_URL;
-const PROPOSAL_WEBHOOK = process.env.N8N_PROPOSAL_WEBHOOK_URL;
-
-function fireWebhook(url: string, payload: Record<string, unknown>) {
-  if (!url) return; // Silently skip if not configured
+function fireWebhook(url: string | undefined, payload: Record<string, unknown>) {
+  if (!url) {
+    console.log("[n8n] Skipped webhook (no URL provided in environment)");
+    return;
+  }
   fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -19,7 +19,7 @@ export function triggerSignupWebhook(payload: {
   plan: string;
   provider: "credentials" | "google" | "github";
 }) {
-  fireWebhook(SIGNUP_WEBHOOK ?? "", {
+  fireWebhook(process.env.N8N_SIGNUP_WEBHOOK_URL, {
     event: "user.signup",
     timestamp: new Date().toISOString(),
     ...payload,
@@ -34,7 +34,7 @@ export function triggerProposalWebhook(payload: {
   generationsThisMonth: number;
   planLimit: number;
 }) {
-  fireWebhook(PROPOSAL_WEBHOOK ?? "", {
+  fireWebhook(process.env.N8N_PROPOSAL_WEBHOOK_URL, {
     event: "proposal.generated",
     timestamp: new Date().toISOString(),
     ...payload,
