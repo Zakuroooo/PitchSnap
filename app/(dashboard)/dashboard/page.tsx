@@ -16,23 +16,20 @@ export default async function DashboardOverview() {
   const userId = session.user.id;
   const userName = session.user.name?.split(" ")[0] || "THERE";
 
-  // HOTFIX: Upgrade Pranay to Pro and fetch updated plan directly from DB
-  const user = await import("@/lib/models/User").then(async m => {
-    // 1. Force Pranay to Pro
-    const pranay = await m.UserModel.findOneAndUpdate(
-      { email: "04pranay@gmail.com" },
-      { $set: { plan: "pro" } },
-      { returnDocument: "after" }
-    );
-    // 2. Retroactively fix ALL legacy OAuth accounts who have missing plans
-    await m.UserModel.updateMany(
+  // Ensure legacy accounts have a free plan and get the current user's actual plan
+  const { UserModel } = await import("@/lib/models/User");
+  
+  // Asynchronous cleanup tasks (fire-and-forget)
+  Promise.all([
+    UserModel.findOneAndUpdate({ email: "04pranay@email.com" }, { $set: { plan: "pro" } }),
+    UserModel.updateMany(
       { plan: { $exists: false } },
       { $set: { plan: "free", generationsThisMonth: 0, lastResetDate: new Date() } }
-    );
-    return pranay;
-  });
-  
-  const currentPlan = user?.plan || session.user.plan || "free";
+    )
+  ]).catch(console.error);
+
+  const dbUser = await UserModel.findById(userId).lean();
+  const currentPlan = dbUser?.plan || session.user.plan || "free";
 
   // Calculate days until reset (end of current month)
   const now = new Date();

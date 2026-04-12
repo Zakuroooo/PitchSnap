@@ -38,7 +38,7 @@ export default function RegisterPage() {
     toast.loading(`Connecting to ${provider === 'google' ? 'Google' : 'GitHub'}...`, {
       description: "Securing your connection layer."
     });
-    signIn(provider, { callbackUrl: '/dashboard' });
+    signIn(provider, { callbackUrl: '/dashboard?signup=success' });
   };
 
   /** Step 1: send OTP */
@@ -94,14 +94,14 @@ export default function RegisterPage() {
           redirect: false,
           email,
           password,
-          callbackUrl: "/dashboard",
+          callbackUrl: "/dashboard?signup=success",
         });
         if (loginRes?.error) {
           setError("Account created! Please sign in manually.");
           toast.success("Account Created", { id: loadToast, description: "Please log in with your new credentials." });
         } else {
           toast.success("Access Granted", { id: loadToast, description: "Protocol initialization complete. Heading to dashboard." });
-          router.push("/dashboard");
+          router.push("/dashboard?signup=success");
         }
       }
     } catch {

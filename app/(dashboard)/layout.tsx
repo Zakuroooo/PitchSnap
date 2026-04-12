@@ -2,6 +2,8 @@ import { auth } from "@/auth"
 import { redirect } from "next/navigation"
 import { Sidebar } from "@/components/dashboard/Sidebar"
 import { BottomNav } from "@/components/dashboard/BottomNav"
+import { Suspense } from "react"
+import { WelcomeToast } from "@/components/ui/WelcomeToast"
 
 export default async function DashboardLayout({
   children,
@@ -22,6 +24,9 @@ export default async function DashboardLayout({
       </aside>
       
       <main className="flex-1 overflow-y-auto pb-20 md:pb-0">
+        <Suspense fallback={null}>
+          <WelcomeToast />
+        </Suspense>
         {children}
       </main>
 

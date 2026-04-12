@@ -30,7 +30,7 @@ export default function LoginPage() {
         redirect: false,
         email,
         password,
-        callbackUrl: "/dashboard",
+        callbackUrl: "/dashboard?login=success",
       });
 
       if (res?.error) {
@@ -38,7 +38,7 @@ export default function LoginPage() {
         toast.error("Invalid credentials", { id: loginToast, description: "Please check your email and password and try again." });
       } else {
         toast.success("Authentication successful", { id: loginToast, description: "Redirecting to your command center..." });
-        router.push("/dashboard");
+        router.push("/dashboard?login=success");
       }
     } catch (err) {
       setError("An unexpected error occurred");
@@ -52,7 +52,7 @@ export default function LoginPage() {
     toast.loading(`Connecting to ${provider === 'google' ? 'Google' : 'GitHub'}...`, {
       description: "Securing your connection layer."
     });
-    signIn(provider, { callbackUrl: '/dashboard' });
+    signIn(provider, { callbackUrl: '/dashboard?login=success' });
   };
 
   return (
